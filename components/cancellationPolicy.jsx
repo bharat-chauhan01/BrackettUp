@@ -12,7 +12,6 @@ export default function CancellationPolicy() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
