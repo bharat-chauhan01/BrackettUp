@@ -8,7 +8,7 @@ import CancellationPolicy from '../components/cancellationPolicy';
 import About from '../components/about';
 import Footer from '../components/footer';
 
-export default function Home() {
+export default function ActivityClass() {
   return (
     <SafeAreaView style={style.container}>
       <Header />

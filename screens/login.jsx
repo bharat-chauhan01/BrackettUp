@@ -28,7 +28,7 @@ const Login = () => {
       error : false
     }
     dispatch(setLogin({ setLoginData }));
-    navigation.navigate('Home')
+    navigation.navigate('Landing')
   };
 
 //   useEffect(() => {
