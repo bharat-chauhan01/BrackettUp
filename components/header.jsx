@@ -9,8 +9,6 @@ export default function Header() {
   const [solid, setSolid] = useState(false);
   const [credit, setCredit] = useState(42);
   const user = useSelector((state) => state.Login.user);
-  //const dispatch = useDispatch();
-  console.log("imageURls", imageURL);
 
   return (
     <View style={styles.container}>

@@ -22,12 +22,12 @@ const Login = () => {
 
   const onSubmitLogin = () => {
     const { username, password } = user;
-    setLoginData = {
-      user: {"name":"abc"},
+    data = {
+      user: username,
       isLoading: false,
       error : false
     }
-    dispatch(setLogin({ setLoginData }));
+    dispatch(setLogin({ data }));
     navigation.navigate('Landing')
   };
 

@@ -11,10 +11,10 @@ const loginSlice = createSlice({
     initialState,
     reducers:{
         setLogin: (state, action) =>{
-            console.log("here is my action"+action.payload.user)
-            state.user = action.payload.user;
-            state.isLoading = action.payload.isLoading;
-            state.error = action.payload.error
+            console.log("here is my action", action.payload.data.user)
+            state.user = action.payload.data.user;
+            state.isLoading = action.payload.data.isLoading;
+            state.error = action.payload.data.error
         },
         setLogout: (state, action) =>{
             state.user = null,
