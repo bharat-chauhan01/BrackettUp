@@ -22,7 +22,9 @@ export default function LandingScreen() {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        tabBarShowLabel: false,
+        tabBarLabelStyle:{
+          fontWeight: 'bold'
+        },
         tabBarStyle: {
           height: navBarHeight,
           paddingBottom: navBarPaddingBottom
