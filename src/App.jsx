@@ -8,6 +8,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -60,5 +61,4 @@ export default function App() {
     </Provider>
   );
 }
-
 

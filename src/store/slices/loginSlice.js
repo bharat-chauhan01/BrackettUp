@@ -11,7 +11,6 @@ const loginSlice = createSlice({
     initialState,
     reducers:{
         setLogin: (state, action) =>{
-            console.log("here is my action", action.payload.data.user)
             state.user = action.payload.data.user;
             state.isLoading = action.payload.data.isLoading;
             state.error = action.payload.data.error

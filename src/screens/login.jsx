@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useNavigation } from '@react-navigation/native';
-//import { loginUser, clearState } from '../reducers/authSlice';
 import { useSelector , useDispatch } from 'react-redux';
 import { setLogin } from '../store/slices/loginSlice';
-// import { RootState } from '../store/store';
+import  { fetchUserData }  from '../apis/login/login'
+
 
 const Login = () => {
   const navigation = useNavigation();
@@ -22,12 +22,19 @@ const Login = () => {
 
   const onSubmitLogin = () => {
     const { username, password } = user;
-    data = {
-      user: username,
-      isLoading: false,
-      error : false
-    }
-    dispatch(setLogin({ data }));
+    fetchUserData("abc","abc").then((data)=>{
+      data = {
+        user: data.username,
+        isLoading: false,
+        error : false
+      }
+      dispatch(setLogin({ data }));
+    }).catch((error)=>{
+      data = {
+        user:"mukesh"
+      }
+      dispatch(setLogin({ data }))
+    })
     navigation.navigate('Landing')
   };
 
