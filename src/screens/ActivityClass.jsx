@@ -1,12 +1,10 @@
 import React from 'react';
-import { Text, View, SafeAreaView, ScrollView, useColorScheme, StyleSheet } from 'react-native';
-import Header from '../components/header';
-import Crousal from '../components/crousal';
-import InformationPage from '../components/informationPage';
-//import Review from '@/components/Review';
-import CancellationPolicy from '../components/cancellationPolicy';
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import About from '../components/about';
+import CancellationPolicy from '../components/cancellationPolicy';
+import Crousal from '../components/crousal';
 import Footer from '../components/footer';
+import Header from '../components/header';
 
 export default function ActivityClass() {
   return (

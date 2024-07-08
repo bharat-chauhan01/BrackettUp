@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { TouchableOpacity, Image, StyleSheet, Dimensions } from 'react-native';
 import ImageCrousal from './image';
-import  { imageURL }  from '../constants/imageURLs';
+import { imageURL } from '../constants/imageURLs';
 
 const Windowheight = Dimensions.get('window').height;
 const WindowWidth = Dimensions.get('window').width;
@@ -10,7 +10,7 @@ export default function Crousal() {
   const [index, setCurrentIndex] = useState(0);
   const scrollViewRef = useRef();
 
-  const handelPress = (event) => {
+  const handelPress = event => {
     const x_pos = event.nativeEvent.locationX;
     const fraction = x_pos / WindowWidth;
 
@@ -23,7 +23,12 @@ export default function Crousal() {
     <TouchableOpacity style={{ zIndex: -1 }} onPress={handelPress} activeOpacity={1}>
       {/* <ScrollView horizontal ref={scrollViewRef} onScroll={handelScroll} > */}
       {/* {imageURL.map((item,index) => ( <ImageCrousal key={index} address={item}/> ))} */}
-      <ImageCrousal key={index} address={imageURL[index]} Currindex={index} totalImage={imageURL.length} />
+      <ImageCrousal
+        key={index}
+        address={imageURL[index]}
+        Currindex={index}
+        totalImage={imageURL.length}
+      />
       {/* </ScrollView> */}
     </TouchableOpacity>
   );

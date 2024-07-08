@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import Toast from 'react-native-toast-message';
 import { useNavigation } from '@react-navigation/native';
-import { useSelector , useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setLogin } from '../store/slices/loginSlice';
-import  { fetchUserData }  from '../apis/login/login'
-
+import { fetchUserData } from '../apis/login/login';
 
 const Login = () => {
   const navigation = useNavigation();
   const [user, setUser] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.Login.user);
+  const userData = useSelector(state => state.Login.user);
 
   const onChangeInput = (key, value) => {
     setUser({ ...user, [key]: value });
@@ -22,38 +20,40 @@ const Login = () => {
 
   const onSubmitLogin = () => {
     const { username, password } = user;
-    fetchUserData("abc","abc").then((data)=>{
-      data = {
-        user: data.username,
-        isLoading: false,
-        error : false
-      }
-      dispatch(setLogin({ data }));
-    }).catch((error)=>{
-      data = {
-        user:"mukesh"
-      }
-      dispatch(setLogin({ data }))
-    })
-    navigation.navigate('Landing')
+    fetchUserData('abc', 'abc')
+      .then(data => {
+        data = {
+          user: data.username,
+          isLoading: false,
+          error: false,
+        };
+        dispatch(setLogin({ data }));
+      })
+      .catch(error => {
+        data = {
+          user: 'mukesh',
+        };
+        dispatch(setLogin({ data }));
+      });
+    navigation.navigate('Landing');
   };
 
-//   useEffect(() => {
-//     if (isSuccess) {
-//       navigation.navigate('Home');
-//     }
-//   }, [isSuccess, navigation]);
+  //   useEffect(() => {
+  //     if (isSuccess) {
+  //       navigation.navigate('Home');
+  //     }
+  //   }, [isSuccess, navigation]);
 
-//   useEffect(() => {
-//     if (isError) {
-//       Toast.show({
-//         type: 'error',
-//         text1: 'Invalid User name or password',
-//         swipeable: true,
-//       });
-//      // dispatch(clearState());
-//     }
-//   }, [isError, dispatch]);
+  //   useEffect(() => {
+  //     if (isError) {
+  //       Toast.show({
+  //         type: 'error',
+  //         text1: 'Invalid User name or password',
+  //         swipeable: true,
+  //       });
+  //      // dispatch(clearState());
+  //     }
+  //   }, [isError, dispatch]);
 
   return (
     <View style={styles.container}>
@@ -63,14 +63,14 @@ const Login = () => {
           style={styles.input}
           placeholder="Username"
           value={user.username}
-          onChangeText={(text) => onChangeInput('username', text)}
+          onChangeText={text => onChangeInput('username', text)}
         />
         <TextInput
           style={styles.input}
           placeholder="Password"
           secureTextEntry={true}
           value={user.password}
-          onChangeText={(text) => onChangeInput('password', text)}
+          onChangeText={text => onChangeInput('password', text)}
         />
         <TouchableOpacity style={styles.loginButton} onPress={onSubmitLogin}>
           <Text style={styles.loginButtonText}>Login</Text>

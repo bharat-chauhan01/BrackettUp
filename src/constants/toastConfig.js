@@ -2,7 +2,7 @@ import React from 'react';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 
 export const toastConfig = {
-  success: (props) => (
+  success: props => (
     <BaseToast
       {...props}
       style={{
@@ -26,7 +26,7 @@ export const toastConfig = {
     />
   ),
 
-  error: (props) => (
+  error: props => (
     <ErrorToast
       {...props}
       text1Style={{

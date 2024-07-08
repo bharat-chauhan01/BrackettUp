@@ -1,5 +1,3 @@
-
-export const constant={
- baseUrl:"http:localhost:8080/",
-
-}
+export const constant = {
+  baseUrl: 'http:localhost:8080/',
+};

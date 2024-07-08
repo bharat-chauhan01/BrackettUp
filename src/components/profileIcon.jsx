@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, Modal, TouchableOpacity } from 'react-native';
-import Icon from "./iconButtons";
+import Icon from './iconButtons';
 import UserProfile from './userProfile';
 import { useNavigation } from '@react-navigation/native';
 
@@ -11,7 +11,7 @@ const ProfileIcon = ({ imageUri, size, username }) => {
   const handleLogout = () => {
     // remove all state
     navigation.navigate('Login');
-  }
+  };
 
   return (
     <View style={styles.container}>

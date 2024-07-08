@@ -8,7 +8,18 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "react-devtools": "react-devtools"
+    "react-devtools": "react-devtools ",
+    "format": "prettier --write src/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
@@ -18,6 +29,7 @@
     "@react-navigation/stack": "^6.4.0",
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
+    "husky": "^9.0.11",
     "react": "18.2.0",
     "react-native": "0.74.2",
     "react-native-gesture-handler": "^2.16.2",

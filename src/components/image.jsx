@@ -7,10 +7,7 @@ const WindowWidth = Dimensions.get('window').width;
 export default function ImageCrousal({ address, Currindex, totalImage }) {
   return (
     <View style={{ flex: 1, flexDirection: 'row' }}>
-      <Image
-        source={{ uri: address }}
-        style={styles.ImageDensions}
-      />
+      <Image source={{ uri: address }} style={styles.ImageDensions} />
       <View style={styles.curretPosition}>
         <Text style={{ color: 'white', fontSize: 15 }}>
           {Currindex + 1}/{totalImage}
@@ -23,7 +20,7 @@ export default function ImageCrousal({ address, Currindex, totalImage }) {
 const styles = StyleSheet.create({
   ImageDensions: {
     width: WindowWidth,
-    height: Windowheight * 0.30
+    height: Windowheight * 0.3,
   },
   curretPosition: {
     position: 'absolute',
@@ -33,6 +30,6 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingHorizontal: 10,
     margin: 5,
-    borderRadius: 5
-  }
+    borderRadius: 5,
+  },
 });

@@ -8,7 +8,6 @@ import SplashScreen from 'react-native-splash-screen';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -18,20 +17,18 @@ export default function App() {
     // Retrieve data when the component mounts
     const getData = async () => {
       try {
-        const firstTimeUser = await AsyncStorage.getItem('firstTimeUser')
+        const firstTimeUser = await AsyncStorage.getItem('firstTimeUser');
         if (firstTimeUser !== null) {
-          setLandingPage("Landing")
-        }
-        else{ 
-          await AsyncStorage.setItem('firstTimeUser',"loggedIn")
-          setLandingPage("Login")
+          setLandingPage('Landing');
+        } else {
+          await AsyncStorage.setItem('firstTimeUser', 'loggedIn');
+          setLandingPage('Login');
         }
       } catch (e) {
-        console.log("Exception during fetching data from AsyncStorage :: ", e)
-        setLandingPage("Login");
-      }
-      finally{ 
-          SplashScreen.hide();
+        console.log('Exception during fetching data from AsyncStorage :: ', e);
+        setLandingPage('Login');
+      } finally {
+        SplashScreen.hide();
       }
     };
     getData();
@@ -50,15 +47,13 @@ export default function App() {
             headerStyle: { backgroundColor: '#351401' },
             headerTintColor: 'white',
             contentStyle: { backgroundColor: '#3f2f25' },
-            headerShown: false
+            headerShown: false,
           }}
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Landing" component={LandingScreen} />
-          
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );
 }
-

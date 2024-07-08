@@ -4,10 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'; // Adjust based on th
 
 function IconButton({ icon, color, onPress }) {
   return (
-    <Pressable
-      onPress={onPress}
-      style={({ pressed }) => pressed && styles.pressed}
-    >
+    <Pressable onPress={onPress} style={({ pressed }) => pressed && styles.pressed}>
       <Ionicons name={icon} size={24} color={color} />
     </Pressable>
   );

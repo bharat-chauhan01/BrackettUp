@@ -69,7 +69,7 @@ export class ProfileScreen extends React.Component {
               <Text style={styles.statValue}>0</Text>
               <Text style={styles.statDescription}>Credits</Text>
             </View>
-            <View style={styles.verticalLine}></View>
+            <View style={styles.verticalLine} />
             <View style={styles.stat}>
               <Text style={styles.statValue}>0</Text>
               <Text style={styles.statDescription}>Reservations</Text>
@@ -81,17 +81,23 @@ export class ProfileScreen extends React.Component {
             data={DATA}
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => alert(item.title)}>
-                <View style={{ flexDirection: 'column', marginEnd: '5%', marginStart: '5%' }}>
+                <View
+                  style={{
+                    flexDirection: 'column',
+                    marginEnd: '5%',
+                    marginStart: '5%',
+                  }}
+                >
                   <View style={styles.item}>
                     <Image round style={styles.itemIcon} source={require('../assets/user.png')} />
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.arrow}>{item.button}</Text>
                   </View>
-                  <View style={styles.horizontalLine}></View>
+                  <View style={styles.horizontalLine} />
                 </View>
               </TouchableOpacity>
             )}
-            keyExtractor={(item) => item.id}
+            keyExtractor={item => item.id}
           />
         </View>
       </View>

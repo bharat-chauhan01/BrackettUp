@@ -1,31 +1,43 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from "./iconButtons";
+import Icon from './iconButtons';
 import ProfileIcon from './profileIcon';
-import  { imageURL } from '../constants/imageURLs';
+import { imageURL } from '../constants/imageURLs';
 import { useSelector } from 'react-redux';
 
 export default function Header() {
   const [solid, setSolid] = useState(false);
   const [credit, setCredit] = useState(42);
-  const user = useSelector((state) => state.Login.user);
+  const user = useSelector(state => state.Login.user);
 
   return (
     <View style={styles.container}>
       <Icon name="chevron-left" size={23} />
-      <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-end", alignContent: 'space-between' }}>
-
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          alignContent: 'space-between',
+        }}
+      >
         <View style={styles.HeaderIcon}>
           <Icon name="arrow-up" size={23} />
         </View>
 
-        <TouchableOpacity style={styles.HeaderIcon} onPress={() => {
-          setSolid(!solid);
-        }}>
+        <TouchableOpacity
+          style={styles.HeaderIcon}
+          onPress={() => {
+            setSolid(!solid);
+          }}
+        >
           <Icon name="heart" size={23} solid={solid} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.HeaderIcon, { alignItems: 'center' }]} onPress={() => (setCredit(credit + 1))}>
+        <TouchableOpacity
+          style={[styles.HeaderIcon, { alignItems: 'center' }]}
+          onPress={() => setCredit(credit + 1)}
+        >
           <Text style={{ fontSize: 17, fontWeight: 'bold' }}>{credit}</Text>
           <Text style={{ color: 'grey', fontSize: 10 }}>credits</Text>
         </TouchableOpacity>
@@ -50,10 +62,10 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     position: 'absolute',
-    zIndex: 1
+    zIndex: 1,
   },
   HeaderIcon: {
     paddingHorizontal: 10,
-    paddingTop: 10
-  }
+    paddingTop: 10,
+  },
 });

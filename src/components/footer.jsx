@@ -16,7 +16,10 @@ export default function Footer() {
     <View style={styles.container}>
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
         <Text style={{ fontSize: 18, fontWeight: '500' }}>3 credits</Text>
-        <Text style={{ fontSize: 17, fontWeight: '400', color: 'rgba(0,0,0,0.3)' }}> Good value</Text>
+        <Text style={{ fontSize: 17, fontWeight: '400', color: 'rgba(0,0,0,0.3)' }}>
+          {' '}
+          Good value
+        </Text>
       </View>
       <TouchableOpacity style={styles.reserveButton} onPress={showToast}>
         <Text style={{ color: 'white', fontWeight: '700', fontSize: 15 }}>Reserve</Text>
