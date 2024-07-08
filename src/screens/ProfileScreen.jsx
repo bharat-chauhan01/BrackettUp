@@ -12,37 +12,37 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 const DATA = [
   {
-    key: "1",
+    key: '1',
     icon: 'card-account-details-outline',
     title: 'Account',
     button: 'arrow-right-bold',
   },
   {
-    key: "2",
+    key: '2',
     icon: 'calendar-account',
     title: 'Reservations',
     button: 'arrow-right-bold',
   },
   {
-    key: "3",
+    key: '3',
     icon: 'cards-heart-outline',
     title: 'Saved',
     button: 'arrow-right-bold',
   },
   {
-    key: "4",
+    key: '4',
     icon: 'help-circle-outline',
     title: 'Support',
     button: 'arrow-right-bold',
   },
   {
-    key: "5",
+    key: '5',
     icon: 'file-document-outline',
     title: 'Terms And Conditions',
     button: 'arrow-right-bold',
   },
   {
-    key: "6",
+    key: '6',
     icon: 'logout',
     title: 'Logout',
     button: 'arrow-right-bold',
@@ -51,7 +51,7 @@ const DATA = [
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
-const fontSize=15;
+const fontSize = 15;
 
 export class ProfileScreen extends React.Component {
   state = {
@@ -97,12 +97,19 @@ export class ProfileScreen extends React.Component {
                   }}
                 >
                   <View style={styles.item}>
-                    <MaterialCommunityIcons name={item.icon} color={'#000000'} size={styles.itemIcon.size}/>                 
+                    <MaterialCommunityIcons
+                      name={item.icon}
+                      color={'#000000'}
+                      size={styles.itemIcon.size}
+                    />
                     <Text style={styles.title}>{item.title}</Text>
                     <View style={styles.arrow}>
-                    <MaterialCommunityIcons name={item.button} color={'#000000'} size={styles.itemIcon.size}/>                 
+                      <MaterialCommunityIcons
+                        name={item.button}
+                        color={'#000000'}
+                        size={styles.itemIcon.size}
+                      />
                     </View>
-                   
                   </View>
                   <View style={styles.horizontalLine} />
                 </View>
@@ -124,7 +131,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 0.07 * height,
-    width: width
+    width: width,
   },
   avatar: {
     width: 0.2 * width,
@@ -183,11 +190,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#909090',
   },
   arrow: {
-    fontSize: fontSize+4,
-    marginEnd:10,
+    fontSize: fontSize + 4,
+    marginEnd: 10,
   },
-  itemIcon:{
-    flex:1,
-    size: fontSize+5
-  }
+  itemIcon: {
+    flex: 1,
+    size: fontSize + 5,
+  },
 });

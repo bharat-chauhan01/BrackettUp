@@ -39,7 +39,7 @@ export default function LandingScreen() {
         component={HomeScreen}
         options={() => ({
           tabBarIcon: () => (
-            <MaterialCommunityIcons name="home" color={"#000000"} size={iconHeight} />
+            <MaterialCommunityIcons name="home" color={'#000000'} size={iconHeight} />
           ),
         })}
       />
@@ -48,7 +48,7 @@ export default function LandingScreen() {
         component={SearchScreen}
         options={{
           tabBarIcon: () => (
-            <MaterialCommunityIcons name="magnify" color={"#000000"} size={iconHeight} />
+            <MaterialCommunityIcons name="magnify" color={'#000000'} size={iconHeight} />
           ),
         }}
       />
@@ -57,7 +57,7 @@ export default function LandingScreen() {
         component={UpcomingClassScreen}
         options={{
           tabBarIcon: () => (
-            <MaterialCommunityIcons name="calendar" color={"#000000"} size={iconHeight} />
+            <MaterialCommunityIcons name="calendar" color={'#000000'} size={iconHeight} />
           ),
         }}
       />
@@ -67,7 +67,7 @@ export default function LandingScreen() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: () => (
-            <MaterialCommunityIcons name="account" color={"#000000"} size={iconHeight} />
+            <MaterialCommunityIcons name="account" color={'#000000'} size={iconHeight} />
           ),
         }}
       />
