@@ -10,42 +10,48 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const DATA = [
+const PROFILE_ITEMS = [
   {
     key: '1',
     icon: 'card-account-details-outline',
     title: 'Account',
     button: 'arrow-right-bold',
+    color: '#000000',
   },
   {
     key: '2',
     icon: 'calendar-account',
     title: 'Reservations',
     button: 'arrow-right-bold',
+    color: '#000000',
   },
   {
     key: '3',
     icon: 'cards-heart-outline',
     title: 'Saved',
     button: 'arrow-right-bold',
+    color: '#000000',
   },
   {
     key: '4',
     icon: 'help-circle-outline',
     title: 'Support',
     button: 'arrow-right-bold',
+    color: '#000000',
   },
   {
     key: '5',
     icon: 'file-document-outline',
     title: 'Terms And Conditions',
     button: 'arrow-right-bold',
+    color: '#000000',
   },
   {
     key: '6',
     icon: 'logout',
     title: 'Logout',
     button: 'arrow-right-bold',
+    color: '#000000',
   },
 ];
 
@@ -60,15 +66,13 @@ export class ProfileScreen extends React.Component {
     },
   };
 
-  unsubscribe = null;
-
   componentWillUnmount() {}
 
   render() {
     return (
       <View>
         <View style={styles.metaContainer}>
-          <View style={{ marginTop: 64, alignItems: 'center' }}>
+          <View style={styles.userProfileInfo}>
             <Image round style={styles.avatar} source={require('../../assets/user.png')} />
             <Text style={styles.name}>{this.state.user.name}</Text>
           </View>
@@ -86,27 +90,21 @@ export class ProfileScreen extends React.Component {
         </View>
         <View style={styles.buttonContainer}>
           <FlatList
-            data={DATA}
+            data={PROFILE_ITEMS}
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => alert(item.title)}>
-                <View
-                  style={{
-                    flexDirection: 'column',
-                    marginEnd: '5%',
-                    marginStart: '5%',
-                  }}
-                >
+                <View style={styles.itemRow}>
                   <View style={styles.item}>
                     <MaterialCommunityIcons
                       name={item.icon}
-                      color={'#000000'}
+                      color={item.color}
                       size={styles.itemIcon.size}
                     />
                     <Text style={styles.title}>{item.title}</Text>
                     <View style={styles.arrow}>
                       <MaterialCommunityIcons
                         name={item.button}
-                        color={'#000000'}
+                        color={item.color}
                         size={styles.itemIcon.size}
                       />
                     </View>
@@ -196,5 +194,14 @@ const styles = StyleSheet.create({
   itemIcon: {
     flex: 1,
     size: fontSize + 5,
+  },
+  itemRow: {
+    flexDirection: 'column',
+    marginEnd: '5%',
+    marginStart: '5%',
+  },
+  userProfileInfo: {
+    marginTop: '10%',
+    alignItems: 'center',
   },
 });
