@@ -17,7 +17,7 @@ export default function LandingScreen() {
 
   return (
     <Tab.Navigator
-       initialRouteName="Home"
+      initialRouteName="Home"
       screenOptions={{
         headerShown: false,
         tabBarLabelStyle: {
