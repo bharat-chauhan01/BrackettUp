@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-. "$(dirname "$0")/_/husky.sh"
+. "$(dirname "$0")/.husky/husky.sh"
 
 npx eslint . --fix
 npm run format
