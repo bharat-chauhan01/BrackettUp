@@ -8,42 +8,50 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const DATA = [
   {
-    icon: '',
+    key: "1",
+    icon: 'card-account-details-outline',
     title: 'Account',
-    button: '>',
+    button: 'arrow-right-bold',
   },
   {
-    imagePath: '',
+    key: "2",
+    icon: 'calendar-account',
     title: 'Reservations',
-    button: '>',
+    button: 'arrow-right-bold',
   },
   {
-    imagePath: '',
+    key: "3",
+    icon: 'cards-heart-outline',
     title: 'Saved',
-    button: '>',
+    button: 'arrow-right-bold',
   },
   {
-    imagePath: '',
+    key: "4",
+    icon: 'help-circle-outline',
     title: 'Support',
-    button: '>',
+    button: 'arrow-right-bold',
   },
   {
-    imagePath: '',
+    key: "5",
+    icon: 'file-document-outline',
     title: 'Terms And Conditions',
-    button: '>',
+    button: 'arrow-right-bold',
   },
   {
-    imagePath: '',
+    key: "6",
+    icon: 'logout',
     title: 'Logout',
-    button: '>',
+    button: 'arrow-right-bold',
   },
 ];
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
+const fontSize=15;
 
 export class ProfileScreen extends React.Component {
   state = {
@@ -89,15 +97,18 @@ export class ProfileScreen extends React.Component {
                   }}
                 >
                   <View style={styles.item}>
-                    <Image round style={styles.itemIcon} source={require('../../assets/user.png')} />
+                    <MaterialCommunityIcons name={item.icon} color={'#000000'} size={styles.itemIcon.size}/>                 
                     <Text style={styles.title}>{item.title}</Text>
-                    <Text style={styles.arrow}>{item.button}</Text>
+                    <View style={styles.arrow}>
+                    <MaterialCommunityIcons name={item.button} color={'#000000'} size={styles.itemIcon.size}/>                 
+                    </View>
+                   
                   </View>
                   <View style={styles.horizontalLine} />
                 </View>
               </TouchableOpacity>
             )}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.key}
           />
         </View>
       </View>
@@ -113,7 +124,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 0.07 * height,
-    width: width,
+    width: width
   },
   avatar: {
     width: 0.2 * width,
@@ -125,6 +136,7 @@ const styles = StyleSheet.create({
     marginTop: 0.02 * height,
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#000000',
   },
   statscontainer: {
     marginTop: 0.02 * height,
@@ -136,21 +148,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   statValue: {
-    color: '#4F566D',
+    color: '#000000',
     fontSize: 16,
     fontWeight: '500',
     marginTop: 4,
   },
   statDescription: {
-    color: '#4F566D',
+    color: '#000000',
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: '300',
     marginTop: 4,
   },
   verticalLine: {
-    height: '100%',
+    marginTop: '2.5%',
+    height: '70%',
     width: 2,
-    backgroundColor: '#909090',
+    backgroundColor: '#000000',
   },
   item: {
     flexDirection: 'row',
@@ -158,14 +171,11 @@ const styles = StyleSheet.create({
     height: 0.05 * height,
   },
   title: {
+    flex: 1,
     fontSize: 15,
-    marginStart: 20,
-    height: 0.05 * height,
-    fontWeight: 'bold',
-  },
-  itemIcon: {
-    width: 0.02 * width,
-    height: 0.05 * height,
+    marginStart: 10,
+    fontWeight: '400',
+    color: '#000000',
   },
   horizontalLine: {
     height: '1%',
@@ -173,9 +183,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#909090',
   },
   arrow: {
-    fontSize: 15,
-    marginEnd: '20',
-    height: 0.05 * height,
-    fontWeight: 'bold',
+    fontSize: fontSize+4,
+    marginEnd:10,
   },
+  itemIcon:{
+    flex:1,
+    size: fontSize+5
+  }
 });
