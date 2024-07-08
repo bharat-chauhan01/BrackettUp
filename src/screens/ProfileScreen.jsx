@@ -61,7 +61,7 @@ export class ProfileScreen extends React.Component {
       <View>
         <View style={styles.metaContainer}>
           <View style={{ marginTop: 64, alignItems: 'center' }}>
-            <Image round style={styles.avatar} source={require('../assets/user.png')} />
+            <Image round style={styles.avatar} source={require('../../assets/user.png')} />
             <Text style={styles.name}>{this.state.user.name}</Text>
           </View>
           <View style={styles.statscontainer}>
@@ -89,7 +89,7 @@ export class ProfileScreen extends React.Component {
                   }}
                 >
                   <View style={styles.item}>
-                    <Image round style={styles.itemIcon} source={require('../assets/user.png')} />
+                    <Image round style={styles.itemIcon} source={require('../../assets/user.png')} />
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.arrow}>{item.button}</Text>
                   </View>
