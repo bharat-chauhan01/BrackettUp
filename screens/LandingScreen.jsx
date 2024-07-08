@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dimensions } from 'react-native';
 import HomeScreen from './HomeScreen';
-import ProfileScreen from './ProfileScreen';
+import {ProfileScreen} from './ProfileScreen';
 import UpcomingClassScreen from './UpcomingClassScreen';
 import SearchScreen from './SearchScreen';
 
