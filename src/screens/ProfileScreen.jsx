@@ -1,5 +1,7 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
+  Alert,
   Dimensions,
   FlatList,
   Image,
@@ -58,14 +60,15 @@ const PROFILE_ITEMS = [
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 const fontSize = 15;
+//const navigation = useNavigation();
 
 export class ProfileScreen extends React.Component {
   state = {
     user: {
-      name: 'Hi Guest',
+      name: 'Hi boss',
     },
   };
-
+  //navigation = useNavigation();navigation.navigate('Landing')
   componentWillUnmount() {}
 
   render() {
@@ -92,7 +95,17 @@ export class ProfileScreen extends React.Component {
           <FlatList
             data={PROFILE_ITEMS}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => alert(item.title)}>
+              <TouchableOpacity onPress={() => { 
+                switch(item.key){
+                  case '1':Alert.alert("Upcoming");break;
+                  case '2':Alert.alert("Upcoming");break;
+                  case '3':Alert.alert("Upcoming");break;
+                  case '4':Alert.alert("Upcoming");break;
+                  case '5':this.props.navigation.navigate('Term');break;
+                  case '6':Alert.alert("Upcoming");break;
+              }
+                //this.props.navigation.navigate('Term')
+                }}>
                 <View style={styles.itemRow}>
                   <View style={styles.item}>
                     <MaterialCommunityIcons

@@ -7,6 +7,9 @@ import { store } from './store/redux/store';
 import SplashScreen from 'react-native-splash-screen';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import TermsAndConditions from './screens/termandcondition';
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -52,6 +55,11 @@ export default function App() {
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Landing" component={LandingScreen} />
+          <Stack.Screen name="Term"   component={TermsAndConditions} 
+          options={{contentStyle: {backgroundColor : '#f0f0f0'}
+          }}/>
+       
+         
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
