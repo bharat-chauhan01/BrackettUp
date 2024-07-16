@@ -50,8 +50,7 @@ export default function HomeScreen() {
       <Text>Welcome to Home Screen</Text>
       <View
         style={{
-          padding: 12,
-          // marginStart: 10,
+          paddingLeft: 12,
         }}
       >
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
