@@ -31,16 +31,16 @@ const TermsAndConditions = () => {
 
 
 
-Welcome to BrackettUp! These Terms of Use (“Terms”) are a contract between you and BrackettUp. If you are in the India, BrackettUp means BrackettUp India Limited. These Terms govern your access to and use of any BrackettUp website, mobile application (such as for iPhone or Android) or content (the “Site”) or any fitness, recreational, wellness, or other classes, experiences, activities, events, services, recordings, and/or products made available through BrackettUp (collectively, “Classes”). Please read these Terms carefully before accessing and using the Site or Classes.
-These terms are subject to any applicable region-specific amendments set forth at the end of this page in the section entitled "Regional Amendments". Please review that section for amendments applicable to your region.
-If you need to contact us, you can do so by:{'\n'}
-●	writing to us at F-197 2nd floor, Pandav Nagar, Delhi-110091, Attention: BrackettUp Customer Support; or
-b) Amendment of Terms. BrackettUp may amend the Terms from time to time. Unless we provide a delayed effective date, all amendments will be effective upon posting of such updated Terms. Your continued access to or use of the Site or Classes after such posting constitutes your consent to be bound by the Terms, as amended.
+  Welcome to BrackettUp! These Terms of Use (“Terms”) are a contract between you and BrackettUp. If you are in the India, BrackettUp means BrackettUp India Limited. These Terms govern your access to and use of any BrackettUp website, mobile application (such as for iPhone or Android) or content (the “Site”) or any fitness, recreational, wellness, or other classes, experiences, activities, events, services, recordings, and/or products made available through BrackettUp (collectively, “Classes”). Please read these Terms carefully before accessing and using the Site or Classes.
+  These terms are subject to any applicable region-specific amendments set forth at the end of this page in the section entitled "Regional Amendments". Please review that section for amendments applicable to your region.
+  If you need to contact us, you can do so by:{'\n'}
+ ●	writing to us at F-197 2nd floor, Pandav Nagar, Delhi-110091, Attention: BrackettUp Customer Support; or
+  b) Amendment of Terms. BrackettUp may amend the Terms from time to time. Unless we provide a delayed effective date, all amendments will be effective upon posting of such updated Terms. Your continued access to or use of the Site or Classes after such posting constitutes your consent to be bound by the Terms, as amended.
 {'\n'}●	contact us through our enquiry form <Link Url="https://help.classpass.com/hc/en-us/requests/new" childern ="Here">Here</Link>{'\n'}.
-b) Amendment of Terms. BrackettUp may amend the Terms from time to time. Unless we provide a delayed effective date, all amendments will be effective upon posting of such updated Terms. Your continued access to or use of the Site or Classes after such posting constitutes your consent to be bound by the Terms, as amended.
-The most current version of these Terms can be accessed at any time at{'\n'} <Link Url="https://classpass.com/terms/" childern="here"></Link>. Changes to these Terms will be notified via posting on{'\n'} the Site (or other written notice to you). Please read these Terms carefully before{'\n'} accessing and/or using the Site and/or Classes. {'\n'}{'\n'}
+  b) Amendment of Terms. BrackettUp may amend the Terms from time to time. Unless we provide a delayed effective date, all amendments will be effective upon posting of such updated Terms. Your continued access to or use of the Site or Classes after such posting constitutes your consent to be bound by the Terms, as amended.
+  The most current version of these Terms can be accessed at any time at{'\n'} <Link Url="https://classpass.com/terms/" childern="here"></Link>. Changes to these Terms will be notified via posting on{'\n'} the Site (or other written notice to you). Please read these Terms carefully before{'\n'} accessing and/or using the Site and/or Classes. {'\n'}{'\n'}
 <BoldText txt="1. Terms"></BoldText>{'\n'}
-a) Acceptance of Terms. By accessing and/or using the Site and/or Classes, or{'\n'} clicking any button to indicate your consent, you accept and agree to be bound by{'\n'} these Terms, just as if you had agreed to these Terms in writing. If you do not agree{'\n'} to these Terms, do not use the Site or any classes.
+  a) Acceptance of Terms. By accessing and/or using the Site and/or Classes, or{'\n'} clicking any button to indicate your consent, you accept and agree to be bound by{'\n'} these Terms, just as if you had agreed to these Terms in writing. If you do not agree{'\n'} to these Terms, do not use the Site or any classes.
 {'\n'}b) Amendment of Terms. BrackettUp may amend the Terms from time to time. Unless we provide a delayed effective date, all amendments will be effective upon posting of such updated Terms. Your continued access to or use of the Site or Classes after such posting constitutes your consent to be bound by the Terms, as amended.
 {'\n'}c) Additional Terms. In addition to these Terms, certain plans, offers, products, services, elements or features may also be subject to additional terms, conditions guidelines or rules which may be posted, communicated or modified by us or applicable third parties at any time. Your use of any such plan, offer, product, service, element or feature is subject to those additional terms and conditions, which are hereby incorporated by reference into the Terms, provided that in the event of any conflict between such additional terms and the Terms, the Terms shall control. The BrackettUp Privacy Policy is hereby incorporated by reference.
 
@@ -48,9 +48,9 @@ a) Acceptance of Terms. By accessing and/or using the Site and/or Classes, or{'\
 
 {'\n'} <BoldText txt="2.BrackettUp Platform"></BoldText>
 
-{'\n'}
 
-{'\n'}a) BrackettUp Platform. The BrackettUp platform enables consumers to reserve, schedule, purchase, access and attend a wide range of fitness, recreational and wellness Classes offered and operated by fitness studios, gyms, trainers, venues or other third parties (collectively, “Venues”). BrackettUp itself is not a gymnasium, place of amusement or recreation, health club, facility, fitness studio or similar establishment and does not own, operate or control any of the Classes that are offered at or through such facilities.
+
+ {'\n'}a) BrackettUp Platform. The BrackettUp platform enables consumers to reserve, schedule, purchase, access and attend a wide range of fitness, recreational and wellness Classes offered and operated by fitness studios, gyms, trainers, venues or other third parties (collectively, “Venues”). BrackettUp itself is not a gymnasium, place of amusement or recreation, health club, facility, fitness studio or similar establishment and does not own, operate or control any of the Classes that are offered at or through such facilities.  
 
 {'\n'}b) Membership Options. There are a number of ways to participate in BrackettUp, such as various subscription plans, promotional plans, and non-subscription purchases. These options consist of different classes, services and features and may be subject to additional and differing conditions, prices, policies and limitations. We reserve the right to modify, terminate or otherwise amend our offered options and plans at any time in our discretion. From time to time we may permit non-subscribers to access certain classes, services, content or features for a cost or at no cost. BrackettUp makes no commitment on the quantity, availability, type or frequency at which such classes, services, content and features will be available to non-subscribers and may modify, discontinue, remove or suspend access at any time and for any reason in our sole discretion.
 
@@ -374,8 +374,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f8f8',
     borderBottomColor: '#ddd',
     borderBottomWidth: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingVertical: 12,
+    paddingHorizontal: 6,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -389,18 +389,20 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   content: {
-    padding: '20',
+    paddingHorizontal: 18,  // Add padding on both sides
   },
   title: {
-    fontSize: 24,
+    fontSize: 25,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 15,
     textAlign: 'center'
   },
   text: {
     fontSize: 16,
     lineHeight: 24,
   },
+  
+ 
 });
 
 export default TermsAndConditions;
