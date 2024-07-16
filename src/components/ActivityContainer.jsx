@@ -46,9 +46,10 @@ const ActivityContainer = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: windowWidth * 0.425,
+    width: windowWidth * 0.44,
     height: windowHeight * 0.24,
-    borderRadius: 10,
+    borderRadius: 5,
+    borderWidth:0.1,
     overflow: 'hidden',
     backgroundColor: '#fff',
     marginHorizontal: '0.5%',

@@ -45,6 +45,7 @@ export default function HomeScreen() {
         // justifyContent: 'center',
         alignItems: 'center',
         color: 'black',
+        backgroundColor: '#FFFFFF',
       }}
     >
       <Text>Welcome to Home Screen</Text>
