@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Ale
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const BoldText = ({txt}) => ( <Text style={{fontWeight:'bold'}} > {txt} </Text> );
+const BoldText = ({txt}) => ( <Text style={{fontWeight:'bold'}} >{txt}</Text> );
 
 const Link = ({Url, childern}) => (
   <Text style={{color: 'blue'}}
@@ -46,7 +46,7 @@ const TermsAndConditions = () => {
 
 {'\n'}
 
-{'\n'} <BoldText txt="2.BrackettUp Platform"></BoldText>
+{'\n'}<BoldText txt="2.BrackettUp Platform"></BoldText>
 
 
 
@@ -84,7 +84,7 @@ const TermsAndConditions = () => {
 
 {'\n'}
 
-{'\n'} <BoldText txt="3.Fees, Billing, Cancellation"></BoldText>
+{'\n'}<BoldText txt="3.Fees, Billing, Cancellation"></BoldText>
 
 {'\n'}
 
@@ -128,7 +128,7 @@ const TermsAndConditions = () => {
 
 {'\n'}
 
-{'\n'} <BoldText txt="4.Promotions"></BoldText>
+{'\n'}<BoldText txt="4.Promotions"></BoldText>
 
 {'\n'}
 
@@ -142,7 +142,7 @@ const TermsAndConditions = () => {
 
 {'\n'}
 
-{'\n'} <BoldText txt="5.Termination or Modification by BrackettUp"></BoldText>
+{'\n'}<BoldText txt="5.Termination or Modification by BrackettUp"></BoldText>
 
 {'\n'}
 
@@ -158,7 +158,7 @@ const TermsAndConditions = () => {
 
 {'\n'}
 
-{'\n'} <BoldText txt="6.Privacy"></BoldText>
+{'\n'}<BoldText txt="6.Privacy"></BoldText>
 
 {'\n'}
 
@@ -216,7 +216,7 @@ const TermsAndConditions = () => {
 
 {'\n'}
 
-{'\n'} <BoldText txt="8.User Submissions"></BoldText>
+{'\n'}<BoldText txt="8.User Submissions"></BoldText>
 
 {'\n'}
 
@@ -242,7 +242,7 @@ const TermsAndConditions = () => {
 
 {'\n'}
 
-{'\n'} <BoldText txt="9.Ownership; Proprietary Rights"></BoldText>
+{'\n'}<BoldText txt="9.Ownership; Proprietary Rights"></BoldText>
 
 {'\n'}
 
@@ -250,7 +250,7 @@ const TermsAndConditions = () => {
 
 {'\n'}
 
-{'\n'} <BoldText txt="10.Third-party Sites, Products and Services;"></BoldText>
+{'\n'}<BoldText txt="10.Third-party Sites, Products and Services;"></BoldText>
 
 {'\n'}
 
@@ -280,7 +280,7 @@ const TermsAndConditions = () => {
 
 {'\n'}
 
-{'\n'} <BoldText txt="12.Liability in respect of Classes and fitness related information"></BoldText>
+{'\n'}<BoldText txt="12.Liability in respect of Classes and fitness related information"></BoldText>
 
 {'\n'}
 
@@ -308,7 +308,7 @@ const TermsAndConditions = () => {
 
 {'\n'}
 
-{'\n'} <BoldText txt="14.Venue Waivers and Terms"></BoldText>
+{'\n'}<BoldText txt="14.Venue Waivers and Terms"></BoldText>
 
 {'\n'}
 
@@ -316,7 +316,7 @@ const TermsAndConditions = () => {
 
 {'\n'}
 
-{'\n'} <BoldText txt="15.Dispute Resolution"></BoldText>
+{'\n'}<BoldText txt="15.Dispute Resolution"></BoldText>
 
 {'\n'}
 
@@ -395,12 +395,18 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 15,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'black',
   },
   text: {
     fontSize: 16,
     lineHeight: 24,
   },
+  text: {
+    textAlign: 'justify',
+    color: 'black',
+  },
+
   
  
 });
