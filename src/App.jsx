@@ -7,6 +7,9 @@ import { store } from './store/redux/store';
 import SplashScreen from 'react-native-splash-screen';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs(); // Ignore all log notifications
 
 const Stack = createNativeStackNavigator();
 

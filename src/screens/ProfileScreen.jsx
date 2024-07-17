@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   Dimensions,
   FlatList,
@@ -7,10 +7,18 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator,
+  TouchableHighlight,
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProfile } from '../store/slices/ProfileSlice';
+import { setLogout } from '../store/slices/loginSlice';
+import { fetchProfile, logout } from '../apis/CommonApi';
+import { useIsFocused, useFocusEffect } from '@react-navigation/native';
+import LogoutModal from '../modals/LogoutModal';
 
-const PROFILE_ITEMS = [
+const PROFILE_ITEMS_META = [
   {
     key: '1',
     icon: 'card-account-details-outline',
@@ -46,80 +54,155 @@ const PROFILE_ITEMS = [
     button: 'arrow-right-bold',
     color: '#000000',
   },
-  {
-    key: '6',
-    icon: 'logout',
-    title: 'Logout',
-    button: 'arrow-right-bold',
-    color: '#000000',
-  },
+  { key: '6', icon: 'logout', title: 'Logout', button: 'arrow-right-bold', color: '#000000' },
 ];
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
+const LOGIN_ITEM = {
+  key: '9',
+  icon: 'login',
+  title: 'Login',
+  button: 'arrow-right-bold',
+  color: '#000000',
+};
+
+const { width, height } = Dimensions.get('window');
 const fontSize = 15;
 
-export class ProfileScreen extends React.Component {
-  state = {
-    user: {
-      name: 'Hi Guest',
-    },
+const ProfileScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const profileData = useSelector(state => state.Profile);
+  const userData = useSelector(state => state.Login);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [profileItems, setProfileItems] = useState(PROFILE_ITEMS_META);
+  const isFocused = useIsFocused();
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const fetchProfileData = async () => {
+    dispatch(
+      setProfile({
+        name: 'Hi Guest',
+        credits: 0,
+        reservations: 0,
+      }),
+    );
+    setLoading(true);
+    setError(null);
+    try {
+      if (!userData || !userData.user) {
+        setProfileItems(PROFILE_ITEMS_META.filter(item => item.key !== '6').concat(LOGIN_ITEM));
+      } else {
+        const response = await fetchProfile();
+        dispatch(
+          setProfile({
+            name: response.name,
+            credits: response.credits,
+            reservations: response.reservations,
+          }),
+        );
+        setProfileItems(PROFILE_ITEMS_META);
+      }
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  componentWillUnmount() {}
+  useFocusEffect(
+    useCallback(() => {
+      if (isFocused) {
+        fetchProfileData(); // Fetch data when screen is focused
+      }
+    }, [isFocused]),
+  );
 
-  render() {
+  const handleLogout = () => {
+    setModalVisible(true);
+  };
+
+  const confirmLogout = () => {
+    setModalVisible(false);
+    logout();
+    dispatch(setLogout(null));
+    setProfileItems(PROFILE_ITEMS_META.filter(item => item.key !== '6').concat());
+    navigation.navigate('Home');
+  };
+
+  const cancelLogout = () => {
+    setModalVisible(false);
+  };
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      onPress={() => {
+        if (item.title === 'Logout') {
+          handleLogout();
+        } else if (item.title === 'Login') {
+          navigation.navigate('Login');
+        } else {
+          alert(item.title);
+        }
+      }}
+    >
+      <View style={styles.itemRow}>
+        <View style={styles.item}>
+          <MaterialCommunityIcons name={item.icon} color={item.color} size={styles.itemIcon.size} />
+          <Text style={styles.title}>{item.title}</Text>
+          <View style={styles.arrow}>
+            <MaterialCommunityIcons
+              name={item.button}
+              color={item.color}
+              size={styles.itemIcon.size}
+            />
+          </View>
+        </View>
+        <View style={styles.horizontalLine} />
+      </View>
+    </TouchableOpacity>
+  );
+
+  if (loading) {
+    return <ActivityIndicator size={styles.loadingIcon.size} color={styles.loadingIcon.color} />;
+  }
+
+  if (error) {
     return (
-      <View style={styles.container}>
-        <View style={styles.metaContainer}>
-          <View style={styles.userProfileInfo}>
-            <Image round style={styles.avatar} source={require('../../assets/user.png')} />
-            <Text style={styles.name}>{this.state.user.name}</Text>
-          </View>
-          <View style={styles.statscontainer}>
-            <View style={styles.stat}>
-              <Text style={styles.statValue}>0</Text>
-              <Text style={styles.statDescription}>Credits</Text>
-            </View>
-            <View style={styles.verticalLine} />
-            <View style={styles.stat}>
-              <Text style={styles.statValue}>0</Text>
-              <Text style={styles.statDescription}>Reservations</Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.buttonContainer}>
-          <FlatList
-            data={PROFILE_ITEMS}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => alert(item.title)}>
-                <View style={styles.itemRow}>
-                  <View style={styles.item}>
-                    <MaterialCommunityIcons
-                      name={item.icon}
-                      color={item.color}
-                      size={styles.itemIcon.size}
-                    />
-                    <Text style={styles.title}>{item.title}</Text>
-                    <View style={styles.arrow}>
-                      <MaterialCommunityIcons
-                        name={item.button}
-                        color={item.color}
-                        size={styles.itemIcon.size}
-                      />
-                    </View>
-                  </View>
-                  <View style={styles.horizontalLine} />
-                </View>
-              </TouchableOpacity>
-            )}
-            keyExtractor={item => item.key}
-          />
-        </View>
+      <View style={styles.centeredView}>
+        <Text style={styles.errorText}>{error.message}</Text>
+        <TouchableHighlight style={styles.submit} onPress={fetchProfileData} underlayColor="#fff">
+          <Text style={styles.submitText}>Retry</Text>
+        </TouchableHighlight>
       </View>
     );
   }
-}
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.metaContainer}>
+        <View style={styles.userProfileInfo}>
+          <Image round style={styles.avatar} source={require('../../assets/user.png')} />
+          <Text style={styles.name}>{profileData ? profileData.name : 'No Data'}</Text>
+        </View>
+        <View style={styles.statscontainer}>
+          <View style={styles.stat}>
+            <Text style={styles.statValue}>{profileData ? profileData.credits : 0}</Text>
+            <Text style={styles.statDescription}>Credits</Text>
+          </View>
+          <View style={styles.verticalLine} />
+          <View style={styles.stat}>
+            <Text style={styles.statValue}>{profileData ? profileData.reservations : 0}</Text>
+            <Text style={styles.statDescription}>Reservations</Text>
+          </View>
+        </View>
+      </View>
+      <View style={styles.buttonContainer}>
+        <FlatList data={profileItems} renderItem={renderItem} keyExtractor={item => item.key} />
+      </View>
+      <LogoutModal visible={modalVisible} onConfirm={confirmLogout} onCancel={cancelLogout} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -128,12 +211,12 @@ const styles = StyleSheet.create({
   },
   metaContainer: {
     marginTop: 0.03 * height,
-    width: width,
+    width,
     height: 0.3 * height,
   },
   buttonContainer: {
     marginTop: 0.07 * height,
-    width: width,
+    width,
   },
   avatar: {
     width: 0.2 * width,
@@ -207,6 +290,37 @@ const styles = StyleSheet.create({
   userProfileInfo: {
     marginTop: '10%',
     alignItems: 'center',
+  },
+  errorText: {
+    color: 'black',
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 20,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  submit: {
+    marginTop: fontSize,
+    backgroundColor: '#68a0cf',
+    borderRadius: 50,
+    width: 80,
+    height: fontSize + fontSize,
+    borderWidth: 1,
+    borderColor: '#fff',
+  },
+  submitText: {
+    marginTop: 0.1 * (fontSize + fontSize),
+    marginBottom: 0.1 * (fontSize + fontSize),
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: fontSize,
+  },
+  loadingIcon: {
+    size: 'large',
+    color: '#0000ff',
   },
 });
 

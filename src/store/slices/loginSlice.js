@@ -16,7 +16,7 @@ const loginSlice = createSlice({
       state.error = action.payload.data.error;
     },
     setLogout: (state, action) => {
-      (state.user = null), (state.isLoading = action.payload.isLoading);
+      (state.user = null), (state.isLoading = false);
       state.error = null;
     },
   },

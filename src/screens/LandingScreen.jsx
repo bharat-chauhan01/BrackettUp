@@ -3,9 +3,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dimensions } from 'react-native';
 import HomeScreen from './HomeScreen';
-import { ProfileScreen } from './ProfileScreen';
+import ProfileScreen from './ProfileScreen';
 import UpcomingClassScreen from './UpcomingClassScreen';
 import SearchScreen from './SearchScreen';
+import { setProfile } from '../store/slices/ProfileSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,6 +16,7 @@ export default function LandingScreen() {
   const navBarHeight = windowHeight * 0.09;
   const navBarPaddingBottom = navBarHeight * 0.25;
   const iconHeight = navBarHeight * 0.5;
+  const dispatch = useDispatch();
 
   return (
     <Tab.Navigator
@@ -70,6 +73,11 @@ export default function LandingScreen() {
             <MaterialCommunityIcons name="account" color={'#000000'} size={iconHeight} />
           ),
         }}
+        listeners={({ navigation }) => ({
+          tabPress: e => {
+            navigation.navigate('Profile');
+          },
+        })}
       />
     </Tab.Navigator>
   );
