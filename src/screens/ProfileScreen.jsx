@@ -73,7 +73,7 @@ export class ProfileScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <View style={styles.metaContainer}>
           <View style={styles.userProfileInfo}>
             <Image round style={styles.avatar} source={require('../../assets/user.png')} />
@@ -135,6 +135,10 @@ export class ProfileScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
   metaContainer: {
     marginTop: 0.03 * height,
     width: width,
@@ -180,8 +184,8 @@ const styles = StyleSheet.create({
   verticalLine: {
     marginTop: '2.5%',
     height: '70%',
-    width: 2,
-    backgroundColor: '#000000',
+    width: 0.5,
+    backgroundColor: '#AAAAAA',
   },
   item: {
     flexDirection: 'row',
@@ -218,3 +222,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default ProfileScreen;
