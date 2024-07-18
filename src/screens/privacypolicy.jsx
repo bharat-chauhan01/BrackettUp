@@ -44,6 +44,7 @@ import React from 'react';
        fontSize: 14,
        marginBottom: 15,
      },
+     
    });
 
    export default Privacy ;
