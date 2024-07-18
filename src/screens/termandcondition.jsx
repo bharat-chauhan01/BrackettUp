@@ -429,8 +429,8 @@ const styles = StyleSheet.create({
   },
   headerText: {
     flex: 1,
-    textAlign: 'center',
-    marginright:20,
+  //  textAlign: 'center',
+    paddingLeft:110,
     marginleft:0,
     fontSize: 18,
     color: '#000',
