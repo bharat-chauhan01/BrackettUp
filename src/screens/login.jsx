@@ -35,7 +35,7 @@ const Login = () => {
         };
         dispatch(setLogin({ data }));
       });
-    navigation.navigate('Landing');
+    navigation.navigate('Home');
   };
 
   //   useEffect(() => {
