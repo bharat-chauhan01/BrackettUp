@@ -65,7 +65,7 @@ const fontSize = 15;
 export class ProfileScreen extends React.Component {
   state = {
     user: {
-      name: 'Hi boss',
+      name: 'Hi Guest',
     },
   };
   //navigation = useNavigation();navigation.navigate('Landing')
