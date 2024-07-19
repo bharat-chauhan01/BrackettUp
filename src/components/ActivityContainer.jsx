@@ -49,10 +49,9 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.44,
     height: windowHeight * 0.24,
     borderRadius: 5,
-    borderWidth:0.1,
     overflow: 'hidden',
     backgroundColor: '#fff',
-    marginHorizontal: '0.5%',
+    // marginHorizontal: '0.5%',
     padding: '1.5%',
   },
   image: {

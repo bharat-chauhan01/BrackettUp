@@ -1,43 +1,38 @@
-import * as React from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { Text, View, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import ActivityContainer from '../components/ActivityContainer';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { fetchHomePageActivities } from '../apis/CommonApi';
+import { useIsFocused, useFocusEffect } from '@react-navigation/native';
+
+const windowWidth = Dimensions.get('window').width;
 
 export default function HomeScreen() {
-  const activities = [
-    {
-      imageUrl:
-        'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
-      title: 'Rocycle',
-      subtitle: 'Zuidas · ',
-      distance: '0.6 km',
-      activity: 'Cycling',
-      rating: '4.7',
-      ratingCount: '(30000+)',
-      ratingDesc: 'Excellent',
-    },
-    {
-      imageUrl:
-        'https://media.istockphoto.com/id/1483989758/photo/diverse-yoga-class-participants-doing-a-side-plank-on-their-yoga-mats-in-a-beautiful-yoga.jpg?s=1024x1024&w=is&k=20&c=EQE_TpZPMPPkjtW94XIqXxSBW69EZ4c-b2rhOmUcUcY=',
-      title: 'YogaSpot',
-      subtitle: 'Buitenveldert · ',
-      distance: '0.6 km',
-      activity: 'Yoga',
-      rating: '4.5',
-      ratingCount: '(20000+)',
-      ratingDesc: 'Great',
-    },
-    {
-      imageUrl:
-        'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
-      title: 'ClubSportive',
-      subtitle: 'Zuidas · ',
-      distance: '0.5 km',
-      activity: 'Gym Time',
-      rating: '4.7 ',
-      ratingCount: '(30000+)',
-      ratingDesc: 'Great',
-    },
-  ];
+  const isFocused = useIsFocused();
+  const [activities, setActivities] = useState([]);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const loadActivities = async () => {
+    try {
+      const data = await fetchHomePageActivities();
+      setActivities(data);
+    } catch (error) {
+      setActivities(error);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      if (isFocused) {
+        setActivities([]); // Reset activities state
+        setScrollPosition(0); // Reset scroll position
+        loadActivities(); // Load fresh data
+      } else {
+        setActivities([]); // Reset activities state when leaving the screen
+      }
+    }, [isFocused]),
+  );
+
   return (
     <View
       style={{
@@ -46,30 +41,78 @@ export default function HomeScreen() {
         alignItems: 'center',
         color: 'black',
         backgroundColor: '#FFFFFF',
+        paddingLeft: 12,
       }}
     >
       <Text>Welcome to Home Screen</Text>
-      <View
-        style={{
-          paddingLeft: 12,
-        }}
+
+      <ScrollView
+        onScroll={event => setScrollPosition(event.nativeEvent.contentOffset.y)}
+        scrollPosition={scrollPosition}
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
       >
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {activities.map((activity, index) => (
-            <ActivityContainer
-              key={index}
-              imageUrl={activity.imageUrl}
-              title={activity.title}
-              subtitle={activity.subtitle}
-              distance={activity.distance}
-              activity={activity.activity}
-              rating={activity.rating}
-              ratingCount={activity.ratingCount}
-              ratingDesc={activity.ratingDesc}
-            />
-          ))}
-        </ScrollView>
-      </View>
+        {activities.map((section, sectionIndex) => (
+          <View key={sectionIndex} style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>{section.key}</Text>
+              <MaterialCommunityIcons
+                name={styles.itemIcon.name}
+                color={styles.itemIcon.color}
+                size={styles.itemIcon.size}
+              />
+            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {section.content.map((activity, activityIndex) => (
+                <ActivityContainer
+                  key={activityIndex}
+                  imageUrl={activity.imageUrl}
+                  title={activity.title}
+                  subtitle={activity.subtitle}
+                  distance={activity.distance}
+                  activity={activity.activity}
+                  rating={activity.rating}
+                  ratingCount={activity.ratingCount}
+                  ratingDesc={activity.ratingDesc}
+                />
+              ))}
+            </ScrollView>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // padding: 12,
+  },
+  contentContainer: {
+    paddingBottom: 50,
+  },
+  section: {
+    // gap: 12
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingRight: 10,
+  },
+  sectionTitle: {
+    fontSize: windowWidth * 0.05,
+    fontWeight: 'bold',
+    color: 'black',
+    paddingLeft: 10,
+    marginTop: 12,
+    marginBottom: 12,
+  },
+
+  itemIcon: {
+    name: 'dots-horizontal',
+    color: '#681',
+    size: 20,
+  },
+});

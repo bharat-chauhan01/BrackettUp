@@ -6,7 +6,133 @@ const dummyUser = {
   credits: 100,
   reservations: 10,
 };
-
+const activitiesMock = [
+  {
+    key: 'Trending now',
+    content: [
+      {
+        imageUrl:
+          'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+        title: 'Rocycle',
+        subtitle: 'Zuidas · ',
+        distance: '0.6 km',
+        activity: 'Cycling',
+        rating: '4.7',
+        ratingCount: '(30000+)',
+        ratingDesc: 'Excellent',
+      },
+      {
+        imageUrl:
+          'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
+        title: 'ClubSportive',
+        subtitle: 'Zuidas · ',
+        distance: '0.5 km',
+        activity: 'Gym Time',
+        rating: '4.7 ',
+        ratingCount: '(30000+)',
+        ratingDesc: 'Great',
+      },
+      {
+        imageUrl:
+          'https://media.istockphoto.com/id/1483989758/photo/diverse-yoga-class-participants-doing-a-side-plank-on-their-yoga-mats-in-a-beautiful-yoga.jpg?s=1024x1024&w=is&k=20&c=EQE_TpZPMPPkjtW94XIqXxSBW69EZ4c-b2rhOmUcUcY=',
+        title: 'YogaSpot',
+        subtitle: 'Buitenveldert · ',
+        distance: '0.6 km',
+        activity: 'Yoga',
+        rating: '4.5',
+        ratingCount: '(20000+)',
+        ratingDesc: 'Great',
+      },
+      {
+        imageUrl:
+          'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
+        title: 'ClubSportive',
+        subtitle: 'Zuidas · ',
+        distance: '0.5 km',
+        activity: 'Gym Time',
+        rating: '4.7 ',
+        ratingCount: '(30000+)',
+        ratingDesc: 'Great',
+      },
+    ],
+  },
+  {
+    key: 'Studios Near You',
+    content: [
+      {
+        imageUrl:
+          'https://media.istockphoto.com/id/1483989758/photo/diverse-yoga-class-participants-doing-a-side-plank-on-their-yoga-mats-in-a-beautiful-yoga.jpg?s=1024x1024&w=is&k=20&c=EQE_TpZPMPPkjtW94XIqXxSBW69EZ4c-b2rhOmUcUcY=',
+        title: 'YogaSpot',
+        subtitle: 'Buitenveldert · ',
+        distance: '0.6 km',
+        activity: 'Yoga',
+        rating: '4.5',
+        ratingCount: '(20000+)',
+        ratingDesc: 'Great',
+      },
+      {
+        imageUrl:
+          'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+        title: 'Rocycle',
+        subtitle: 'Zuidas · ',
+        distance: '0.6 km',
+        activity: 'Cycling',
+        rating: '4.7',
+        ratingCount: '(30000+)',
+        ratingDesc: 'Excellent',
+      },
+      {
+        imageUrl:
+          'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
+        title: 'ClubSportive',
+        subtitle: 'Zuidas · ',
+        distance: '0.5 km',
+        activity: 'Gym Time',
+        rating: '4.7 ',
+        ratingCount: '(30000+)',
+        ratingDesc: 'Great',
+      },
+    ],
+  },
+  {
+    key: "See what's new on BrackettUp",
+    content: [
+      {
+        imageUrl:
+          'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
+        title: 'ClubSportive',
+        subtitle: 'Zuidas · ',
+        distance: '0.5 km',
+        activity: 'Gym Time',
+        rating: '4.7 ',
+        ratingCount: '(30000+)',
+        ratingDesc: 'Great',
+      },
+      {
+        imageUrl:
+          'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+        title: 'Rocycle',
+        subtitle: 'Zuidas · ',
+        distance: '0.6 km',
+        activity: 'Cycling',
+        rating: '4.7',
+        ratingCount: '(30000+)',
+        ratingDesc: 'Excellent',
+      },
+      {
+        imageUrl:
+          'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
+        title: 'ClubSportive',
+        subtitle: 'Zuidas · ',
+        distance: '0.5 km',
+        activity: 'Gym Time',
+        rating: '4.7 ',
+        ratingCount: '(30000+)',
+        ratingDesc: 'Great',
+      },
+    ],
+  },
+];
 export const fetchProfile = async () => {
   try {
     const response = await get('/profile');
@@ -19,12 +145,24 @@ export const fetchProfile = async () => {
   }
 };
 
-export const logout = async() => {
+export const logout = async () => {
   try {
     return await post('/logout', null);
   } catch (error) {
     if (error instanceof BackendUnreachableError) {
       return {};
+    }
+    throw error;
+  }
+};
+
+export const fetchHomePageActivities = async () => {
+  try {
+    const response = await get(`/activities`, null);
+    return response.data;
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return activitiesMock;
     }
     throw error;
   }
