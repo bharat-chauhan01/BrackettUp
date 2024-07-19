@@ -19,7 +19,7 @@ const TermsAndConditions = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Icon name="chevron-back" size={25} color="#000" />
+          <Icon name="chevron-back" style={styles.iconstyle} />
           
         </TouchableOpacity>
         <Text style={styles.headerText}>Privacy Policy</Text>
@@ -436,9 +436,10 @@ const styles = StyleSheet.create({
     color: '#000',
  
   },
-
- 
-  
+  iconstyle :{
+    size={25},
+    color="#000",
+  }
 });
 
 export default TermsAndConditions;
