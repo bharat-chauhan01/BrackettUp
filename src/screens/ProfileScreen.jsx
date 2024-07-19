@@ -140,29 +140,13 @@ const ProfileScreen = ({ navigation }) => {
           handleLogout();
         } else if (item.title === 'Login') {
           navigation.navigate('Login');
+        } else if(item.title === 'Terms And Conditions') {
+                  navigation.navigate('TermAndCondition');
         } else {
-            switch (item.key) {
-                case '1':
-                  Alert.alert('Upcoming');
-                  break;
-                case '2':
-                  Alert.alert('Upcoming');
-                  break;
-                case '3':
-                  Alert.alert('Upcoming');
-                  break;
-                case '4':
-                  Alert.alert('Upcoming');
-                  break;
-                case '5':
-                  this.props.navigation.navigate('Term');
-                  break;
-                case '6':
-                  Alert.alert('Upcoming');
-                  break;
-              }
+          alert(item.title);
         }
-      }}
+      }
+      }
     >
       <View style={styles.itemRow}>
         <View style={styles.item}>
