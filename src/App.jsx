@@ -60,7 +60,7 @@ export default function App() {
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Landing" component={LandingScreen} />
-          <Stack.Screen name="Term"   component={TermsAndConditions} 
+          <Stack.Screen name="TermAndCondition"   component={TermsAndConditions} 
           options={{contentStyle: {backgroundColor : '#f0f0f0'}
           }}/>
        
