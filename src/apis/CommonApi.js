@@ -158,7 +158,7 @@ export const logout = async () => {
 
 export const fetchHomePageActivities = async () => {
   try {
-    const response = await get(`/activities`, null);
+    const response = await get(`/activities`);
     return response.data;
   } catch (error) {
     if (error instanceof BackendUnreachableError) {
