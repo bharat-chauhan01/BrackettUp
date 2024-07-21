@@ -3,5 +3,6 @@ export const constant = {
   error: {
     networkErrorMessage: 'Oops please check your internet connection',
     backendUnreachableErrorMessage: 'We are fixing our systems',
+    invalidMobileNumber: 'Please check your mobile number!',
   },
 };

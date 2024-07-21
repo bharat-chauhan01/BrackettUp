@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { setItem } from '../LocalStorage';
 
 const initialState = {
-  user: null,
-  isLoading: false,
-  error: null,
+  authToken: null,
+};
+
+const storeData = async input => {
+  await setItem('auth', input);
 };
 
 const loginSlice = createSlice({
@@ -11,13 +14,12 @@ const loginSlice = createSlice({
   initialState,
   reducers: {
     setLogin: (state, action) => {
-      state.user = action.payload.data.user;
-      state.isLoading = action.payload.data.isLoading;
-      state.error = action.payload.data.error;
+      state.authToken = action.payload.res.authToken;
+      storeData(action.payload.res);
     },
     setLogout: (state, action) => {
-      (state.user = null), (state.isLoading = false);
-      state.error = null;
+      state.authToken = null;
+      storeData(null);
     },
   },
 });

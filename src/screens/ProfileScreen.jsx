@@ -15,8 +15,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setProfile } from '../store/slices/ProfileSlice';
 import { setLogout } from '../store/slices/loginSlice';
 import { fetchProfile, logout } from '../apis/CommonApi';
-import { useIsFocused, useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import LogoutModal from '../modals/LogoutModal';
+import { getItem } from '../store/LocalStorage';
 
 const PROFILE_ITEMS_META = [
   {
@@ -71,26 +72,19 @@ const fontSize = 15;
 const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const profileData = useSelector(state => state.Profile);
-  const userData = useSelector(state => state.Login);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [profileItems, setProfileItems] = useState(PROFILE_ITEMS_META);
-  const isFocused = useIsFocused();
   const [modalVisible, setModalVisible] = useState(false);
 
   const fetchProfileData = async () => {
-    dispatch(
-      setProfile({
-        name: 'Hi Guest',
-        credits: 0,
-        reservations: 0,
-      }),
-    );
     setLoading(true);
     setError(null);
     try {
-      if (!userData || !userData.user) {
+      const authData = await getItem('auth');
+      if (!authData || !authData.authToken) {
         setProfileItems(PROFILE_ITEMS_META.filter(item => item.key !== '6').concat(LOGIN_ITEM));
+        dispatch(setProfile({ name: 'Hi Guest', credits: 0, reservations: 0 }));
       } else {
         const response = await fetchProfile();
         dispatch(
@@ -111,21 +105,19 @@ const ProfileScreen = ({ navigation }) => {
 
   useFocusEffect(
     useCallback(() => {
-      if (isFocused) {
-        fetchProfileData(); // Fetch data when screen is focused
-      }
-    }, [isFocused]),
+      fetchProfileData();
+    }, []),
   );
 
   const handleLogout = () => {
     setModalVisible(true);
   };
 
-  const confirmLogout = () => {
+  const confirmLogout = async () => {
     setModalVisible(false);
-    logout();
-    dispatch(setLogout(null));
-    setProfileItems(PROFILE_ITEMS_META.filter(item => item.key !== '6').concat());
+    await logout();
+    dispatch(setLogout());
+    setProfileItems(PROFILE_ITEMS_META.filter(item => item.key !== '6').concat(LOGIN_ITEM));
     navigation.navigate('Home');
   };
 

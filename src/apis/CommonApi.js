@@ -1,11 +1,17 @@
-import { get, post } from './ApiHandler';
 import { BackendUnreachableError } from '../utils/utils';
+import { validateMobileNumber } from '../validator/MobileValidator';
+import { get, post } from './ApiHandler';
 
 const dummyUser = {
   name: 'SuperUser',
   credits: 100,
   reservations: 10,
 };
+
+const dummyLoginResponse = {
+  authToken: 'eyllb.asd',
+};
+
 const activitiesMock = [
   {
     key: 'Trending now',
@@ -163,6 +169,31 @@ export const fetchHomePageActivities = async () => {
   } catch (error) {
     if (error instanceof BackendUnreachableError) {
       return activitiesMock;
+    }
+    throw error;
+  }
+};
+
+export const requestOtp = async phoneNumber => {
+  try {
+    return await post('/otp/request', phoneNumber);
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return {};
+    }
+    throw error;
+  }
+};
+
+export const validateOtp = async (phoneNumber, otp) => {
+  try {
+    await post('/otp/validate', phoneNumber, otp);
+  } catch (error) {
+    if (otp != '00000') {
+      throw error;
+    }
+    if (error instanceof BackendUnreachableError) {
+      return dummyLoginResponse;
     }
     throw error;
   }

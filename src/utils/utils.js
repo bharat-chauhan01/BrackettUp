@@ -10,3 +10,10 @@ export class BackendUnreachableError extends Error {
     this.name = 'BackendUnreachable';
   }
 }
+
+export class InvalidMobileNumberError extends Error {
+  constructor() {
+    super(constant.error.invalidMobileNumber);
+    this.name = 'InvalidMobileNumber';
+  }
+}

@@ -6,8 +6,7 @@ import HomeScreen from './HomeScreen';
 import ProfileScreen from './ProfileScreen';
 import UpcomingClassScreen from './UpcomingClassScreen';
 import SearchScreen from './SearchScreen';
-import { setProfile } from '../store/slices/ProfileSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 

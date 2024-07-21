@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Modal, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 
 const { width, height } = Dimensions.get('window');
 
@@ -9,17 +8,15 @@ const LogoutModal = ({ visible, onConfirm, onCancel }) => {
     <Modal transparent={true} animationType="fade" visible={visible} onRequestClose={onCancel}>
       <View style={styles.modalOverlay}>
         <View style={styles.modalContainer}>
+          <Text style={styles.title}>Log Out</Text>
           <Text style={styles.message}>Are you sure you want to logout?</Text>
+          <View style={styles.horizontalLine} />
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.buttonWrapper} onPress={onCancel}>
-              <LinearGradient colors={['#E0E0E0', '#BEBEBE']} style={styles.gradientButton}>
-                <Text style={styles.cancelButtonText}>NO</Text>
-              </LinearGradient>
+            <TouchableOpacity onPress={onCancel}>
+              <Text style={styles.cancelButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonWrapper} onPress={onConfirm}>
-              <LinearGradient colors={['#4c669f', '#3b5998']} style={styles.gradientButton}>
-                <Text style={styles.confirmButtonText}>Logout</Text>
-              </LinearGradient>
+            <TouchableOpacity onPress={onConfirm}>
+              <Text style={styles.confirmButtonText}>Yes</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -37,7 +34,7 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     width: width * 0.85,
-    padding: 25,
+    padding: 12,
     backgroundColor: 'white',
     borderRadius: 15,
     alignItems: 'center',
@@ -48,40 +45,37 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 15,
   },
   message: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#666',
-    marginBottom: 25,
+    marginBottom: 15,
     textAlign: 'center',
+  },
+  horizontalLine: {
+    height: 1,
+    width: '100%',
+    backgroundColor: '#909090',
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     width: '100%',
-  },
-  buttonWrapper: {
-    flex: 1,
-    marginHorizontal: 10,
-  },
-  gradientButton: {
-    paddingVertical: 12,
-    borderRadius: 25,
-    alignItems: 'center',
+    marginTop: 15,
   },
   cancelButtonText: {
-    color: '#333',
+    color: '#7F00FF',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '500',
   },
   confirmButtonText: {
-    color: '#FFFFFF',
+    color: '#7F00FF',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '500',
   },
 });
 
