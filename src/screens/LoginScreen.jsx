@@ -7,59 +7,49 @@ const { width } = Dimensions.get('window');
 
 const LoginOptionsScreen = ({ navigation }) => {
   return (
-    <LinearGradient
-      colors={['#FF6F61', '#FFD54F']} // Gradient colors for the background
-      style={styles.background}
-    >
-      <View style={styles.container}>
-        <Text style={styles.title}>Welcome</Text>
-        <Text style={styles.message}>Continue with one of the following options</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Welcome</Text>
+      <Text style={styles.message}>Continue with one of the following options</Text>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            /* Handle Google Login */
-          }}
-        >
-          <MaterialCommunityIcons name="google" size={24} color="#DB4437" style={styles.icon} />
-          <Text style={styles.buttonText}>Google</Text>
-        </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          /* Handle Google Login */
+        }}
+      >
+        <MaterialCommunityIcons name="google" size={24} color="#DB4437" style={styles.icon} />
+        <Text style={styles.buttonText}>Google</Text>
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate('PhoneNumberLogin');
-          }}
-        >
-          <MaterialCommunityIcons name="phone" size={24} color="#34b7f1" style={styles.icon} />
-          <Text style={styles.buttonText}>Mobile Number</Text>
-        </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('PhoneNumberLogin');
+        }}
+      >
+        <MaterialCommunityIcons name="phone" size={24} color="#34b7f1" style={styles.icon} />
+        <Text style={styles.buttonText}>Mobile Number</Text>
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            /* Handle Email Login */
-          }}
-        >
-          <MaterialCommunityIcons name="email" size={24} color="#D93025" style={styles.icon} />
-          <Text style={styles.buttonText}>Email</Text>
-        </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          /* Handle Email Login */
+        }}
+      >
+        <MaterialCommunityIcons name="email" size={24} color="#D93025" style={styles.icon} />
+        <Text style={styles.buttonText}>Email</Text>
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.skipButton}
-          onPress={() => {
-            navigation.navigate('Landing');
-          }}
-        >
-          <LinearGradient
-            colors={['#6E6E6E', '#9E9E9E']} // Slightly darker gray gradient
-            style={styles.skipButtonGradient}
-          >
-            <Text style={styles.skipButtonText}>Skip</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
-    </LinearGradient>
+      <TouchableOpacity
+        style={styles.skipButton}
+        onPress={() => {
+          navigation.navigate('Landing');
+        }}
+      >
+        <Text style={styles.skipButtonText}>Skip For Now</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -74,11 +64,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    backgroundColor: 'white',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: 'black',
     marginBottom: 5,
   },
   button: {
@@ -107,6 +98,11 @@ const styles = StyleSheet.create({
     width: width * 0.9,
     borderRadius: 10,
     overflow: 'hidden', // Ensures gradient does not overflow the button’s rounded corners
+    paddingVertical: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    width: '100%',
   },
   skipButtonGradient: {
     paddingVertical: 15,
@@ -117,12 +113,12 @@ const styles = StyleSheet.create({
   },
   skipButtonText: {
     fontSize: 16,
-    color: '#ffffff',
+    color: 'black',
     fontWeight: 'bold',
   },
   message: {
     fontSize: 16,
-    color: '#ffffff',
+    color: 'black',
     textAlign: 'center',
     marginBottom: 20,
   },
