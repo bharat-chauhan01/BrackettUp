@@ -1,6 +1,7 @@
 import { BackendUnreachableError } from '../utils/utils';
 import { validateMobileNumber } from '../validator/MobileValidator';
 import { get, post } from './ApiHandler';
+import { scheduleMock } from './MockData';
 
 const dummyUser = {
   name: 'SuperUser',
@@ -194,6 +195,18 @@ export const validateOtp = async (phoneNumber, otp) => {
     }
     if (error instanceof BackendUnreachableError) {
       return dummyLoginResponse;
+    }
+    throw error;
+  }
+};
+
+export const fetchActivitySchedule = async activityId => {
+  try {
+    const response = await get('activity/' + activityId + '/schedule', null);
+    return response.data;
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return scheduleMock;
     }
     throw error;
   }

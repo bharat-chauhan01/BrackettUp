@@ -16,6 +16,7 @@ import { toastConfig } from '../src/constants/toastConfig';
 import Toast from 'react-native-toast-message';
 import HomeScreen from './screens/HomeScreen';
 import PhoneNumberLogin from './screens/PhoneNumberLogin';
+import ScheduleScreen from './screens/ScheduleScreen';
 
 LogBox.ignoreAllLogs(); // Ignore all log notifications
 
@@ -69,6 +70,7 @@ export default function App() {
             options={{ contentStyle: { backgroundColor: '#f0f0f0' } }}
           />
           <Stack.Screen name="PhoneNumberLogin" component={PhoneNumberLogin} />
+          <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
         </Stack.Navigator>
       </NavigationContainer>
       <Toast config={toastConfig} />

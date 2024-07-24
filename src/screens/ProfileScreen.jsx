@@ -135,7 +135,7 @@ const ProfileScreen = ({ navigation }) => {
         } else if (item.title === 'Terms And Conditions') {
           navigation.navigate('TermAndCondition');
         } else {
-          alert(item.title);
+          navigation.navigate('ScheduleScreen');
         }
       }}
     >

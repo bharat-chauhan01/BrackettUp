@@ -1,15 +1,7 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  SafeAreaView,
-  Alert,
-} from 'react-native';
+import { Text, StyleSheet, ScrollView, SafeAreaView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { renderHeader } from '../modals/HeaderModal';
 
 const BoldText = ({ txt }) => <Text style={{ fontWeight: 'bold' }}>{txt}</Text>;
 
@@ -29,16 +21,7 @@ const TermsAndConditions = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Icon
-            name="chevron-back"
-            style={styles.iconStyle}
-            size={styles.headerText.fontSize + 5}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>Privacy Policy</Text>
-      </View>
+      {renderHeader(navigation, 'Privacy Policy')}
       <ScrollView style={styles.content}>
         <Text style={styles.title}>Terms and Conditions</Text>
         <Text style={styles.text}>
@@ -934,27 +917,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 60,
-    backgroundColor: '#f8f8f8',
-    position: 'relative',
-  },
-  backButton: {
-    position: 'absolute',
-    left: 10,
-    padding: 10,
-  },
-  iconStyle: {
-    color: '#000',
-  },
-  headerText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#000',
-  },
   content: {
     padding: 17,
   },
@@ -972,16 +934,6 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'justify',
     color: 'black',
-  },
-  headerText: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 18,
-    color: '#000',
-  },
-  iconstyle: {
-    size: 25,
-    color: '#000',
   },
 });
 
