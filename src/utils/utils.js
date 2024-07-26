@@ -26,7 +26,7 @@ export const transformDateByReferenceDayAndDDMMM = dateString => {
     return 'Today' + ', ' + format(date, 'dd MMM');
   } else if (isTomorrow(date)) {
     return 'Tomorrow' + ', ' + format(date, 'dd MMM');
-  }  else {
-    return format(date, 'dd MMM, yyyy');
+  } else {
+    return format(date, 'EEE, dd MMM');
   }
 };

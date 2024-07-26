@@ -13,12 +13,11 @@ const UpcomingActivitiesCard = ({
 }) => {
   return (
     <View style={styles.card}>
-      <Image source={require('./mapImage.jpg')} style={styles.mapImage} />
       <View style={styles.details}>
         <View style={styles.outer}>
           <View style={styles.text}>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subtitle}>
+            <Text style={styles.date}>
               {transformDateByReferenceDayAndDDMMM(date)} · {time}
             </Text>
             <Text style={styles.instructor}>
@@ -34,7 +33,7 @@ const UpcomingActivitiesCard = ({
               color={styles.directionIcon.color}
               size={styles.directionIcon.size}
             />
-            <Text style={styles.buttonText}>Map</Text>
+            <Text style={styles.buttonText}>Directions</Text>
           </View>
           <View style={styles.button}>
             <MaterialCommunityIcons
@@ -63,7 +62,7 @@ const styles = StyleSheet.create({
   },
   mapImage: {
     width: '100%',
-    height: 120,
+    height: 100,
     resizeMode: 'cover',
   },
   details: {
@@ -82,15 +81,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black',
   },
-  subtitle: {
+  date: {
     fontSize: 12,
     color: 'black',
-    fontWeight: 'bold',
     marginVertical: 5,
   },
   instructor: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'black',
+    marginBottom: 20,
   },
   activityImageUrl: {
     width: 60,
@@ -100,7 +99,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-start',
     marginTop: 10,
   },
   button: {
@@ -108,13 +107,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#eee',
     borderRadius: 10,
-    paddingVertical: 5,
-    paddingHorizontal: 15,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    marginRight: 10,
     gap: 4,
   },
   buttonText: {
     fontSize: 15,
-    fontWeight: 'bold',
     color: 'black',
   },
   directionIcon: {

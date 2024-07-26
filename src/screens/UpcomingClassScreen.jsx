@@ -115,9 +115,11 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   heading: {
-    fontSize: 36,
+    marginTop: 30,
+    fontSize: 30,
     fontWeight: 'bold',
     color: 'black',
+    marginBottom: 10,
   },
   noActivities: {
     fontSize: 18,
