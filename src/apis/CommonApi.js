@@ -41,7 +41,7 @@ const activitiesMock = [
       },
       {
         imageUrl:
-          'https://media.istockphoto.com/id/1483989758/photo/diverse-yoga-class-participants-doing-a-side-plank-on-their-yoga-mats-in-a-beautiful-yoga.jpg?s=1024x1024&w=is&k=20&c=EQE_TpZPMPPkjtW94XIqXxSBW69EZ4c-b2rhOmUcUcY=',
+          'https://media.istockphoto.com/id/1483989758/photo/diverse-yoga-class-participants-doing-a-instructor-plank-on-their-yoga-mats-in-a-beautiful-yoga.jpg?s=1024x1024&w=is&k=20&c=EQE_TpZPMPPkjtW94XIqXxSBW69EZ4c-b2rhOmUcUcY=',
         title: 'YogaSpot',
         subtitle: 'Buitenveldert · ',
         distance: '0.6 km',
@@ -68,7 +68,7 @@ const activitiesMock = [
     content: [
       {
         imageUrl:
-          'https://media.istockphoto.com/id/1483989758/photo/diverse-yoga-class-participants-doing-a-side-plank-on-their-yoga-mats-in-a-beautiful-yoga.jpg?s=1024x1024&w=is&k=20&c=EQE_TpZPMPPkjtW94XIqXxSBW69EZ4c-b2rhOmUcUcY=',
+          'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
         title: 'YogaSpot',
         subtitle: 'Buitenveldert · ',
         distance: '0.6 km',
@@ -140,6 +140,48 @@ const activitiesMock = [
     ],
   },
 ];
+
+const upcomingaAtivitiesMock = [
+  {
+    title: 'Haircut (Regular)',
+    date: '2024-07-24',
+    time: '10:00 AM - 12:00 PM',
+    instructor: 'Dan Rose',
+    institution: 'Fit Club',
+    imageUrl:
+      'https://t3.ftcdn.net/jpg/04/49/73/64/360_F_449736488_IAGo58o7DloC8Os5S5v9vppX3BIxzK4S.jpg',
+    activityImageUrl:
+      'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.webp',
+  },
+  {
+    title: 'Yoga Session',
+    date: '2024-07-25',
+    time: '08:00 AM - 09:00 AM',
+    instructor: 'Jane Doe',
+    institution: 'Wellness Center',
+    activityImageUrl:
+      'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+  },
+  {
+    title: 'Swimming Class',
+    date: '2024-07-23',
+    time: '02:00 PM - 04:00 PM',
+    instructor: 'John Smith',
+    institution: 'Swim School',
+    activityImageUrl:
+      'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.webp',
+  },
+  {
+    title: 'Yoga Class',
+    date: '2024-07-26',
+    time: '06:00 PM - 07:00 PM',
+    instructor: 'Emily Clark',
+    institution: 'Yoga Academy',
+    activityImageUrl:
+      'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+  },
+];
+
 export const fetchProfile = async () => {
   try {
     const response = await get('/profile');
@@ -207,6 +249,18 @@ export const fetchActivitySchedule = async activityId => {
   } catch (error) {
     if (error instanceof BackendUnreachableError) {
       return scheduleMock;
+    }
+    throw error;
+  }
+};
+
+export const fetchUpcomingPageActivities = async () => {
+  try {
+    const response = await get(`/activities/upcoming`);
+    return response.data;
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return upcomingaAtivitiesMock;
     }
     throw error;
   }
