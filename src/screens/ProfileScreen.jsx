@@ -134,7 +134,9 @@ const ProfileScreen = ({ navigation }) => {
           navigation.navigate('Login');
         } else if (item.title === 'Terms And Conditions') {
           navigation.navigate('TermAndCondition');
-        } else {
+        } else if (item.title === 'Saved') {
+          navigation.navigate('SavedScreen');
+        } else  {
           navigation.navigate('ScheduleScreen');
         }
       }}

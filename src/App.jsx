@@ -17,6 +17,9 @@ import Toast from 'react-native-toast-message';
 import HomeScreen from './screens/HomeScreen';
 import PhoneNumberLogin from './screens/PhoneNumberLogin';
 import ScheduleScreen from './screens/ScheduleScreen';
+import SavedScreen from './screens/SavedScreen';
+import { setItem } from './store/LocalStorage';
+import { saveData } from './apis/MockData';
 
 LogBox.ignoreAllLogs(); // Ignore all log notifications
 
@@ -26,6 +29,7 @@ export default function App() {
   const [landingPage, setLandingPage] = useState(null);
 
   useEffect(() => {
+    setItem('savedData',saveData);
     // Retrieve data when the component mounts
     const getData = async () => {
       try {
@@ -68,6 +72,11 @@ export default function App() {
             name="TermAndCondition"
             component={TermsAndConditions}
             options={{ contentStyle: { backgroundColor: '#f0f0f0' } }}
+          />
+          <Stack.Screen
+            name="SavedScreen"
+            component={SavedScreen}
+            options={{ contentStyle: { backgroundColor: '#FFFFFF' } }}
           />
           <Stack.Screen name="PhoneNumberLogin" component={PhoneNumberLogin} />
           <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />

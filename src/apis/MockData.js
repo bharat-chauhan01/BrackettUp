@@ -91,3 +91,22 @@ export const scheduleMock = [
     data: [{ hour: '12:00 am', duration: '50 min', title: 'Ashtanga Yoga' }],
   },
 ];
+
+
+export const saveData = [
+  {
+    id: '1',
+    name: 'Chasse Dance Studio',
+    distance: '4.1km',
+    rating: { value: '4.8', count: '(20,000+)', description: 'Excellent' },
+    imageUrl:
+      'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ktcv2zxh8puczwddeud9.jpg',
+  },
+  {
+    id: '2',
+    name: 'The Reformer Club',
+    distance: '4.1km',
+    rating: { value: '4.9', count: '(20,000+)', description: 'Excellent' },
+    imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.BIEJXgLeS8ZjLi4ts90tEgHaE8&pid=Api&P=0&h=180',
+  },
+];
