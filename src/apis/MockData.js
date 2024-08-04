@@ -92,6 +92,266 @@ export const scheduleMock = [
   },
 ];
 
+export const searchModalsData = [
+  {
+    activityName: 'Yoga Session',
+    distance: '5 km',
+    organisation: 'John Doe',
+    rating: 4.5,
+    categories: ['Health', 'Fitness'],
+    time: ['10:00 AM', '11:00 AM', '10:00 AM', '11:00 AM'],
+    credits: '2 credits',
+    imageSource: {
+      uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+    },
+    ratingCount: '400',
+    ratingDesc: 'Great',
+  },
+  {
+    activityName: 'Pilates Class',
+    distance: '3 km',
+    organisation: 'Jane Smith',
+    rating: 4.0,
+    categories: ['Health', 'Wellness'],
+    time: ['10:00 AM', '11:00 AM'],
+    credits: '3 credits',
+    imageSource: {
+      uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+    },
+    ratingCount: '300+',
+    ratingDesc: 'Excellent',
+  },
+  {
+    activityName: 'Yoga Session',
+    distance: '5 km',
+    organisation: 'John Doe',
+    rating: 4.5,
+    categories: ['Health', 'Fitness'],
+    time: ['10:00 AM', '11:00 AM'],
+    credits: '2 credits',
+    ratingCount: '500',
+    ratingDesc: 'Super',
+    imageSource: {
+      uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+    },
+  },
+  {
+    activityName: 'Pilates Class',
+    distance: '3 km',
+    organisation: 'Jane Smith',
+    rating: 4.0,
+    categories: ['Health', 'Wellness'],
+    time: ['10:00 AM', '11:00 AM'],
+    ratingCount: '50',
+    ratingDesc: 'Super',
+    credits: '3 credits',
+    imageSource: {
+      uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+    },
+  },
+  {
+    activityName: 'Yoga Session',
+    distance: '5 km',
+    organisation: 'John Doe',
+    rating: 4.5,
+    categories: ['Health', 'Fitness'],
+    time: ['10:00 AM', '11:00 AM'],
+    ratingCount: '50',
+    ratingDesc: 'Super',
+    credits: '2 credits',
+    imageSource: {
+      uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+    },
+  },
+  {
+    activityName: 'Pilates Class',
+    distance: '3 km',
+    organisation: 'Jane Smith',
+    rating: 4.0,
+    categories: ['Health', 'Wellness'],
+    time: ['10:00 AM', '11:00 AM'],
+    ratingCount: '50',
+    ratingDesc: 'Super',
+    credits: '3 credits',
+    imageSource: {
+      uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+    },
+  },
+  // Add more data objects as needed
+];
+
+export const placesMock = [
+  {
+    name: 'akshardham',
+    location: {
+      lat: '123.2',
+      long: '123.2',
+    },
+  },
+  {
+    name: 'mayur vihar',
+    location: {
+      lat: '',
+      long: '',
+    },
+  },
+  {
+    name: 'anand vihar',
+    location: {
+      lat: '',
+      long: '',
+    },
+  },
+  {
+    name: 'dwarka',
+    location: {
+      lat: '',
+      long: '',
+    },
+  },
+  {
+    name: 'connaught palace',
+    location: {
+      lat: '',
+      long: '',
+    },
+  },
+  {
+    name: 'paschim vihar',
+    location: {
+      lat: '',
+      long: '',
+    },
+  },
+];
+
+export const searchMock = [
+  {
+    name: 'Boxing',
+    ref_id: '9d834d1a-e9f4-4784-894a-66e0a98f9d2f',
+    ref_type: 'activity',
+  },
+  {
+    name: 'iron pumper gym',
+    ref_id: '479d94d1-098c-4b7d-bc1c-438c8c87a367',
+    ref_type: 'institution',
+  },
+  {
+    name: 'yoga',
+    ref_id: 'e9785413-e442-414e-a58d-a58c0f2c35d3',
+    ref_type: 'institution',
+  },
+  {
+    name: 'swimming',
+    ref_id: 'e9785413-e442-414e-a58d-a58c0f2c35d3',
+    ref_type: 'activity',
+  },
+  {
+    name: 'dance',
+    ref_id: 'e9785413-e442-414e-a58d-a58c0f2c35d3',
+    ref_type: 'institution',
+  },
+  {
+    name: 'shuffle dance',
+    ref_id: 'e9785413-e442-414e-a58d-a58c0f2c35d3',
+    ref_type: 'institution',
+  },
+];
+
+export const categoriesMock = [
+  {
+    name: 'Boxing',
+    id: '1',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+  {
+    name: 'Boxing',
+    id: '2',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+  {
+    name: 'Boxing',
+    id: '3',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+  {
+    name: 'Boxing',
+    id: '4',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+  {
+    name: 'Boxing',
+    id: '5',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+  {
+    name: 'Boxing',
+    id: '6',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+  {
+    name: 'Boxing',
+    id: '7',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+  {
+    name: 'Boxing',
+    id: '8',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+  {
+    name: 'Boxing',
+    id: '9',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+  {
+    name: 'Boxing',
+    id: '10',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+  {
+    name: 'Boxing',
+    id: '11',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+  {
+    name: 'Boxing',
+    id: '12',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+  {
+    name: 'Boxing',
+    id: '13',
+    description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
+    imageUrl:
+      'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
+  },
+];
+
 
 export const saveData = [
   {

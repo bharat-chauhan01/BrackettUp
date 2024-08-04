@@ -1,7 +1,7 @@
 import { BackendUnreachableError } from '../utils/utils';
 import { validateMobileNumber } from '../validator/MobileValidator';
 import { get, post } from './ApiHandler';
-import { scheduleMock } from './MockData';
+import { categoriesMock, placesMock, scheduleMock, searchMock, searchModalsData } from './MockData';
 
 const dummyUser = {
   name: 'SuperUser',
@@ -261,6 +261,54 @@ export const fetchUpcomingPageActivities = async () => {
   } catch (error) {
     if (error instanceof BackendUnreachableError) {
       return upcomingaAtivitiesMock;
+    }
+    throw error;
+  }
+};
+
+export const searchedResults = async data => {
+  try {
+    const response = await post('/search', data);
+    return response.data;
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return searchModalsData;
+    }
+    throw error;
+  }
+};
+
+export const getNearByPlaces = async searchText => {
+  try {
+    const response = await get('places?searchText=' + searchText);
+    return response.data;
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return placesMock;
+    }
+    throw error;
+  }
+};
+
+export const searchSuggestions = async searchText => {
+  try {
+    const response = await get('/activitySuggestions?searchText=' + searchText);
+    return response.data;
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return searchMock;
+    }
+    throw error;
+  }
+};
+
+export const getCategories = async () => {
+  try {
+    const response = await get('/categories');
+    return response.data;
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return categoriesMock;
     }
     throw error;
   }

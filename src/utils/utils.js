@@ -30,3 +30,16 @@ export const transformDateByReferenceDayAndDDMMM = dateString => {
     return format(date, 'EEE, dd MMM');
   }
 };
+
+export const generateTwoWeeksDates = () => {
+  const dates = [];
+  const today = new Date();
+  const options = { weekday: 'short', day: 'numeric' }; // Format options
+
+  for (let i = 0; i < 14; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
+    dates.push(date.toLocaleDateString('en-US', options)); // Format date as "Day, Date"
+  }
+  return dates;
+};

@@ -6,6 +6,7 @@ import HomeScreen from './HomeScreen';
 import ProfileScreen from './ProfileScreen';
 import UpcomingClassScreen from './UpcomingClassScreen';
 import SearchScreen from './SearchScreen';
+import SearchLandingScreen from './SearchLandingScreen';
 import { useDispatch } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
@@ -47,7 +48,7 @@ export default function LandingScreen() {
       />
       <Tab.Screen
         name="Search"
-        component={SearchScreen}
+        component={SearchLandingScreen}
         options={{
           tabBarIcon: () => (
             <MaterialCommunityIcons name="magnify" color={'#000000'} size={iconHeight} />

@@ -45,7 +45,7 @@ export const post = (path, data) => {
         throw new Error(constant.error.backendUnreachableErrorMessage);
       } else if (error.request) {
         // The request was made but no response was received
-        console.log('Unreachable: Error while calling path', path, error);
+        console.log('Unreachable: Error while calling path', path, data, error);
         throw new BackendUnreachableError();
       } else if (error.code === 'ECONNABORTED') {
         // The request took longer than the timeout set
