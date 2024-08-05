@@ -16,9 +16,9 @@ export default function SavedScreen() {
     setError(null);
     try {
       const storedData = await getItem('savedData');
-      if (storedData!=null && storedData.length>0) {
+      if (storedData != null && storedData.length > 0) {
         setData(storedData);
-      }else{
+      } else {
         setData([]);
       }
     } catch (error) {
@@ -31,7 +31,6 @@ export default function SavedScreen() {
   useFocusEffect(
     useCallback(() => {
       fetchData();
-      
     }, []),
   );
 
@@ -50,7 +49,7 @@ export default function SavedScreen() {
   return (
     <View>
       {renderHeader(navigation, 'Saved')}
-      <View style={{marginTop:20}}></View>
+      <View style={{ marginTop: 20 }}></View>
       <SavedItem data={data} />
     </View>
   );

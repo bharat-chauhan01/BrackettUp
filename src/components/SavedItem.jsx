@@ -6,7 +6,7 @@ import { setItem } from '../store/LocalStorage';
 
 const SavedItem = ({ data }) => {
   const [savedData, setSavedData] = useState(data);
-  const navigation=useNavigation()
+  const navigation = useNavigation();
 
   useFocusEffect(
     useCallback(() => {
@@ -42,9 +42,7 @@ const SavedItem = ({ data }) => {
               navigation.navigate('ScheduleScreen');
             }}
           >
-            <Text style={styles.scheduleText}>
-              Schedule
-            </Text>
+            <Text style={styles.scheduleText}>Schedule</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.imageContainer}>
@@ -67,11 +65,7 @@ const SavedItem = ({ data }) => {
     </View>
   );
 
-  return (
-    <ScrollView >
-      {savedData.map(item => renderItem(item))}
-    </ScrollView>
-  );
+  return <ScrollView>{savedData.map(item => renderItem(item))}</ScrollView>;
 };
 
 const styles = StyleSheet.create({
@@ -83,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 1,
     padding: 10,
-    marginHorizontal:10,
+    marginHorizontal: 10,
     backgroundColor: '#fff',
     shadowColor: '#000',
     shadowOpacity: 0.1,

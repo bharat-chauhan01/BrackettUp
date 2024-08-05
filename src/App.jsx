@@ -32,7 +32,7 @@ const MainApp = () => {
   const { errorMsg } = useUserLocation();
 
   useEffect(() => {
-    setItem('savedData',saveData);
+    setItem('savedData', saveData);
     // Retrieve data when the component mounts
     const getData = async () => {
       try {
@@ -76,10 +76,10 @@ const MainApp = () => {
           options={{ contentStyle: { backgroundColor: '#f0f0f0' } }}
         />
         <Stack.Screen
-            name="SavedScreen"
-            component={SavedScreen}
-            options={{ contentStyle: { backgroundColor: '#FFFFFF' } }}
-          />
+          name="SavedScreen"
+          component={SavedScreen}
+          options={{ contentStyle: { backgroundColor: '#FFFFFF' } }}
+        />
         <Stack.Screen name="PhoneNumberLogin" component={PhoneNumberLogin} />
         <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
