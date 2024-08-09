@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { transformDateByReferenceDayAndDDMMM } from '../utils/utils';
 
@@ -33,7 +33,9 @@ const UpcomingActivitiesCard = ({
               color={styles.directionIcon.color}
               size={styles.directionIcon.size}
             />
-            <Text style={styles.buttonText}>Directions</Text>
+            <TouchableOpacity onPress={() => Alert.alert('Directions button clicked!')}>
+              <Text style={styles.buttonText}>Directions</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.button}>
             <MaterialCommunityIcons
@@ -41,7 +43,9 @@ const UpcomingActivitiesCard = ({
               color={styles.calendarIcon.color}
               size={styles.calendarIcon.size}
             />
-            <Text style={styles.buttonText}>Add</Text>
+            <TouchableOpacity onPress={() => Alert.alert('Add button clicked!')}>
+              <Text style={styles.buttonText}>Add</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
