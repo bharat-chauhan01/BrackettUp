@@ -1,261 +1,281 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, Dimensions, Alert, ActivityIndicator } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
 import { renderHeader } from '../modals/HeaderModal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useNavigation,useRoute } from '@react-navigation/native';
-import {fetchActivityDetail} from '../apis/CommonApi';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { fetchActivityDetail } from '../apis/CommonApi';
 import RenderTextWithToggle from '../components/RenderTextWithToggle';
 
 const { width: screenWidth } = Dimensions.get('window');
 const handleReserve = () => {
-    Alert.alert('Reservation successful');
-
+  Alert.alert('Reservation successful');
 };
 
 export default function ActivityDetail() {
   const scrollViewRef = useRef(null);
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
-  const [activityData,setActivityData]=useState([]);
-  const route = useRoute(); 
-  
-  const { activityId } = route.params; 
+  const [activityData, setActivityData] = useState([]);
+  const route = useRoute();
 
-  
-  	useEffect(() => {
-        const loadActivityDetail = async () => {
-          setLoading(true);
-          try {
-            const data = await fetchActivityDetail(activityId);
-          setActivityData(data);
-          
-          } catch (error) {
-            console.error('Failed to fetch activity details:', error);
-          } finally {
-            setLoading(false);
-          }
-    	    };
-    	
-        loadActivityDetail();
-      }, [activityId]);
-    
+  const { activityId } = route.params;
 
-      
+  useEffect(() => {
+    const loadActivityDetail = async () => {
+      setLoading(true);
+      try {
+        const data = await fetchActivityDetail(activityId);
+        setActivityData(data);
+      } catch (error) {
+        console.error('Failed to fetch activity details:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-return (
+    loadActivityDetail();
+  }, [activityId]);
+
+  return (
     <View style={styles.container}>
-    {renderHeader(navigation, activityData.activityName)}
+      {renderHeader(navigation, activityData.activityName)}
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-      {loading ? (<ActivityIndicator size="large" color="#0000ff" />):(<>
-        <View style={styles.imageContainer}>
-          <ScrollView
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            ref={scrollViewRef}
-            onScroll={(event) => {
-              const scrollPosition = event.nativeEvent.contentOffset.x;
-            }}
-            
-          >
-            {activityData.images && activityData.images.map((image, index) => (
-              <View key={image.id} style={styles.imageWrapper}>
-                <Image source={{ uri: image.uri }} style={styles.image} />
-                <View style={styles.imageNumberContainer}>
-                  <Text style={styles.imageNumber}>{index + 1}/{activityData.images.length}</Text>
+        {loading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : (
+          <>
+            <View style={styles.imageContainer}>
+              <ScrollView
+                horizontal
+                pagingEnabled
+                showsHorizontalScrollIndicator={false}
+                ref={scrollViewRef}
+                onScroll={event => {
+                  const scrollPosition = event.nativeEvent.contentOffset.x;
+                }}
+              >
+                {activityData.images &&
+                  activityData.images.map((image, index) => (
+                    <View key={image.id} style={styles.imageWrapper}>
+                      <Image source={{ uri: image.uri }} style={styles.image} />
+                      <View style={styles.imageNumberContainer}>
+                        <Text style={styles.imageNumber}>
+                          {index + 1}/{activityData.images.length}
+                        </Text>
+                      </View>
+                    </View>
+                  ))}
+              </ScrollView>
+            </View>
+
+            <View>
+              <View style={styles.detailsContainer}>
+                <Text style={styles.title}>{activityData.activityName}</Text>
+                <Text style={styles.rating}>
+                  {activityData.rating?.value}{' '}
+                  <MaterialCommunityIcons
+                    name={styles.starIcon.name}
+                    color={styles.starIcon.color}
+                    size={styles.starIcon.size}
+                  />
+                  {activityData.rating?.count}{' '}
+                  <Text style={styles.ratingDesc}>{activityData.rating?.description}</Text>
+                </Text>
+
+                <View style={styles.instructorContainer}>
+                  <Text style={styles.instructorOrganiser}>
+                    {activityData.organisationName} · {activityData.location}
+                  </Text>
+                </View>
+                <Text style={styles.category}>{activityData.category}</Text>
+                <Text style={styles.time}>{activityData.time}</Text>
+                <Text style={styles.classTakenBy}>{activityData.classTakenBy}</Text>
+
+                <View style={styles.buttonRow}>
+                  <TouchableOpacity style={styles.fullWidthButton}>
+                    <Text style={styles.buttonText}>
+                      <MaterialCommunityIcons
+                        name={styles.accountIcon.name}
+                        color={styles.accountIcon.color}
+                        size={styles.accountIcon.size}
+                      />{' '}
+                      Invite
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.fullWidthButton}>
+                    <Text style={styles.buttonText}>
+                      <MaterialCommunityIcons
+                        name={styles.calendarIcon.name}
+                        color={styles.calendarIcon.color}
+                        size={styles.calendarIcon.size}
+                      />{' '}
+                      Add
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+
+                <Text style={styles.classDescription}>{activityData.classDescription}</Text>
+              </View>
+              <View style={styles.horizontalLine} />
+
+              <View style={styles.details}>
+                <View style={styles.detailsContainer}>
+                  <Text style={styles.subTitle}>Reviews</Text>
+                  <Text style={styles.ratingFull}>
+                    {activityData.rating?.value}{' '}
+                    <MaterialCommunityIcons
+                      name={styles.starIcon.name}
+                      color={styles.starIcon.color}
+                      size={styles.starIcon.size}
+                    />{' '}
+                    {activityData.rating?.count}
+                  </Text>
+
+                  <TouchableOpacity>
+                    <Text style={styles.moreLink}>See all reviews</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.horizontalLine} />
+                <View style={styles.detailsContainer}>
+                  <Text style={styles.subTitle}>Cancellation policy</Text>
+                  <Text style={styles.text}>{activityData.cancellationPolicy}</Text>
+                  <Text style={styles.moreLink}>Learn more</Text>
+                </View>
+                <View style={styles.horizontalLine} />
+                <View style={styles.detailsContainer}>
+                  <Text style={styles.subTitle}>About</Text>
+                  <View style={styles.infoContainer}>
+                    <View style={styles.infoRow}>
+                      <Text style={styles.infoText}>{activityData.instagramAccount}</Text>
+                      <MaterialCommunityIcons
+                        name={styles.instagramIcon.name}
+                        color={styles.instagramIcon.color}
+                        size={styles.instagramIcon.size}
+                      />
+                    </View>
+                    <View style={styles.infoRow}>
+                      <Text style={styles.infoText}>{activityData.websiteUrl}</Text>
+                      <MaterialCommunityIcons
+                        name={styles.webIcon.name}
+                        color={styles.webIcon.color}
+                        size={styles.webIcon.size}
+                      />
+                    </View>
+                  </View>
+                  <RenderTextWithToggle text={activityData.about} />
+                  {/* {RenderTextWithToggle(activityData.about)} */}
+                </View>
+                <View style={styles.horizontalLine} />
+                <View style={styles.detailsContainer}>
+                  <View style={styles.highlightsContainer}>
+                    <Text style={styles.subTitle}>Highlights</Text>
+                    <View style={styles.highlightsRow}>
+                      {activityData.highlights &&
+                        activityData.highlights.map((item, index) => (
+                          <Text key={index} style={styles.highlightsText}>
+                            <MaterialCommunityIcons
+                              name={styles.checkIcon.name}
+                              color={styles.checkIcon.color}
+                              size={styles.checkIcon.size}
+                            />{' '}
+                            {item}
+                          </Text>
+                        ))}
+                    </View>
+
+                    <Text style={styles.subTitle}>Amenities</Text>
+                    <View>
+                      {activityData.amenities &&
+                        activityData.amenities.map((item, index) => (
+                          <Text key={index} style={styles.highlightsText}>
+                            <MaterialCommunityIcons
+                              name={styles.checkIcon.name}
+                              color={styles.checkIcon.color}
+                              size={styles.checkIcon.size}
+                            />{' '}
+                            {item}
+                          </Text>
+                        ))}
+                    </View>
+                  </View>
+                </View>
+                <View style={styles.detailsContainer}>
+                  <View style={styles.locationContainer}>
+                    {/* <Image source={{ uri: activityData.mapImage }} style={styles.mapImage} /> */}
+                    <View style={styles.locationTextContainer}>
+                      <Text style={styles.locationText}>{activityData.address}</Text>
+                      <Text style={styles.locationText}>{activityData.city}</Text>
+                    </View>
+                    <TouchableOpacity style={styles.getDirectionsButton}>
+                      <Text style={styles.buttonText}>
+                        <MaterialCommunityIcons
+                          name={styles.directionsIcon.name}
+                          color={styles.directionsIcon.color}
+                          size={styles.directionsIcon.size}
+                        />{' '}
+                        Get Directions
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+
+                  <Text style={styles.subTitle}>How to get there</Text>
+                  <RenderTextWithToggle text={activityData.howToGetThere} />
+                  {/* {renderTextWithToggle(activityData.howToGetThere)} */}
+                </View>
+                <View style={styles.horizontalLine} />
+                <View style={styles.detailsContainer}>
+                  <Text style={styles.subTitle}>Safety & Cleanliness</Text>
+                  <Text style={styles.classDescription}>{activityData.updatedDate}</Text>
+                </View>
+                <View style={styles.detailsContainer}>
+                  <View style={styles.precautionContainer}>
+                    <Text style={styles.precautionTitle}>Safety & Health Measures</Text>
+                    <View style={styles.safetyContainer}>
+                      {activityData.safety &&
+                        activityData.safety.map((item, index) => (
+                          <Text key={index} style={styles.safetyItem}>
+                            <MaterialCommunityIcons
+                              name={styles.checkIcon.name}
+                              color={styles.checkIcon.color}
+                              size={styles.checkIcon.size}
+                            />{' '}
+                            {item}
+                          </Text>
+                        ))}
+                    </View>
+
+                    <Text style={styles.moreLink}>See details</Text>
+                  </View>
+                </View>
+                <View style={styles.detailsContainer}>
+                  <Text style={styles.subTitle}>How to prepare</Text>
+                  <RenderTextWithToggle text={activityData.preparation} />
+
+                  <View style={styles.reportContainer}>
+                    <MaterialCommunityIcons
+                      name={styles.reportIcon.name}
+                      color={styles.reportIcon.color}
+                      size={styles.reportIcon.size}
+                    />
+                    <Text style={styles.moreLink}>Report inaccurate information</Text>
+                  </View>
                 </View>
               </View>
-            ))}
-          </ScrollView>
-        </View>
-
-        <View >
-        <View style={styles.detailsContainer}>
-          <Text style={styles.title}>{activityData.activityName}</Text>
-          <Text style={styles.rating}>{activityData.rating?.value} <MaterialCommunityIcons
-              name={styles.starIcon.name}
-              color={styles.starIcon.color}
-              size={styles.starIcon.size}
-            /> 
-            {activityData.rating?.count} <Text style={styles.ratingDesc}>{activityData.rating?.description}</Text></Text>
- 
-    <View style={styles.instructorContainer}>  
-          <Text style={styles.instructorOrganiser}>{activityData.organisationName} · {activityData.location}</Text>
-            
             </View>
-            <Text style={styles.category}>{activityData.category}</Text>
-          <Text style={styles.time}>{activityData.time}</Text>
-          <Text style={styles.classTakenBy}>{activityData.classTakenBy}</Text>
-          
-          
-          <View style={styles.buttonRow}>
-            <TouchableOpacity style={styles.fullWidthButton} >
-              <Text style={styles.buttonText}><MaterialCommunityIcons
-                name={styles.accountIcon.name}
-                color={styles.accountIcon.color}
-                size={styles.accountIcon.size}
-              /> Invite</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.fullWidthButton} >
-              <Text style={styles.buttonText}><MaterialCommunityIcons
-                name={styles.calendarIcon.name}
-                color={styles.calendarIcon.color}
-                size={styles.calendarIcon.size}
-              /> Add</Text>
-            </TouchableOpacity>
-          </View>
-
-          <Text style={styles.classDescription}>{activityData.classDescription}</Text>
-          </View>
-          <View style={styles.horizontalLine} />
-
-          <View style={styles.details}>
-          <View style={styles.detailsContainer}>          
-          <Text style={styles.subTitle}>Reviews</Text>
-          <Text style={styles.ratingFull}>{activityData.rating?.value} <MaterialCommunityIcons
-            name={styles.starIcon.name}
-            color={styles.starIcon.color}
-            size={styles.starIcon.size}
-          /> {activityData.rating?.count}</Text>
-          
-          <TouchableOpacity  >
-          <Text style={styles.moreLink}>See all reviews</Text> 
-            </TouchableOpacity>
-          </View>
-          <View style={styles.horizontalLine} />
-          <View style={styles.detailsContainer}> 
-          <Text style={styles.subTitle}>Cancellation policy</Text>
-          <Text style={styles.text}>{activityData.cancellationPolicy}</Text>
-          <Text style={styles.moreLink}>Learn more</Text>
-          </View>
-          <View style={styles.horizontalLine} />
-          <View style={styles.detailsContainer}>
-          <Text style={styles.subTitle}>About</Text>
-          <View style={styles.infoContainer}>
-      <View style={styles.infoRow}>
-        <Text style={styles.infoText}>{activityData.instagramAccount}</Text>
-        <MaterialCommunityIcons
-            name={styles.instagramIcon.name}
-            color={styles.instagramIcon.color}
-            size={styles.instagramIcon.size}
-          />
-      </View>
-      <View style={styles.infoRow}>
-        <Text style={styles.infoText}>{activityData.websiteUrl}</Text>
-        <MaterialCommunityIcons
-            name={styles.webIcon.name}
-            color={styles.webIcon.color}
-            size={styles.webIcon.size}
-          />
-      </View>
-    </View>
-    <RenderTextWithToggle text={activityData.about} />
-          {/* {RenderTextWithToggle(activityData.about)} */}
-          </View>
-          <View style={styles.horizontalLine} />
-          <View style={styles.detailsContainer}>
-          <View style={styles.highlightsContainer}>
-      <Text style={styles.subTitle}>Highlights</Text>
-      <View style={styles.highlightsRow}>
-
-      {activityData.highlights && activityData.highlights.map((item, index) => (
-                    <Text key={index} style={styles.highlightsText}>
-                      <MaterialCommunityIcons
-                        name={styles.checkIcon.name}
-                        color={styles.checkIcon.color}
-                        size={styles.checkIcon.size}
-                      /> {item}
-                    </Text>
-                  ))}
-                </View>
-
-
-      <Text style={styles.subTitle}>Amenities</Text>
-      <View>
-      {activityData.amenities && activityData.amenities.map((item, index) => (
-                    <Text key={index} style={styles.highlightsText}>
-                      <MaterialCommunityIcons
-                        name={styles.checkIcon.name}
-                        color={styles.checkIcon.color}
-                        size={styles.checkIcon.size}
-                      /> {item}
-                    </Text>
-                  ))}
-      </View>
-    </View>
-    </View>
-    <View style={styles.detailsContainer}>
-    
-    <View style={styles.locationContainer}>
-         {/* <Image source={{ uri: activityData.mapImage }} style={styles.mapImage} /> */}
-         <View style={styles.locationTextContainer}>
-         <Text style={styles.locationText}>{activityData.address}</Text>
-         <Text style={styles.locationText}>{activityData.city}</Text>
-         </View>         
-         <TouchableOpacity style={styles.getDirectionsButton} >
-              <Text style={styles.buttonText}><MaterialCommunityIcons
-                        name={styles.directionsIcon.name}
-                        color={styles.directionsIcon.color}
-                        size={styles.directionsIcon.size}
-                      />  Get Directions</Text>
-            </TouchableOpacity> 
-          </View>
-          
-         
-          <Text style={styles.subTitle}>How to get there</Text>
-          <RenderTextWithToggle text={activityData.howToGetThere} />
-          {/* {renderTextWithToggle(activityData.howToGetThere)} */}
-          
-          </View>
-          <View style={styles.horizontalLine} />
-          <View style={styles.detailsContainer}>
-        <Text style={styles.subTitle}>Safety & Cleanliness</Text>
-          <Text style={styles.classDescription}>{activityData.updatedDate}</Text>
-          </View>
-          <View style={styles.detailsContainer}>
-        <View style={styles.precautionContainer}>
-        <Text style={styles.precautionTitle}>Safety & Health Measures</Text>
-          <View style={styles.safetyContainer}>
-                  {activityData.safety && activityData.safety.map((item, index) => (
-                    <Text key={index} style={styles.safetyItem}>
-                      <MaterialCommunityIcons
-                        name={styles.checkIcon.name}
-                        color={styles.checkIcon.color}
-                        size={styles.checkIcon.size}
-                      /> {item}
-                    </Text>
-                  ))}
-                </View>
-
-          <Text style={styles.moreLink}>See details</Text>
-          </View>
-          </View>
-          <View style={styles.detailsContainer}>
-          <Text style={styles.subTitle}>How to prepare</Text>
-          <RenderTextWithToggle text={activityData.preparation} />
-          
-          <View style={styles.reportContainer}>
-          <MaterialCommunityIcons
-            name={styles.reportIcon.name}
-            color={styles.reportIcon.color}
-            size={styles.reportIcon.size}
-          /> 
-          <Text style={styles.moreLink}> 
-          Report inaccurate information</Text>
-          </View>
-          
-          </View>
-          
-        
-        </View>
-        </View>
-        </>
-      )
-      }
-        
-        
+          </>
+        )}
       </ScrollView>
-      
+
       <View style={styles.reserveButtonContainer}>
         <Text style={styles.credits}>{activityData.credits} credits</Text>
         <TouchableOpacity style={styles.reserveButton} onPress={handleReserve}>
@@ -270,7 +290,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    color:'black'
+    color: 'black',
   },
   scrollContainer: {
     paddingBottom: 60,
@@ -283,7 +303,7 @@ const styles = StyleSheet.create({
     height: 250,
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
-    paddingBottom:10,
+    paddingBottom: 10,
     position: 'relative',
   },
   image: {
@@ -336,7 +356,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   instructorContainer: {
-    flex:1,
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-end',
   },
@@ -360,7 +380,7 @@ const styles = StyleSheet.create({
     color: '#000000',
     size: 22,
   },
-  directionsIcon:{
+  directionsIcon: {
     name: 'directions',
     color: '#000000',
     size: 16,
@@ -396,7 +416,7 @@ const styles = StyleSheet.create({
   },
   time: {
     fontSize: 14,
-    marginTop:8,
+    marginTop: 8,
     color: 'black',
   },
   classTakenBy: {
@@ -410,23 +430,22 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   horizontalLine: {
-    marginTop:10,
+    marginTop: 10,
     height: 1,
     width: '100%',
     backgroundColor: '#D3D3D3',
   },
   buttonRow: {
-    marginTop:10,
+    marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
-    gap:10,
+    gap: 10,
     color: 'white',
-
   },
-  reviewsButton:{
+  reviewsButton: {
     flex: 1,
-    width:'100%',
+    width: '100%',
     backgroundColor: 'white',
     paddingVertical: 10,
     borderWidth: 1,
@@ -435,32 +454,32 @@ const styles = StyleSheet.create({
   },
   fullWidthButton: {
     flex: 1,
-    width:'80%',
+    width: '80%',
     backgroundColor: 'white',
     paddingVertical: 10,
     borderWidth: 1,
     borderColor: '#D3D3D3',
     borderRadius: 10,
   },
-  
+
   buttonText: {
     color: 'black',
     textAlign: 'center',
     fontSize: 14,
   },
-  getDirectionsButton:{
+  getDirectionsButton: {
     // flex: 1,
-    width:'50%',
+    width: '50%',
     backgroundColor: 'white',
     paddingVertical: 10,
     borderWidth: 1,
     borderColor: '#D3D3D3',
     borderRadius: 10,
-    marginLeft:20,
-    marginBottom:20
+    marginLeft: 20,
+    marginBottom: 20,
   },
   classDescription: {
-    marginTop:12,
+    marginTop: 12,
     fontSize: 14,
     marginVertical: 10,
     lineHeight: 22,
@@ -469,8 +488,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    paddingHorizontal:20,
-    paddingVertical:10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     backgroundColor: 'white',
     borderTopWidth: 1,
     borderColor: '#ccc',
@@ -479,14 +498,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   credits: {
-    fontWeight:'bold',
+    fontWeight: 'bold',
     fontSize: 14,
-    color:'black'
+    color: 'black',
   },
   reserveButton: {
     backgroundColor: '#1B7CDD',
     padding: 15,
-    paddingHorizontal:50,
+    paddingHorizontal: 50,
     borderRadius: 25,
   },
   reserveButtonText: {
@@ -494,57 +513,56 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   details: {
-    
     // paddingHorizontal: 20,
-    paddingBottom:20,
+    paddingBottom: 20,
   },
   reviewsTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-    color:'black',
+    color: 'black',
   },
   infoContainer: {
     flex: 1,
-    marginTop:10,
+    marginTop: 10,
   },
   infoRow: {
     flexDirection: 'row',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 10,
   },
   infoText: {
-   fontSize: 14,
-    color:'black',
+    fontSize: 14,
+    color: 'black',
     marginRight: 10,
   },
   subTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginTop:20,
+    marginTop: 20,
     // marginBottom: 10,
-    color:'black',
+    color: 'black',
   },
   precautionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop:20,
+    marginTop: 20,
     marginBottom: 10,
-    color:'black',
+    color: 'black',
   },
 
   text: {
     fontSize: 14,
-    color:'black',
-    marginTop:12,
-    marginBottom:12,
-    lineHeight:25,   
+    color: 'black',
+    marginTop: 12,
+    marginBottom: 12,
+    lineHeight: 25,
   },
   locationText: {
     fontSize: 14,
-    color:'black',
-    lineHeight:30  
+    color: 'black',
+    lineHeight: 30,
   },
   moreLink: {
     fontSize: 14,
@@ -552,56 +570,53 @@ const styles = StyleSheet.create({
     color: 'black',
     textDecorationLine: 'underline',
     marginBottom: 10,
-    
   },
   highlightsContainer: {
     padding: 16,
-    marginTop:15,    
+    marginTop: 15,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#E0E0E0',
   },
   locationContainer: {
-    height:170,
-    marginTop:20,    
+    height: 170,
+    marginTop: 20,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#E0E0E0',
   },
   precautionContainer: {
-    padding:10,
-    marginTop:20,    
+    padding: 10,
+    marginTop: 20,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#E0E0E0',
-    paddingBottom:30,
+    paddingBottom: 30,
   },
   reportContainer: {
-    paddingTop:20,
-    flex:1,
-    flexDirection:'row',
-    gap:10,
+    paddingTop: 20,
+    flex: 1,
+    flexDirection: 'row',
+    gap: 10,
   },
-  locationTextContainer:{
-    padding:20
+  locationTextContainer: {
+    padding: 20,
   },
   highlightsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop:8, 
-    gap:10
+    marginTop: 8,
+    gap: 10,
   },
   checkIcon: {
     name: 'check',
     color: 'green',
     size: 24,
-    
   },
   reportIcon: {
     name: 'flag-outline',
     color: '#000000',
     size: 24,
-    
   },
   highlightsText: {
     fontSize: 12,
@@ -611,8 +626,8 @@ const styles = StyleSheet.create({
   safetyContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom:20,
-    gap:6,
+    marginBottom: 20,
+    gap: 6,
   },
   safetyItem: {
     fontSize: 12,
@@ -620,5 +635,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-

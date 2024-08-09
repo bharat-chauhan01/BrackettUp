@@ -136,6 +136,8 @@ const ProfileScreen = ({ navigation }) => {
           navigation.navigate('TermAndCondition');
         } else if (item.title === 'Saved') {
           navigation.navigate('SavedScreen');
+        } else if (item.title === 'Reservations') {
+          navigation.navigate('ReservationsScreen');
         } else {
           navigation.navigate('ScheduleScreen');
         }

@@ -8,8 +8,6 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   FlatList,
-  TouchableWithoutFeedback,
-  Keyboard,
 } from 'react-native';
 import SearchModal from '../modals/SearchModal';
 import SortPickerModal from '../modals/SortPickerModal';
@@ -18,7 +16,6 @@ import { generateTwoWeeksDates } from '../utils/utils';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getNearByPlaces, searchedResults, searchSuggestions } from '../apis/CommonApi';
 import { useSelector } from 'react-redux';
-import { renderHeader } from '../modals/HeaderModal';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 

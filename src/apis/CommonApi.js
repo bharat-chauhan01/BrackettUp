@@ -1,10 +1,17 @@
 import { BackendUnreachableError } from '../utils/utils';
-import { validateMobileNumber } from '../validator/MobileValidator';
 import { get, post } from './ApiHandler';
-import { categoriesMock, placesMock, scheduleMock, searchMock, searchModalsData } from './MockData';
-import {activitiesMock} from './MockData';
-import {upcomingActivitiesMock} from './MockData';
-import {activityDataMock} from './MockData';
+import {
+  categoriesMock,
+  placesMock,
+  reservationMock,
+  scheduleMock,
+  searchMock,
+  searchModalsData,
+  activityDataMock,
+  activitiesMock,
+  upcomingActivitiesMock,
+} from './MockData';
+
 const dummyUser = {
   name: 'SuperUser',
   credits: 100,
@@ -14,8 +21,6 @@ const dummyUser = {
 const dummyLoginResponse = {
   authToken: 'eyllb.asd',
 };
-
-
 
 export const fetchProfile = async () => {
   try {
@@ -149,17 +154,26 @@ export const getCategories = async () => {
   }
 };
 
-
-
-
-export const fetchActivityDetail = async (id) => {
+export const fetchActivityDetail = async id => {
   try {
     const response = await get(`/activity/${id}`);
     return response.data;
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {  
+    if (error instanceof BackendUnreachableError) {
       const mockData = activityDataMock.find(activity => activity.activityId === id);
-      return mockData ? mockData : {}; 
+      return mockData ? mockData : {};
+    }
+    throw error;
+  }
+};
+
+export const fetchReservation = async () => {
+  try {
+    const response = await get(`/reservation`);
+    return response.data;
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return reservationMock;
     }
     throw error;
   }

@@ -3,7 +3,7 @@ import { Text, View, ScrollView, StyleSheet, Dimensions, TouchableOpacity } from
 import ActivityContainer from '../components/ActivityContainer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { fetchHomePageActivities } from '../apis/CommonApi';
-import { useIsFocused, useFocusEffect,useNavigation } from '@react-navigation/native';
+import { useIsFocused, useFocusEffect, useNavigation } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -21,23 +21,21 @@ export default function HomeScreen() {
       setActivities(error);
     }
   };
-  const handleActivityPress = (activityId ) => {
+  const handleActivityPress = activityId => {
     navigation.navigate('ActivityDetail', { activityId });
   };
 
   useFocusEffect(
     useCallback(() => {
       if (isFocused) {
-        setActivities([]); 
-        setScrollPosition(0); 
-        loadActivities(); 
+        setActivities([]);
+        setScrollPosition(0);
+        loadActivities();
       } else {
-        setActivities([]); 
+        setActivities([]);
       }
     }, [isFocused]),
   );
-
-
 
   return (
     <View
@@ -59,7 +57,6 @@ export default function HomeScreen() {
         contentContainerStyle={styles.contentContainer}
       >
         {activities.map((section, sectionIndex) => (
-          
           <View key={sectionIndex} style={styles.section}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>{section.key}</Text>
@@ -71,18 +68,21 @@ export default function HomeScreen() {
             </View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {section.content.map((activity, activityIndex) => (
-                <TouchableOpacity key={activityIndex} onPress={() => handleActivityPress(activity.activityId)}>
-                <ActivityContainer
+                <TouchableOpacity
                   key={activityIndex}
-                  imageUrl={activity.imageUrl}
-                  title={activity.title}
-                  subtitle={activity.subtitle}
-                  distance={activity.distance}
-                  activity={activity.activity}
-                  rating={activity.rating}
-                  ratingCount={activity.ratingCount}
-                  ratingDesc={activity.ratingDesc}
-                />
+                  onPress={() => handleActivityPress(activity.activityId)}
+                >
+                  <ActivityContainer
+                    key={activityIndex}
+                    imageUrl={activity.imageUrl}
+                    title={activity.title}
+                    subtitle={activity.subtitle}
+                    distance={activity.distance}
+                    activity={activity.activity}
+                    rating={activity.rating}
+                    ratingCount={activity.ratingCount}
+                    ratingDesc={activity.ratingDesc}
+                  />
                 </TouchableOpacity>
               ))}
             </ScrollView>

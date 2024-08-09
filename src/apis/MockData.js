@@ -352,7 +352,6 @@ export const categoriesMock = [
   },
 ];
 
-
 export const saveData = [
   {
     id: '1',
@@ -537,14 +536,22 @@ export const upcomingActivitiesMock = [
   },
 ];
 
-
 export const activityDataMock = [
   {
     activityId: 1,
     images: [
-      { id: '1', uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg' },
-      { id: '2', uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg' },
-      { id: '3', uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/r1oaybq0ejmylhdy3jv9.jpg' }
+      {
+        id: '1',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+      },
+      {
+        id: '2',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
+      },
+      {
+        id: '3',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/r1oaybq0ejmylhdy3jv9.jpg',
+      },
     ],
     activityName: 'ROCYCLE',
     rating: { value: '4.8', count: '(20,000+)', description: 'Great' },
@@ -553,67 +560,145 @@ export const activityDataMock = [
     category: 'Yoga',
     time: 'Sat, Jul 13 · 10:00 AM - 10:45 AM',
     classTakenBy: 'Judith',
-    classDescription: 'This is our signature 45 minute indoor Roride. Every class includes the use of cycling shoes and dumbbells.',
+    classDescription:
+      'This is our signature 45 minute indoor Roride. Every class includes the use of cycling shoes and dumbbells.',
     credits: '11',
-    cancellationPolicy: 'Cancel 12 hours in advance to avoid a fee €11.00 late cancellation fee. A missed reservation will result in a €13.00 fee.',
-    instagramAccount:'rocyclestudios',
+    cancellationPolicy:
+      'Cancel 12 hours in advance to avoid a fee €11.00 late cancellation fee. A missed reservation will result in a €13.00 fee.',
+    instagramAccount: 'rocyclestudios',
     websiteUrl: 'classpass.com',
-    about: "Rocycle makes your workout into a party on a bike! You ride to the music in a candlelit studio and train your upper body with dumbbells. ",
-    highlights: [
-      'LGBTQ-friendly'
-    ],
-    amenities: [
-      'Showers',
-      'Lockers',
-      'Towels'
-    ],
-    mapImage:'https://cdn.prod.website-files.com/5e832e12eb7ca02ee9064d42/64d4e4f4803795aef34e644d_maps_img-5.png',
-      address: 'Gustav Mahlerlaan 635, 1082 MX',
-      city: 'Amsterdam, Amsterdam, 1082 MX',
+    about:
+      'Rocycle makes your workout into a party on a bike! You ride to the music in a candlelit studio and train your upper body with dumbbells. ',
+    highlights: ['LGBTQ-friendly'],
+    amenities: ['Showers', 'Lockers', 'Towels'],
+    mapImage:
+      'https://cdn.prod.website-files.com/5e832e12eb7ca02ee9064d42/64d4e4f4803795aef34e644d_maps_img-5.png',
+    address: 'Gustav Mahlerlaan 635, 1082 MX',
+    city: 'Amsterdam, Amsterdam, 1082 MX',
     howToGetThere: 'RoCycle Zuid is located at Gustav Mahlerlaan 635, 1082 MX Amsterdam',
     updatedDate: 'Provided by Rocycle. Updated on 3/7/2024.',
-    safety: [
-      'Ventilation system',
-      'Extra sanitation'
-    ],
-    preparation: 'Double check your booked location! All Rocycle’s workouts include the use of cycling shoes. Make sure to arrive 15 minutes before your class starts...'
+    safety: ['Ventilation system', 'Extra sanitation'],
+    preparation:
+      'Double check your booked location! All Rocycle’s workouts include the use of cycling shoes. Make sure to arrive 15 minutes before your class starts...',
   },
   {
     activityId: 2,
     images: [
-      { id: '1', uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg' },
-      { id: '2', uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/r1oaybq0ejmylhdy3jv9.jpg' },
-      { id: '3', uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg' }
+      {
+        id: '1',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
+      },
+      {
+        id: '2',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/r1oaybq0ejmylhdy3jv9.jpg',
+      },
+      {
+        id: '3',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
+      },
     ],
     activityName: 'ClubSportive',
-    rating: { value: "4.8", count: "(20,000+)", description: "Excellent" },
+    rating: { value: '4.8', count: '(20,000+)', description: 'Excellent' },
     organisationName: 'Alice Smith',
     location: 'Downtown',
     category: 'Yoga',
     time: 'Sun, Jul 14 · 9:00 AM - 10:00 AM',
     classTakenBy: 'Michael',
-    classDescription: 'Join us for an invigorating yoga flow class to start your day right. Suitable for all levels.',
+    classDescription:
+      'Join us for an invigorating yoga flow class to start your day right. Suitable for all levels.',
     credits: '10',
-    cancellationPolicy: 'Cancel 8 hours in advance to avoid a fee €10.00 late cancellation fee. A missed reservation will result in a €12.00 fee.',
-    instagramAccount:'rocyclestudios',
+    cancellationPolicy:
+      'Cancel 8 hours in advance to avoid a fee €10.00 late cancellation fee. A missed reservation will result in a €12.00 fee.',
+    instagramAccount: 'rocyclestudios',
     websiteUrl: 'classpass.com',
-    about: 'Experience the best yoga class in town with top-notch instructors and a welcoming community.',
-    highlights: [
-      'LGBTQ-friendly'
-    ],
-    amenities: [
-      'Yoga mats',
-      'Water'
-    ],
-    mapImage:'https://cdn.prod.website-files.com/5e832e12eb7ca02ee9064d42/64d4e4f4803795aef34e644d_maps_img-5.png',
-      address: '123 Yoga St, 1000 AB',
-      city: 'New York, NsY, 1000 AB',
+    about:
+      'Experience the best yoga class in town with top-notch instructors and a welcoming community.',
+    highlights: ['LGBTQ-friendly'],
+    amenities: ['Yoga mats', 'Water'],
+    mapImage:
+      'https://cdn.prod.website-files.com/5e832e12eb7ca02ee9064d42/64d4e4f4803795aef34e644d_maps_img-5.png',
+    address: '123 Yoga St, 1000 AB',
+    city: 'New York, NsY, 1000 AB',
     howToGetThere: 'RoCycle Zuid is located at Gustav Mahlerlaan 635, 1082 MX Amsterdam',
     updatedDate: 'Provided by Rocycle. Updated on 3/7/2024.',
-    safety: [
-      'Sanitized mats',
-      'Social distancing'
-    ],
-    preparation: 'Please arrive 10 minutes before the class starts. Bring your own water bottle and a towel.'
-  }
+    safety: ['Sanitized mats', 'Social distancing'],
+    preparation:
+      'Please arrive 10 minutes before the class starts. Bring your own water bottle and a towel.',
+  },
+];
+
+export const reservationMock = [
+  {
+    id: 1,
+    activityName: 'Yoga',
+    organisationName: 'Yoga Academy',
+    instructor: 'Emily Clark',
+    time: '06:00 PM - 07:00 PM',
+    date: 'Thu, 24 Aug',
+    credits: '10',
+    status: 'Approved',
+    imageUrl:
+      'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+  },
+  {
+    id: 2,
+    activityName: 'Yoga',
+    organisationName: 'Yoga Academy',
+    instructor: 'Emily Clark',
+    time: '06:00 PM - 07:00 PM',
+    date: 'Thu, 24 Aug',
+    credits: '10',
+    status: 'Cancelled',
+    imageUrl:
+      'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+  },
+
+  {
+    id: 3,
+    activityName: 'Yoga',
+    organisationName: 'Yoga Academy',
+    instructor: 'Emily Clark',
+    time: '06:00 PM-07:00 PM',
+    date: 'Thu, 24 Aug',
+    credits: '10',
+    status: 'Approved',
+    imageUrl:
+      'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+  },
+  {
+    id: 4,
+    activityName: 'Yoga',
+    organisationName: 'Yoga Academy',
+    instructor: 'Emily Clark',
+    time: '06:00 PM-07:00 PM',
+    date: 'Thu, 24 Aug',
+    credits: '10',
+    status: 'Cancelled',
+    imageUrl:
+      'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+  },
+  {
+    id: 5,
+    activityName: 'Yoga',
+    organisationName: 'Yoga Academy',
+    instructor: 'Emily Clark',
+    time: '06:00 PM-07:00 PM',
+    date: 'Thu, 24 Aug',
+    credits: '10',
+    status: 'Approved',
+    imageUrl:
+      'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+  },
+  {
+    id: 6,
+    activityName: 'Yoga',
+    organisationName: 'Yoga Academy',
+    instructor: 'Emily Clark',
+    time: '06:00 PM-07:00 PM',
+    date: 'Thu, 24 Aug',
+    credits: '10',
+    status: 'Cancelled',
+    imageUrl:
+      'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+  },
 ];

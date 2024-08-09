@@ -23,6 +23,7 @@ import { saveData } from './apis/MockData';
 import useUserLocation from './components/UserLocation';
 import SearchScreen from './screens/SearchScreen';
 import ActivityDetail from './screens/ActivityDetail';
+import ReservationsScreen from './screens/ReservationsScreen';
 
 LogBox.ignoreAllLogs(); // Ignore all log notifications
 
@@ -81,10 +82,15 @@ const MainApp = () => {
           component={SavedScreen}
           options={{ contentStyle: { backgroundColor: '#FFFFFF' } }}
         />
+        <Stack.Screen
+          name="ReservationsScreen"
+          component={ReservationsScreen}
+          options={{ contentStyle: { backgroundColor: '#FFFFFF' } }}
+        />
         <Stack.Screen name="PhoneNumberLogin" component={PhoneNumberLogin} />
         <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
-          <Stack.Screen name="ActivityDetail" component={ActivityDetail} />
+        <Stack.Screen name="ActivityDetail" component={ActivityDetail} />
       </Stack.Navigator>
       <Toast config={toastConfig} />
       {errorMsg && <Text>{errorMsg}</Text>}

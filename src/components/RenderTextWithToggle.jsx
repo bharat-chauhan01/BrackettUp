@@ -25,10 +25,10 @@ const RenderTextWithToggle = ({ text }) => {
 const styles = StyleSheet.create({
   text: {
     fontSize: 14,
-    color:'black',
-    marginTop:12,
+    color: 'black',
+    marginTop: 12,
     // marginBottom:12,
-    lineHeight:22,   
+    lineHeight: 22,
   },
   moreLink: {
     fontSize: 14,
@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
     color: 'black',
     textDecorationLine: 'underline',
     marginBottom: 10,
-    
   },
 });
 
