@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { Text, View, ScrollView, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import ActivityContainer from '../components/ActivityContainer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { fetchHomePageActivities } from '../apis/CommonApi';
-import { useIsFocused, useFocusEffect } from '@react-navigation/native';
+import { useIsFocused, useFocusEffect,useNavigation } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -11,6 +11,7 @@ export default function HomeScreen() {
   const isFocused = useIsFocused();
   const [activities, setActivities] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const navigation = useNavigation();
 
   const loadActivities = async () => {
     try {
@@ -20,18 +21,23 @@ export default function HomeScreen() {
       setActivities(error);
     }
   };
+  const handleActivityPress = (activityId ) => {
+    navigation.navigate('ActivityDetail', { activityId });
+  };
 
   useFocusEffect(
     useCallback(() => {
       if (isFocused) {
-        setActivities([]); // Reset activities state
-        setScrollPosition(0); // Reset scroll position
-        loadActivities(); // Load fresh data
+        setActivities([]); 
+        setScrollPosition(0); 
+        loadActivities(); 
       } else {
-        setActivities([]); // Reset activities state when leaving the screen
+        setActivities([]); 
       }
     }, [isFocused]),
   );
+
+
 
   return (
     <View
@@ -53,6 +59,7 @@ export default function HomeScreen() {
         contentContainerStyle={styles.contentContainer}
       >
         {activities.map((section, sectionIndex) => (
+          
           <View key={sectionIndex} style={styles.section}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>{section.key}</Text>
@@ -64,6 +71,7 @@ export default function HomeScreen() {
             </View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {section.content.map((activity, activityIndex) => (
+                <TouchableOpacity key={activityIndex} onPress={() => handleActivityPress(activity.activityId)}>
                 <ActivityContainer
                   key={activityIndex}
                   imageUrl={activity.imageUrl}
@@ -75,6 +83,7 @@ export default function HomeScreen() {
                   ratingCount={activity.ratingCount}
                   ratingDesc={activity.ratingDesc}
                 />
+                </TouchableOpacity>
               ))}
             </ScrollView>
           </View>

@@ -22,6 +22,7 @@ import { setItem } from './store/LocalStorage';
 import { saveData } from './apis/MockData';
 import useUserLocation from './components/UserLocation';
 import SearchScreen from './screens/SearchScreen';
+import ActivityDetail from './screens/ActivityDetail';
 
 LogBox.ignoreAllLogs(); // Ignore all log notifications
 
@@ -83,6 +84,7 @@ const MainApp = () => {
         <Stack.Screen name="PhoneNumberLogin" component={PhoneNumberLogin} />
         <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
+          <Stack.Screen name="ActivityDetail" component={ActivityDetail} />
       </Stack.Navigator>
       <Toast config={toastConfig} />
       {errorMsg && <Text>{errorMsg}</Text>}
