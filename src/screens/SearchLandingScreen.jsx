@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
   TextInput,
@@ -6,47 +6,104 @@ import {
   Text,
   StyleSheet,
   ImageBackground,
-  Alert,
   Pressable,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
 } from 'react-native';
-import { getCategories } from '../apis/CommonApi';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Image } from 'react-native-paper/lib/typescript/components/Avatar/Avatar';
+import { fetchSearchLandingSuggestions, getCategories, searchSuggestions } from '../apis/CommonApi';
+import { useFocusEffect, useIsFocused, useNavigation } from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SearchModal from '../modals/SearchModal';
 
 const SearchLandingScreen = () => {
   const [searchText, setSearchText] = useState('');
-  const [categories, setCategories] = useState([]);
+  const [searchSuggestionEnabled, setSearchSuggestionEnabled] = useState(false);
+  const [activitySuggestions, setActivitySuggestions] = useState([]);
+  const [submitSearch, setSubmitSearch] = useState(false);
+  const [homeSearchData, setHomeSearchData] = useState({
+    craftedForYou: [],
+    fillingOutFast: [],
+    categories: [],
+  });
   const [loading, setLoading] = useState(false);
+
+  const isFocused = useIsFocused();
   const navigation = useNavigation();
 
-  const loadCategories = async () => {
+  const loadData = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await getCategories();
-      setCategories(data);
+      const data = await fetchSearchLandingSuggestions();
+      setHomeSearchData(data);
     } catch (error) {
       console.error(error);
-      setCategories([]);
+      setHomeSearchData({ craftedForYou: [], fillingOutFast: [], categories: [] });
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useFocusEffect(
     useCallback(() => {
-      if (categories === null || categories.length === 0) {
-        loadCategories();
+      if (isFocused) {
+        loadData();
       }
-    }, []),
+    }, [isFocused, loadData]),
   );
 
+  useEffect(() => {
+    if (submitSearch) {
+      setSearchSuggestionEnabled(false);
+      navigation.navigate('SearchScreen', { searchText });
+      setSubmitSearch(false);
+    }
+  }, [submitSearch, searchText, navigation]);
+
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      if (searchSuggestionEnabled && searchText.length > 2) {
+        try {
+          const response = await searchSuggestions(searchText);
+          setActivitySuggestions(response);
+        } catch (error) {
+          console.error(error);
+          setActivitySuggestions([]);
+        }
+      } else {
+        setActivitySuggestions([]);
+      }
+    };
+    fetchSuggestions();
+  }, [searchText, searchSuggestionEnabled]);
+
+  const renderSearchSuggestions = () => (
+    <FlatList
+      data={activitySuggestions}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item }) => (
+        <TouchableOpacity onPress={() => handleSearchSuggestionSelect(item.name)}>
+          <Text style={styles.suggestionItem}>{item.name}</Text>
+        </TouchableOpacity>
+      )}
+    />
+  );
+
+  const handleSearchSuggestionSelect = suggestion => {
+    setSearchText(suggestion);
+    setSubmitSearch(true);
+  };
+
   const handleCategoryPress = category => {
-    navigation.navigate(`SearchScreen`, category.name);
+    navigation.navigate('SearchScreen', { searchText: category.name });
+  };
+
+  const handleActivityPress = activityId => {
+    navigation.navigate('ActivityDetail', { activityId });
   };
 
   const renderCategory = category => (
-    <View style={styles.cardWrapper}>
+    <View style={styles.cardWrapper} key={category.name}>
       <Pressable onPress={() => handleCategoryPress(category)}>
         <ImageBackground
           source={{ uri: category.imageUrl }}
@@ -63,17 +120,87 @@ const SearchLandingScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Search..."
-        value={searchText}
-        onChangeText={setSearchText}
-        onSubmitEditing={() => navigation.navigate('SearchScreen', { searchText })}
-      />
-      <Text style={styles.categoryTitle}>Top Categories</Text>
-      <ScrollView contentContainerStyle={styles.categoriesList}>
-        <View style={styles.cardsContainer}>{categories.map(renderCategory)}</View>
-      </ScrollView>
+      {loading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      ) : (
+        <>
+          <View style={{ paddingHorizontal: 10 }}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Search..."
+              value={searchText}
+              onChangeText={text => {
+                setSearchText(text);
+                setSearchSuggestionEnabled(text.length > 2);
+              }}
+              onSubmitEditing={() => {
+                setSearchSuggestionEnabled(false);
+                navigation.navigate('SearchScreen', { searchText });
+              }}
+            />
+            {searchSuggestionEnabled && renderSearchSuggestions()}
+          </View>
+
+          <ScrollView contentContainerStyle={styles.categoriesList}>
+            <View style={styles.bestDealsContainer}>
+              <Text style={styles.bestDealTitle}>Crafted For You</Text>
+              <MaterialCommunityIcons name="star-face" color="black" size={20} />
+            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {homeSearchData.craftedForYou.map((data, index) => (
+                <View key={index} style={{ marginLeft: 10 }}>
+                  <TouchableOpacity onPress={() => handleActivityPress(data.activityId)}>
+                    <SearchModal
+                      activityName={data.activityName}
+                      distance={data.distance}
+                      organisation={data.organisation}
+                      rating={data.rating}
+                      categories={data.categories}
+                      time={null}
+                      credits={data.credits}
+                      imageSource={data.imageSource}
+                      ratingCount={data.ratingCount}
+                      ratingDesc={data.ratingDesc}
+                    />
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </ScrollView>
+
+            <View style={styles.bestDealsContainer}>
+              <Text style={styles.bestDealTitle}>Filling Out Fast</Text>
+              <MaterialCommunityIcons name="alarm" color="black" size={20} />
+            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {homeSearchData.fillingOutFast.map((data, index) => (
+                <View key={index} style={{ marginLeft: 10 }}>
+                  <TouchableOpacity onPress={() => handleActivityPress(data.activityId)}>
+                    <SearchModal
+                      activityName={data.activityName}
+                      distance={data.distance}
+                      organisation={data.organisation}
+                      rating={data.rating}
+                      categories={data.categories}
+                      time={null}
+                      credits={data.credits}
+                      imageSource={data.imageSource}
+                      ratingCount={data.ratingCount}
+                      ratingDesc={data.ratingDesc}
+                    />
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </ScrollView>
+
+            <Text style={styles.categoryTitle}>Top Categories</Text>
+            <View style={styles.cardsContainer}>
+              {homeSearchData.categories.map(renderCategory)}
+            </View>
+          </ScrollView>
+        </>
+      )}
     </View>
   );
 };
@@ -82,7 +209,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 50,
-    paddingHorizontal: 20,
     backgroundColor: '#ffffff',
   },
   searchInput: {
@@ -92,19 +218,41 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     backgroundColor: '#fff',
+    zIndex: 2, // Ensure it stays above suggestions
+  },
+  suggestionItem: {
+    padding: 10,
+    fontSize: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  bestDealsContainer: {
+    paddingHorizontal: 10,
+    paddingTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  bestDealTitle: {
+    fontSize: 20,
+    marginRight: 5,
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'left',
   },
   categoryTitle: {
+    paddingHorizontal: 10,
     fontSize: 20,
-    marginTop: 20,
-    paddingBottom: 10,
+    paddingBottom: 20,
     fontWeight: 'bold',
     color: 'black',
     textAlign: 'left',
   },
   categoriesList: {
-    paddingBottom: 20,
+    paddingVertical: 10,
   },
   cardsContainer: {
+    paddingHorizontal: 10,
+    paddingRight: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
@@ -114,12 +262,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 10,
     overflow: 'hidden',
-    // Shadow properties
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3, // for Android shadow
+    elevation: 3,
   },
   card: {
     width: '100%',
@@ -133,13 +280,19 @@ const styles = StyleSheet.create({
   },
   cardContent: {
     padding: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // To make text stand out
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   cardTitle: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#fff',
-    textAlign: 'right', // Align text to the right
+    textAlign: 'right',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
   },
 });
 

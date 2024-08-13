@@ -36,6 +36,10 @@ const SearchScreen = () => {
   const [activitySuggestions, setActivitySuggestions] = useState([]);
   const [searchPlaceholder, setSearchPlaceHodler] = useState(' Search activity...');
 
+  const handleActivityPress = activityId => {
+    navigation.navigate('ActivityDetail', { activityId });
+  };
+
   const [locationQuery, setLocationQuery] = useState('');
   const [locationSuggestionEnabled, setLocationSuggestionEnabled] = useState(false);
   const [submitLocation, setSubmitLocation] = useState(false);
@@ -322,19 +326,21 @@ const SearchScreen = () => {
         ) : (
           data.map((data, index) => (
             <View key={index} style={styles.innerContainer}>
-              <SearchModal
-                activityName={data.activityName}
-                distance={data.distance}
-                organisation={data.organisation}
-                rating={data.rating}
-                categories={data.categories}
-                time={data.time}
-                credits={data.credits}
-                imageSource={data.imageSource}
-                ratingCount={data.ratingCount}
-                ratingDesc={data.ratingDesc}
-              />
-              <View style={styles.horizontalLine} />
+              <TouchableOpacity onPress={() => handleActivityPress(data.activityId)}>
+                <SearchModal
+                  activityName={data.activityName}
+                  distance={data.distance}
+                  organisation={data.organisation}
+                  rating={data.rating}
+                  categories={data.categories}
+                  time={data.time}
+                  credits={data.credits}
+                  imageSource={data.imageSource}
+                  ratingCount={data.ratingCount}
+                  ratingDesc={data.ratingDesc}
+                />
+                <View style={styles.horizontalLine} />
+              </TouchableOpacity>
             </View>
           ))
         )}

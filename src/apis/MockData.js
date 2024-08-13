@@ -94,6 +94,7 @@ export const scheduleMock = [
 
 export const searchModalsData = [
   {
+    activityId: 1,
     activityName: 'Yoga Session',
     distance: '5 km',
     organisation: 'John Doe',
@@ -108,6 +109,7 @@ export const searchModalsData = [
     ratingDesc: 'Great',
   },
   {
+    activityId: 1,
     activityName: 'Pilates Class',
     distance: '3 km',
     organisation: 'Jane Smith',
@@ -122,6 +124,7 @@ export const searchModalsData = [
     ratingDesc: 'Excellent',
   },
   {
+    activityId: 1,
     activityName: 'Yoga Session',
     distance: '5 km',
     organisation: 'John Doe',
@@ -136,6 +139,7 @@ export const searchModalsData = [
     },
   },
   {
+    activityId: 1,
     activityName: 'Pilates Class',
     distance: '3 km',
     organisation: 'Jane Smith',
@@ -150,6 +154,7 @@ export const searchModalsData = [
     },
   },
   {
+    activityId: 1,
     activityName: 'Yoga Session',
     distance: '5 km',
     organisation: 'John Doe',
@@ -702,3 +707,71 @@ export const reservationMock = [
       'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
   },
 ];
+
+export const homeSearch = {
+  categories: categoriesMock,
+  craftedForYou: [
+    {
+      activityId: 1,
+      activityName: 'Yoga Session',
+      distance: '5 km',
+      organisation: 'John Doe',
+      rating: 4.5,
+      categories: ['Health', 'Fitness'],
+      time: ['10:00 AM', '11:00 AM', '10:00 AM', '11:00 AM'],
+      credits: '2 credits',
+      imageSource: {
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+      },
+      ratingCount: '400',
+      ratingDesc: 'Great',
+    },
+    {
+      activityId: 1,
+      activityName: 'Yoga Session',
+      distance: '5 km',
+      organisation: 'John Doe',
+      rating: 4.5,
+      categories: ['Health', 'Fitness'],
+      time: ['10:00 AM', '11:00 AM', '10:00 AM', '11:00 AM'],
+      credits: '2 credits',
+      imageSource: {
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+      },
+      ratingCount: '400',
+      ratingDesc: 'Great',
+    },
+  ],
+  fillingOutFast: [
+    {
+      activityId: 1,
+      activityName: 'Yoga Session',
+      distance: '5 km',
+      organisation: 'John Doe',
+      rating: 4.5,
+      categories: ['Health', 'Fitness'],
+      time: ['10:00 AM', '11:00 AM', '10:00 AM', '11:00 AM'],
+      credits: '2 credits',
+      imageSource: {
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+      },
+      ratingCount: '400',
+      ratingDesc: 'Great',
+    },
+    {
+      activityId: 1,
+      activityName: 'Yoga Session',
+      distance: '5 km',
+      organisation: 'John Doe',
+      rating: 4.5,
+      categories: ['Health', 'Fitness'],
+      time: ['10:00 AM', '11:00 AM', '10:00 AM', '11:00 AM'],
+      credits: '2 credits',
+      imageSource: {
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+      },
+      ratingCount: '400',
+      ratingDesc: 'Great',
+    },
+  ],
+};

@@ -31,7 +31,7 @@ const SearchModal = ({
                 size={styles.itemIcon.size}
               />
             </Text>
-            <Text style={styles.ratingCount}>{' (' + ratingCount + ')  '}</Text>
+            <Text style={styles.ratingCount}>{' (' + ratingCount + ') '}</Text>
             <Text style={styles.ratingDesc}>{capitalizeFirstLetter(ratingDesc)}</Text>
           </View>
           <View style={styles.distanceAndCreditsContainer}>
@@ -48,20 +48,24 @@ const SearchModal = ({
           <Text style={styles.property}>{categories.join(', ')}</Text>
         </View>
       </View>
-      <View style={styles.timeContainer}>
-        {time.map((t, index) => (
-          <View key={index} style={styles.timeBox}>
-            <Text style={styles.timeText}>{t}</Text>
-          </View>
-        ))}
-      </View>
+
+      {/* Only render timeContainer if time is not null */}
+      {time && time.length > 0 && (
+        <View style={styles.timeContainer}>
+          {time.map((t, index) => (
+            <View key={index} style={styles.timeBox}>
+              <Text style={styles.timeText}>{t}</Text>
+            </View>
+          ))}
+        </View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   topContainer: {
-    flexDirection: 'column', // Align children vertically
+    flexDirection: 'column',
     backgroundColor: 'white',
   },
   infocontainer: {
@@ -71,18 +75,16 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     alignItems: 'flex-start',
     backgroundColor: 'white',
-    flex: 1, // Take up available space
   },
   image: {
     width: 100,
     height: 100,
     borderRadius: 10,
     marginRight: 20,
-    alignSelf: 'flex-start',
   },
   textContainer: {
     flex: 1,
-    justifyContent: 'space-between', // Ensure space between elements
+    justifyContent: 'flex-start',
   },
   activityName: {
     color: 'black',
@@ -92,11 +94,11 @@ const styles = StyleSheet.create({
   distanceAndCreditsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 4,
   },
   distance: {
     fontSize: 14,
     color: 'black',
+    marginLeft: 5,
   },
   creditsBox: {
     backgroundColor: '#f0f0f0',
@@ -113,6 +115,7 @@ const styles = StyleSheet.create({
   },
   property: {
     fontSize: 14,
+    color: 'black',
   },
   timeContainer: {
     flexDirection: 'row',
@@ -124,8 +127,8 @@ const styles = StyleSheet.create({
   timeBox: {
     backgroundColor: '#f0f0f0',
     borderRadius: 5,
-    paddingHorizontal: 4,
-    paddingVertical: 2,
+    paddingHorizontal: 6,
+    paddingVertical: 4,
     marginRight: 10,
     marginBottom: 5,
   },
@@ -135,8 +138,8 @@ const styles = StyleSheet.create({
   },
   ratingContainer: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
-    marginBottom: 5,
+    alignItems: 'center',
+    marginTop: 5,
   },
   rating: {
     fontSize: 12,
@@ -148,15 +151,20 @@ const styles = StyleSheet.create({
     size: 12,
   },
   ratingText: {
-    fontSize: 12,
+    fontSize: 14,
     color: 'black',
-    marginTop: '1%',
     fontWeight: 'bold',
+  },
+  ratingCount: {
+    fontSize: 12,
+    color: '#666',
+    marginLeft: 2,
   },
   ratingDesc: {
     fontSize: 12,
     color: 'purple',
     fontWeight: '600',
+    marginLeft: 2,
   },
 });
 

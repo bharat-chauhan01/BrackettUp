@@ -10,6 +10,7 @@ import {
   activityDataMock,
   activitiesMock,
   upcomingActivitiesMock,
+  homeSearch,
 } from './MockData';
 
 const dummyUser = {
@@ -174,6 +175,18 @@ export const fetchReservation = async () => {
   } catch (error) {
     if (error instanceof BackendUnreachableError) {
       return reservationMock;
+    }
+    throw error;
+  }
+};
+
+export const fetchSearchLandingSuggestions = async (latitute, longitude) => {
+  try {
+    const response = await get(`/home/search?latitute=` + latitute + '&longitude=' + longitude);
+    return response.data;
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return homeSearch;
     }
     throw error;
   }
