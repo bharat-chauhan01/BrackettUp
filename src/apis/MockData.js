@@ -775,3 +775,70 @@ export const homeSearch = {
     },
   ],
 };
+export const faqs = [
+  {
+    question: 'What is Kussbus?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste placeat quibusdam rerum quaerat magnam id vero illum sint itaque aliquam, saepe accusantium doloribus earum nemo eum nesciunt dolores cupiditate dignissimos.',
+  },
+
+  {
+    question: 'Why choose Kussbus?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste placeat quibusdam rerum quaerat magnam id vero illum sint itaque aliquam, saepe accusantium doloribus earum nemo eum nesciunt dolores cupiditate dignissimos.',
+  },
+
+  {
+    question: 'What Kussbus lines are available?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste placeat quibusdam rerum quaerat magnam id vero illum sint itaque aliquam, saepe accusantium doloribus earum nemo eum nesciunt dolores cupiditate dignissimos.',
+  },
+
+  {
+    question: 'What are the different stops?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste placeat quibusdam rerum quaerat magnam id vero illum sint itaque aliquam, saepe accusantium doloribus earum nemo eum nesciunt dolores cupiditate dignissimos.',
+  },
+
+  {
+    question: 'Is there a list of judgments?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste placeat quibusdam rerum quaerat magnam id vero illum sint itaque aliquam, saepe accusantium doloribus earum nemo eum nesciunt dolores cupiditate dignissimos.',
+  },
+
+  {
+    question: 'What if I cannot find a stop?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste placeat quibusdam rerum quaerat magnam id vero illum sint itaque aliquam, saepe accusantium doloribus earum nemo eum nesciunt dolores cupiditate dignissimos.',
+  },
+
+  {
+    question: 'Hello',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste placeat quibusdam rerum quaerat magnam id vero illum sint itaque aliquam, saepe accusantium doloribus earum nemo eum nesciunt dolores cupiditate dignissimos.',
+  },
+
+  {
+    question: 'It is brackettup',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste placeat quibusdam rerum quaerat magnam id vero illum sint itaque aliquam, saepe accusantium doloribus earum nemo eum nesciunt dolores cupiditate dignissimos.',
+  },
+
+  {
+    question: 'Health',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste placeat quibusdam rerum quaerat magnam id vero illum sint itaque aliquam, saepe accusantium doloribus earum nemo eum nesciunt dolores cupiditate dignissimos.',
+  },
+
+  {
+    question: 'Wellness',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste placeat quibusdam rerum quaerat magnam id vero illum sint itaque aliquam, saepe accusantium doloribus earum nemo eum nesciunt dolores cupiditate dignissimos.',
+  },
+
+  {
+    question: 'Wellness',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste placeat quibusdam rerum quaerat magnam id vero illum sint itaque aliquam, saepe accusantium doloribus earum nemo eum nesciunt dolores cupiditate dignissimos.',
+  },
+];

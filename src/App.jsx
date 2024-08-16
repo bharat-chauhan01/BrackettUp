@@ -10,6 +10,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import SupportScreen from './screens/SupportScreen';
 
 import TermsAndConditions from './screens/TermAndConditionScreen';
 import { LogBox, Text } from 'react-native';
@@ -91,6 +92,7 @@ const MainApp = () => {
         <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
         <Stack.Screen name="ActivityDetail" component={ActivityDetail} />
+        <Stack.Screen name="SupportScreen" component={SupportScreen} />
       </Stack.Navigator>
       <Toast config={toastConfig} />
       {errorMsg && <Text>{errorMsg}</Text>}

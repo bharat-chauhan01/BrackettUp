@@ -18,6 +18,7 @@ import { fetchProfile, logout } from '../apis/CommonApi';
 import { useFocusEffect } from '@react-navigation/native';
 import LogoutModal from '../modals/LogoutModal';
 import { getItem } from '../store/LocalStorage';
+import SupportScreen from '../screens/SupportScreen';
 
 const PROFILE_ITEMS_META = [
   {
@@ -138,6 +139,8 @@ const ProfileScreen = ({ navigation }) => {
           navigation.navigate('SavedScreen');
         } else if (item.title === 'Reservations') {
           navigation.navigate('ReservationsScreen');
+        } else if (item.title === 'Support') {
+          navigation.navigate('SupportScreen');
         } else {
           navigation.navigate('ScheduleScreen');
         }
