@@ -19,10 +19,6 @@ const dummyUser = {
   reservations: 10,
 };
 
-const dummyLoginResponse = {
-  authToken: 'eyllb.asd',
-};
-
 export const fetchProfile = async () => {
   try {
     const response = await get('/profile');
@@ -53,31 +49,6 @@ export const fetchHomePageActivities = async () => {
   } catch (error) {
     if (error instanceof BackendUnreachableError) {
       return activitiesMock;
-    }
-    throw error;
-  }
-};
-
-export const requestOtp = async phoneNumber => {
-  try {
-    return await post('/otp/request', phoneNumber);
-  } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return {};
-    }
-    throw error;
-  }
-};
-
-export const validateOtp = async (phoneNumber, otp) => {
-  try {
-    await post('/otp/validate', phoneNumber, otp);
-  } catch (error) {
-    if (otp != '00000') {
-      throw error;
-    }
-    if (error instanceof BackendUnreachableError) {
-      return dummyLoginResponse;
     }
     throw error;
   }

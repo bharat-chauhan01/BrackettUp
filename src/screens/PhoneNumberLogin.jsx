@@ -6,8 +6,8 @@ import Toast from 'react-native-toast-message';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { setLogin } from '../store/slices/loginSlice';
-import { requestOtp, validateOtp } from '../apis/CommonApi';
 import { validateMobileNumber } from '../validator/MobileValidator';
+import { requestOtp, validateOtp } from '../apis/AuthApi';
 
 const { width } = Dimensions.get('window');
 
@@ -62,6 +62,7 @@ const PhoneNumberLogin = () => {
       console.log('res ', res);
       dispatch(setLogin({ res }));
     } catch (error) {
+      console.log(error);
       Toast.show({
         type: 'error',
         text1: error.message,
@@ -116,7 +117,7 @@ const PhoneNumberLogin = () => {
                 </TouchableOpacity>
               </View>
               <View style={styles.otpContainer}>
-                <Otp isFormEditable={true} numberOfInputs={5} onSubmit={onSubmitOtp} />
+                <Otp isFormEditable={true} numberOfInputs={6} onSubmit={onSubmitOtp} />
               </View>
               <TouchableOpacity
                 style={[styles.submitButton, { width: '80%' }]}

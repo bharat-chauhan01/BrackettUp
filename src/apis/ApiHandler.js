@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { constant } from './constant';
 import { BackendUnreachableError } from '../utils/utils';
+import { getItem } from '../store/LocalStorage';
+
+const authData = await getItem('auth');
 
 const apiClient = axios.create({
   baseURL: constant.baseUrl,
   headers: {
-    authToken: 'your-auth-token-here',
+    authToken: authData.authToken,
   },
 });
 
@@ -17,7 +20,7 @@ export const get = path => {
       if (error.response) {
         // The request was made and the server responded with a status code that falls out of the range of 2xx
         console.log('Non2xx: Error while calling path', path, error);
-        throw new Error(constant.error.backendUnreachableErrorMessage);
+        throw new BackendUnreachableError();
       } else if (error.request) {
         // The request was made but no response was received
         console.log('Unreachable: Error while calling path', path, error);
@@ -35,6 +38,7 @@ export const get = path => {
 };
 
 export const post = (path, data) => {
+  console.log(data);
   return apiClient
     .post(path, data)
     .then(response => response.data)
@@ -42,7 +46,7 @@ export const post = (path, data) => {
       if (error.response) {
         // The request was made and the server responded with a status code that falls out of the range of 2xx
         console.log('Non2xx: Error while calling path', path, error);
-        throw new Error(constant.error.backendUnreachableErrorMessage);
+        throw new BackendUnreachableError();
       } else if (error.request) {
         // The request was made but no response was received
         console.log('Unreachable: Error while calling path', path, data, error);

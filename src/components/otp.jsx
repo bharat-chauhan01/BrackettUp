@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, TextInput, Pressable, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TextInput, Pressable, Text, StyleSheet } from 'react-native';
 
-const Otp = ({ isFormEditable, numberOfInputs = 6, onSubmit }) => {
+const Otp = ({ isFormEditable, numberOfInputs, onSubmit }) => {
   const [code, setCode] = useState('');
   const ref = useRef(null);
   const [error, setError] = useState(undefined);
@@ -14,7 +14,7 @@ const Otp = ({ isFormEditable, numberOfInputs = 6, onSubmit }) => {
     if (code.length === numberOfInputs) {
       onSubmit(code);
     }
-  }, [code, numberOfInputs, onSubmit]);
+  }, [code, onSubmit]);
 
   useEffect(() => {
     // Focus on the first input when the component mounts

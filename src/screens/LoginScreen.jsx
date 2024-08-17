@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import GoogleSignInComponent from '../components/GoogleSignInComponent';
 
 const { width } = Dimensions.get('window');
 
@@ -11,15 +11,7 @@ const LoginOptionsScreen = ({ navigation }) => {
       <Text style={styles.title}>Welcome</Text>
       <Text style={styles.message}>Continue with one of the following options</Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          /* Handle Google Login */
-        }}
-      >
-        <MaterialCommunityIcons name="google" size={24} color="#DB4437" style={styles.icon} />
-        <Text style={styles.buttonText}>Google</Text>
-      </TouchableOpacity>
+      <GoogleSignInComponent />
 
       <TouchableOpacity
         style={styles.button}
@@ -54,11 +46,6 @@ const LoginOptionsScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -80,8 +67,8 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     width: width * 0.9,
     marginBottom: 15,
-    justifyContent: 'center', // Center content horizontally
-    position: 'relative', // Enable absolute positioning for children
+    justifyContent: 'center',
+    position: 'relative',
   },
   icon: {
     position: 'absolute',
@@ -91,20 +78,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
     textAlign: 'center',
-    width: '100%', // Take up all available width
+    width: '100%',
   },
   skipButton: {
     marginTop: 20,
     width: width * 0.9,
     borderRadius: 10,
-    overflow: 'hidden', // Ensures gradient does not overflow the button’s rounded corners
-    paddingVertical: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-    width: '100%',
-  },
-  skipButtonGradient: {
+    overflow: 'hidden',
     paddingVertical: 15,
     alignItems: 'center',
     justifyContent: 'center',
