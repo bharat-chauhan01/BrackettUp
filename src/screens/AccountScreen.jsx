@@ -19,7 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 import { renderHeader } from '../modals/HeaderModal';
 import { getItem } from '../store/LocalStorage';
 import { fetchAccountData } from '../apis/CommonApi';
-import { saveAccountData,requestPhoneOtp, requestEmailOtp } from '../apis/CommonApi';
+import { saveAccountData, requestPhoneOtp, requestEmailOtp } from '../apis/CommonApi';
 import VerificationModal from '../modals/VerificationModal';
 
 const AccountScreen = () => {
@@ -54,23 +54,21 @@ const AccountScreen = () => {
     }
   };
 
-  const handleOpenModal = (title, subtitle, type,value) => {
-    try{
-    setModalTitle(title);
-    setModalSubtitle(subtitle);
-    setType(type);
-    setModalVisible(true);
-    
-    if(type==='phone'){
-      requestPhoneOtp(value);
+  const handleOpenModal = (title, subtitle, type, value) => {
+    try {
+      setModalTitle(title);
+      setModalSubtitle(subtitle);
+      setType(type);
+      setModalVisible(true);
+
+      if (type === 'phone') {
+        requestPhoneOtp(value);
+      } else {
+        requestEmailOtp(value);
+      }
+    } catch (error) {
+      Alert.alert('Error', error.message);
     }
-    else{
-      requestEmailOtp(value);
-    }
-  }
-  catch(error){
-    Alert.alert('Error', error.message);
-  }
   };
 
   const handleCloseModal = () => {
@@ -83,7 +81,6 @@ const AccountScreen = () => {
     setOtp('');
   };
 
-
   const reloadAccountData = () => {
     setReload(!reload);
   };
@@ -93,7 +90,7 @@ const AccountScreen = () => {
       const payload = {
         firstName,
         lastName,
-        gender
+        gender,
       };
       const response = await saveAccountData(payload);
       await new Promise(resolve => setTimeout(resolve, 500));
@@ -140,7 +137,7 @@ const AccountScreen = () => {
     } else {
       setAccountData([]);
     }
-  }, [user,reload]);
+  }, [user, reload]);
 
   return (
     <>
@@ -235,7 +232,7 @@ const AccountScreen = () => {
                       'OTP Verification',
                       `Enter OTP sent to +91${mobileNumber}`,
                       'phone',
-                      oldMobileNumber
+                      oldMobileNumber,
                     )
                   }
                 >
@@ -255,7 +252,12 @@ const AccountScreen = () => {
                 />
                 <TouchableOpacity
                   onPress={() =>
-                    handleOpenModal('OTP Verification', `Enter OTP sent to ${email}`, 'email',oldEmail)
+                    handleOpenModal(
+                      'OTP Verification',
+                      `Enter OTP sent to ${email}`,
+                      'email',
+                      oldEmail,
+                    )
                   }
                 >
                   <Text style={styles.updateButton}>Update</Text>
@@ -277,9 +279,9 @@ const AccountScreen = () => {
         <VerificationModal
           visible={modalVisible}
           onClose={() => {
-    handleCloseModal();
-    reloadAccountData(); 
-  }}
+            handleCloseModal();
+            reloadAccountData();
+          }}
           onSubmit={handleOtpSubmit}
           otp={otp}
           setOtp={setOtp}
@@ -287,8 +289,8 @@ const AccountScreen = () => {
           subtitle={modalSubtitle}
           type={type}
           value={type === 'phone' ? mobileNumber : email}
-          oldValue={type === 'phone' ? oldMobileNumber: oldEmail}
-          newValueUpdate={type === 'phone' ? setOldMobileNumber: setOldEmail}
+          oldValue={type === 'phone' ? oldMobileNumber : oldEmail}
+          newValueUpdate={type === 'phone' ? setOldMobileNumber : setOldEmail}
         />
       </KeyboardAvoidingView>
     </>

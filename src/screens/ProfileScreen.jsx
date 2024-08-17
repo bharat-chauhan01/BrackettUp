@@ -19,6 +19,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import LogoutModal from '../modals/LogoutModal';
 import { getItem } from '../store/LocalStorage';
 import SupportScreen from '../screens/SupportScreen';
+import { imageURL } from '../constants/imageURLs';
 
 const PROFILE_ITEMS_META = [
   {
@@ -88,11 +89,13 @@ const ProfileScreen = ({ navigation }) => {
         dispatch(setProfile({ name: 'Hi Guest', credits: 0, reservations: 0 }));
       } else {
         const response = await fetchProfile();
+        console.log(response);
         dispatch(
           setProfile({
             name: response.name,
             credits: response.credits,
             reservations: response.reservations,
+            imageUrl: response.imageUrl,
           }),
         );
         setProfileItems(PROFILE_ITEMS_META);
@@ -184,7 +187,14 @@ const ProfileScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.metaContainer}>
         <View style={styles.userProfileInfo}>
-          <Image round style={styles.avatar} source={require('../../assets/user.png')} />
+          <Image
+            style={styles.avatar}
+            source={
+              profileData.imageUrl
+                ? { uri: profileData.imageUrl }
+                : require('../../assets/user.png')
+            }
+          />
           <Text style={styles.name}>{profileData ? profileData.name : 'No Data'}</Text>
         </View>
         <View style={styles.statscontainer}>
@@ -216,6 +226,8 @@ const styles = StyleSheet.create({
     marginTop: 0.03 * height,
     width,
     height: 0.3 * height,
+    alignItems: 'center', // Center contents horizontally
+    justifyContent: 'center', // Center contents vertically
   },
   buttonContainer: {
     marginTop: 0.07 * height,
@@ -223,15 +235,15 @@ const styles = StyleSheet.create({
   },
   avatar: {
     width: 0.2 * width,
-    height: 0.3 * 0.3 * height,
-    borderRadius: 68,
-    paddingLeft: 10,
+    height: 0.2 * width, // Ensure the height matches the width for a circular image
+    borderRadius: (0.2 * width) / 2, // Half of the width to make it circular
   },
   name: {
     marginTop: 0.02 * height,
     fontSize: 20,
     fontWeight: 'bold',
     color: '#000000',
+    textAlign: 'center', // Ensure text is centered
   },
   statscontainer: {
     marginTop: 0.02 * height,

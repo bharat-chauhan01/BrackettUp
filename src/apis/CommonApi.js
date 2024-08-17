@@ -11,23 +11,14 @@ import {
   activitiesMock,
   upcomingActivitiesMock,
   homeSearch,
-  accountMockData
+  accountMockData,
 } from './MockData';
-
-const dummyUser = {
-  name: 'SuperUser',
-  credits: 100,
-  reservations: 10,
-};
 
 export const fetchProfile = async () => {
   try {
-    const response = await get('/profile');
-    return response.data;
+    const response = await get('/user/profile');
+    return response;
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return dummyUser;
-    }
     throw error;
   }
 };
@@ -228,7 +219,6 @@ export const validatePhoneOtp = async (oldPhone, newPhone, otp) => {
 export const validateEmailOtp = async (oldEmail, newEmail, otp) => {
   try {
     await post('/email/otp/validate', { oldEmail, newEmail, otp });
-
   } catch (error) {
     if (otp != '0000') {
       throw new Error('Please Enter 0000 for validation');

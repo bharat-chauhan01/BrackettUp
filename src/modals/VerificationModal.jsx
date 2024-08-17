@@ -5,7 +5,7 @@ import {
   requestEmailOtp,
   validatePhoneOtp,
   validateEmailOtp,
-  saveAccountData
+  saveAccountData,
 } from '../apis/CommonApi';
 
 const resendOtp = async (type, value, onClose) => {
@@ -60,7 +60,12 @@ const VerificationModal = ({
   const handleRequestClose = onClose || (() => {});
 
   return (
-    <Modal transparent={true} visible={visible} onRequestClose={handleRequestClose} animationType="slide">
+    <Modal
+      transparent={true}
+      visible={visible}
+      onRequestClose={handleRequestClose}
+      animationType="slide"
+    >
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>{title}</Text>
@@ -83,7 +88,7 @@ const VerificationModal = ({
             <TouchableOpacity
               style={styles.modalButton}
               onPress={() =>
-                handleOtpSubmit(type, oldValue,value, otp, setOtp, onClose, newValueUpdate)
+                handleOtpSubmit(type, oldValue, value, otp, setOtp, onClose, newValueUpdate)
               }
             >
               <Text style={styles.modalButtonText}>Submit</Text>

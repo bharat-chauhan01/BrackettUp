@@ -4,6 +4,7 @@ const initialState = {
   name: '',
   credits: 0,
   reservations: 0,
+  imageUrl: '',
 };
 
 const profileSlice = createSlice({
@@ -14,6 +15,7 @@ const profileSlice = createSlice({
       state.name = action.payload.name;
       state.credits = action.payload.credits;
       state.reservations = action.payload.reservations;
+      state.imageUrl = action.payload.imageUrl;
     },
   },
 });
