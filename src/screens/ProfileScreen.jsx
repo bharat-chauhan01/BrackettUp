@@ -141,6 +141,8 @@ const ProfileScreen = ({ navigation }) => {
           navigation.navigate('ReservationsScreen');
         } else if (item.title === 'Support') {
           navigation.navigate('SupportScreen');
+        } else if (item.title === 'Account') {
+          navigation.navigate('AccountScreen');
         } else {
           navigation.navigate('ScheduleScreen');
         }

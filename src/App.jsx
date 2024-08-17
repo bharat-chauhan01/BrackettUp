@@ -25,6 +25,7 @@ import useUserLocation from './components/UserLocation';
 import SearchScreen from './screens/SearchScreen';
 import ActivityDetail from './screens/ActivityDetail';
 import ReservationsScreen from './screens/ReservationsScreen';
+import AccountScreen from './screens/AccountScreen';
 
 LogBox.ignoreAllLogs(); // Ignore all log notifications
 
@@ -93,6 +94,7 @@ const MainApp = () => {
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
         <Stack.Screen name="ActivityDetail" component={ActivityDetail} />
         <Stack.Screen name="SupportScreen" component={SupportScreen} />
+        <Stack.Screen name="AccountScreen" component={AccountScreen} />
       </Stack.Navigator>
       <Toast config={toastConfig} />
       {errorMsg && <Text>{errorMsg}</Text>}

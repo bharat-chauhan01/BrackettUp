@@ -3,16 +3,20 @@ import { constant } from './constant';
 import { BackendUnreachableError } from '../utils/utils';
 import { getItem } from '../store/LocalStorage';
 
-const authData = await getItem('auth');
+const createApiClient = async () => {
+  const authData = await getItem('auth');
 
-const apiClient = axios.create({
-  baseURL: constant.baseUrl,
-  headers: {
-    authToken: authData.authToken,
-  },
-});
+  return axios.create({
+    baseURL: constant.baseUrl,
+    headers: {
+      authToken: authData?.authToken || '',
+    },
+  });
+};
 
-export const get = path => {
+export const get = async path => {
+  const apiClient = await createApiClient();
+
   return apiClient
     .get(path)
     .then(response => response.data)
@@ -37,7 +41,9 @@ export const get = path => {
     });
 };
 
-export const post = (path, data) => {
+export const post = async (path, data) => {
+  const apiClient = await createApiClient();
+
   console.log(data);
   return apiClient
     .post(path, data)

@@ -842,3 +842,11 @@ export const faqs = [
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste placeat quibusdam rerum quaerat magnam id vero illum sint itaque aliquam, saepe accusantium doloribus earum nemo eum nesciunt dolores cupiditate dignissimos.',
   },
 ];
+
+export let accountMockData = {
+  firstName: 'Shourya',
+  lastName: 'Rastogi',
+  gender: 'male',
+  mobile: '1234567890',
+  email: 'abc@gmail.com',
+};
