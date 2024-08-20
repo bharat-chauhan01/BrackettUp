@@ -4,18 +4,19 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { capitalizeFirstLetter } from '../utils/utils';
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 const fontSize = 15;
 
 const ActivityContainer = ({
   imageUrl,
   title,
   subtitle,
-  activity,
   distance,
   rating,
   ratingCount,
   ratingDesc,
+  date,
+  time,
+  credits
 }) => {
   return (
     <View style={styles.container}>
@@ -26,7 +27,6 @@ const ActivityContainer = ({
           <Text style={styles.subtitle}>{capitalizeFirstLetter(subtitle)}</Text>
           <Text style={styles.distance}>{distance}</Text>
         </View>
-        <Text style={styles.activity}>{capitalizeFirstLetter(activity)}</Text>
         <View style={styles.ratingContainer}>
           <Text style={styles.ratingText}>
             {rating}{' '}
@@ -39,6 +39,18 @@ const ActivityContainer = ({
           <Text style={styles.ratingCount}>{ratingCount}</Text>
           <Text style={styles.ratingDesc}>{capitalizeFirstLetter(ratingDesc)}</Text>
         </View>
+        {date && (
+          <View style={styles.dateTimeContainer}>
+            <Text style={styles.details}>{date}</Text>
+            <View style={styles.circle} />
+            {time && <Text style={styles.details}>{time}</Text>}
+          </View>
+        )}
+        {credits && (
+          <View style={styles.textBox}>
+            <Text style={styles.creditsText}>{credits} credits</Text>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -46,63 +58,86 @@ const ActivityContainer = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: windowWidth * 0.44,
-    height: windowHeight * 0.24,
     borderRadius: 5,
     overflow: 'hidden',
     backgroundColor: '#fff',
-    // marginHorizontal: '0.5%',
-    padding: '1.5%',
+    padding: 5,
+    marginVertical: 5,
+    width: windowWidth * 0.45,
   },
   image: {
     width: '100%',
-    height: '53%',
+    height: windowWidth * 0.29,
     borderRadius: 10,
   },
   textContainer: {
-    marginTop: '2%',
+    marginTop: 5,
+    alignItems: 'flex-start',
   },
   title: {
     fontSize: windowWidth * 0.04,
     fontWeight: 'bold',
     color: 'black',
     letterSpacing: 1.25,
+    marginBottom: 2,
   },
   subtitle: {
     fontSize: windowWidth * 0.035,
     color: '#666',
+    marginBottom: 2,
   },
   act: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   ratingContainer: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
-    gap: windowWidth * 0.005,
-  },
-  rating: {
-    fontSize: windowWidth * 0.033,
-    color: '#666',
-  },
-  itemIcon: {
-    name: 'star',
-    color: '#000000',
-    size: fontSize,
-  },
-  activity: {
-    fontSize: windowWidth * 0.035,
-    color: '#666',
+    alignItems: 'center',
+    marginBottom: 2,
   },
   ratingText: {
     fontSize: windowWidth * 0.035,
     color: 'black',
-    marginTop: '1%',
     fontWeight: 'bold',
   },
   ratingDesc: {
     fontSize: windowWidth * 0.033,
     color: 'purple',
     fontWeight: '600',
+  },
+  dateTimeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center', // Align items vertically centered
+    marginTop: 2,
+  },
+  details: {
+    fontSize: windowWidth * 0.035,
+    marginRight: 4,
+  },
+  textBox: {
+    backgroundColor: '#f0f0f0',
+    borderRadius: 5,
+    paddingHorizontal: 4,
+    paddingVertical: 2,
+    marginTop: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  creditsText: {
+    fontSize: windowWidth * 0.035,
+    color: 'black',
+  },
+  itemIcon: {
+    name: 'star',
+    color: '#000000',
+    size: fontSize,
+  },
+  circle: {
+    width: 4, // Adjusted size for better visibility
+    height: 4,
+    borderRadius: 2, // Radius to make it a perfect circle
+    backgroundColor: 'black',
+    marginHorizontal: 6, // Adjusted margin for better spacing
   },
 });
 

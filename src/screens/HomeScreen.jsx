@@ -51,17 +51,8 @@ export default function HomeScreen() {
   );
 
   return (
-    <View
-      style={{
-        flex: 1,
-        // justifyContent: 'center',
-        alignItems: 'center',
-        color: 'black',
-        backgroundColor: '#FFFFFF',
-        paddingLeft: 12,
-      }}
-    >
-      <Text>Welcome to Home Screen</Text>
+    <View style={styles.screenContainer}>
+      <Text style={styles.welcomeText}>Welcome to Home Screen</Text>
 
       <ScrollView
         onScroll={event => setScrollPosition(event.nativeEvent.contentOffset.y)}
@@ -79,14 +70,14 @@ export default function HomeScreen() {
                 size={styles.itemIcon.size}
               />
             </View>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <ScrollView marginLeft={10} horizontal showsHorizontalScrollIndicator={false}>
               {section.content.map((activity, activityIndex) => (
                 <TouchableOpacity
                   key={activityIndex}
+                  style={styles.activityTouchable}
                   onPress={() => handleActivityPress(activity.referenceId, activity.referenceType)}
                 >
                   <ActivityContainer
-                    key={activityIndex}
                     imageUrl={activity.imageUrl}
                     title={activity.title}
                     subtitle={activity.subtitle}
@@ -95,6 +86,9 @@ export default function HomeScreen() {
                     rating={activity.rating}
                     ratingCount={activity.ratingCount}
                     ratingDesc={activity.ratingDesc}
+                    date={activity.date}
+                    time={activity.time}
+                    credits={activity.credits}
                   />
                 </TouchableOpacity>
               ))}
@@ -107,34 +101,43 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  welcomeText: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    marginVertical: 10,
+  },
   container: {
     flex: 1,
-    // padding: 12,
+    width: '100%',
   },
   contentContainer: {
-    paddingBottom: 50,
+    paddingBottom: 0,
   },
   section: {
-    // gap: 12
+    marginBottom: 0,
   },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingRight: 10,
+    marginLeft: 10,
   },
   sectionTitle: {
-    fontSize: windowWidth * 0.05,
+    fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
-    paddingLeft: 10,
-    marginTop: 12,
-    marginBottom: 12,
   },
-
   itemIcon: {
     name: 'dots-horizontal',
     color: '#681',
     size: 20,
+  },
+  activityTouchable: {
+    marginHorizontal: 0,
   },
 });
