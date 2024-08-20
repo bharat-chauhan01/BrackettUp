@@ -16,7 +16,7 @@ const ActivityContainer = ({
   ratingDesc,
   date,
   time,
-  credits
+  credits,
 }) => {
   return (
     <View style={styles.container}>
