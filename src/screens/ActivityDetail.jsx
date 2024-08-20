@@ -28,7 +28,7 @@ export default function ActivityDetail() {
   const [activityData, setActivityData] = useState([]);
   const route = useRoute();
 
-  const { activityId } = route.params;
+  const activityId = route.params;
 
   useEffect(() => {
     const loadActivityDetail = async () => {

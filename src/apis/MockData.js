@@ -380,7 +380,8 @@ export const activitiesMock = [
     key: 'Trending now',
     content: [
       {
-        activityId: 1,
+        referenceId: 1,
+        referenceType: 'portfolio',
         imageUrl:
           'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
         title: 'Rocycle',
@@ -392,7 +393,8 @@ export const activitiesMock = [
         ratingDesc: 'Excellent',
       },
       {
-        activityId: 2,
+        referenceId: 2,
+        referenceType: 'activity',
         imageUrl:
           'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
         title: 'ClubSportive',
@@ -404,7 +406,8 @@ export const activitiesMock = [
         ratingDesc: 'Great',
       },
       {
-        activityId: 2,
+        referenceId: 2,
+        referenceType: 'activity',
         imageUrl:
           'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
         title: 'ClubSportive',
@@ -421,7 +424,8 @@ export const activitiesMock = [
     key: 'Studios Near You',
     content: [
       {
-        activityId: 2,
+        referenceId: 1,
+        referenceType: 'activity',
         imageUrl:
           'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
         title: 'YogaSpot',
@@ -433,7 +437,8 @@ export const activitiesMock = [
         ratingDesc: 'Great',
       },
       {
-        activityId: 1,
+        referenceId: 2,
+        referenceType: 'activity',
         imageUrl:
           'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
         title: 'Rocycle',
@@ -445,7 +450,8 @@ export const activitiesMock = [
         ratingDesc: 'Excellent',
       },
       {
-        activityId: 2,
+        referenceId: 1,
+        referenceType: 'activity',
         imageUrl:
           'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
         title: 'ClubSportive',
@@ -462,7 +468,8 @@ export const activitiesMock = [
     key: "See what's new on BrackettUp",
     content: [
       {
-        activityId: 1,
+        referenceId: 1,
+        referenceType: 'activity',
         imageUrl:
           'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
         title: 'ClubSportive',
@@ -474,7 +481,8 @@ export const activitiesMock = [
         ratingDesc: 'Great',
       },
       {
-        activityId: 2,
+        referenceId: 2,
+        referenceType: 'activity',
         imageUrl:
           'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
         title: 'Rocycle',
@@ -486,7 +494,8 @@ export const activitiesMock = [
         ratingDesc: 'Excellent',
       },
       {
-        activityId: 1,
+        referenceId: 2,
+        referenceType: 'activity',
         imageUrl:
           'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
         title: 'ClubSportive',

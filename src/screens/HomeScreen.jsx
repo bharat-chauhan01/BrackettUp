@@ -1,5 +1,13 @@
 import React, { useState, useCallback } from 'react';
-import { Text, View, ScrollView, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import ActivityContainer from '../components/ActivityContainer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { fetchHomePageActivities } from '../apis/CommonApi';
@@ -21,8 +29,13 @@ export default function HomeScreen() {
       setActivities(error);
     }
   };
-  const handleActivityPress = activityId => {
-    navigation.navigate('ActivityDetail', { activityId });
+  const handleActivityPress = (referenceId, referenceType) => {
+    if (referenceType === 'activity') {
+      console.log(referenceId);
+      navigation.navigate('ActivityDetail', referenceId);
+    } else if (referenceType === 'portfolio') {
+      Alert.alert('Portfolio Page is building');
+    }
   };
 
   useFocusEffect(
@@ -70,7 +83,7 @@ export default function HomeScreen() {
               {section.content.map((activity, activityIndex) => (
                 <TouchableOpacity
                   key={activityIndex}
-                  onPress={() => handleActivityPress(activity.activityId)}
+                  onPress={() => handleActivityPress(activity.referenceId, activity.referenceType)}
                 >
                   <ActivityContainer
                     key={activityIndex}
