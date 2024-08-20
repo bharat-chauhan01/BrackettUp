@@ -437,7 +437,9 @@ export const activitiesMock = [
         ratingDesc: 'Great',
         time: '45min',
         date: 'Thu, 24 Aug',
-        credits: '10',
+        credits: '10 ',
+        discountCredits: '5 credits',
+        percentageDiscount: '25%',
       },
       {
         referenceId: 2,
@@ -453,7 +455,7 @@ export const activitiesMock = [
         ratingDesc: 'Excellent',
         time: '45min',
         date: 'Thu, 24 Aug',
-        credits: '10',
+        credits: '10 credits',
       },
       {
         referenceId: 1,
@@ -469,7 +471,7 @@ export const activitiesMock = [
         ratingDesc: 'Great',
         time: '45min',
         date: 'Thu, 24 Aug',
-        credits: '10',
+        credits: '10 credits',
       },
     ],
   },

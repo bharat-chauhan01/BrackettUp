@@ -52,8 +52,6 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.screenContainer}>
-      <Text style={styles.welcomeText}>Welcome to Home Screen</Text>
-
       <ScrollView
         onScroll={event => setScrollPosition(event.nativeEvent.contentOffset.y)}
         scrollPosition={scrollPosition}
@@ -89,6 +87,8 @@ export default function HomeScreen() {
                     date={activity.date}
                     time={activity.time}
                     credits={activity.credits}
+                    discountCredits={activity.discountCredits}
+                    percentageDiscount={activity.percentageDiscount}
                   />
                 </TouchableOpacity>
               ))}
@@ -106,12 +106,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
   },
-  welcomeText: {
-    fontSize: 10,
-    fontWeight: 'bold',
-    marginVertical: 10,
-  },
   container: {
+    marginTop: 20,
     flex: 1,
     width: '100%',
   },

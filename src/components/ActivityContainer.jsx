@@ -17,6 +17,8 @@ const ActivityContainer = ({
   date,
   time,
   credits,
+  discountCredits,
+  percentageDiscount,
 }) => {
   return (
     <View style={styles.container}>
@@ -27,6 +29,13 @@ const ActivityContainer = ({
           <Text style={styles.subtitle}>{capitalizeFirstLetter(subtitle)}</Text>
           <Text style={styles.distance}>{distance}</Text>
         </View>
+        {date && (
+          <View style={styles.dateTimeContainer}>
+            <Text style={styles.details}>{date}</Text>
+            <View style={styles.circle} />
+            {time && <Text style={styles.details}>{time}</Text>}
+          </View>
+        )}
         <View style={styles.ratingContainer}>
           <Text style={styles.ratingText}>
             {rating}{' '}
@@ -39,16 +48,25 @@ const ActivityContainer = ({
           <Text style={styles.ratingCount}>{ratingCount}</Text>
           <Text style={styles.ratingDesc}>{capitalizeFirstLetter(ratingDesc)}</Text>
         </View>
-        {date && (
-          <View style={styles.dateTimeContainer}>
-            <Text style={styles.details}>{date}</Text>
-            <View style={styles.circle} />
-            {time && <Text style={styles.details}>{time}</Text>}
-          </View>
-        )}
         {credits && (
-          <View style={styles.textBox}>
-            <Text style={styles.creditsText}>{credits} credits</Text>
+          <View style={{ flexDirection: 'row' }}>
+            {percentageDiscount && (
+              <View style={styles.discountPercentage}>
+                <Text style={styles.discountPercentageText}>{percentageDiscount}</Text>
+              </View>
+            )}
+            <View style={styles.creditBox}>
+              <View style={[styles.creditsContainer, discountCredits && styles.greyBackground]}>
+                <Text style={[styles.creditsText, discountCredits && styles.strikethrough]}>
+                  {credits}
+                </Text>
+              </View>
+              {discountCredits && (
+                <View style={[styles.creditsContainer, styles.discountedContainer]}>
+                  <Text style={[styles.creditsText, { color: 'white' }]}>{discountCredits}</Text>
+                </View>
+              )}
+            </View>
           </View>
         )}
       </View>
@@ -101,6 +119,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   ratingDesc: {
+    marginLeft: 2,
     fontSize: windowWidth * 0.033,
     color: 'purple',
     fontWeight: '600',
@@ -108,14 +127,13 @@ const styles = StyleSheet.create({
   dateTimeContainer: {
     flexDirection: 'row',
     alignItems: 'center', // Align items vertically centered
-    marginTop: 2,
   },
   details: {
     fontSize: windowWidth * 0.035,
     marginRight: 4,
   },
-  textBox: {
-    backgroundColor: '#f0f0f0',
+  discountPercentage: {
+    backgroundColor: '#009E60',
     borderRadius: 5,
     paddingHorizontal: 4,
     paddingVertical: 2,
@@ -124,8 +142,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   creditsText: {
+    textDecorationStyle: 'line-through',
     fontSize: windowWidth * 0.035,
     color: 'black',
+  },
+  discountPercentageText: {
+    fontSize: windowWidth * 0.035,
+    color: 'white',
   },
   itemIcon: {
     name: 'star',
@@ -138,6 +161,36 @@ const styles = StyleSheet.create({
     borderRadius: 2, // Radius to make it a perfect circle
     backgroundColor: 'black',
     marginHorizontal: 6, // Adjusted margin for better spacing
+  },
+  creditBox: {
+    flex: 1,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+  },
+  creditsContainer: {
+    paddingHorizontal: 3, // Add some padding inside the box
+    paddingVertical: 1,
+    borderRadius: 5, // Radius to make it a perfect circle
+    borderColor: 'black',
+    borderWidth: 0.19,
+    backgroundColor: '#515656', // Add grey background color
+    position: 'relative', // Needed for the diagonal line
+  },
+  greyBackground: {
+    backgroundColor: '#515656', // Add grey background color
+    marginHorizontal: 3, // Add space between the boxes
+  },
+  creditsText: {
+    fontSize: 14,
+    color: 'white', // Set the text color to black for contrast
+  },
+  strikethrough: {
+    textDecorationLine: 'line-through', // Apply strikethrough style
+  },
+  discountedContainer: {
+    borderColor: '#007FFF',
+    backgroundColor: '#007FFF',
   },
 });
 
