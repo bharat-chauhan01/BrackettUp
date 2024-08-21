@@ -522,42 +522,46 @@ export const activitiesMock = [
 ];
 export const upcomingActivitiesMock = [
   {
+    activityId: 1,
     title: 'Haircut (Regular)',
     date: '2024-07-24',
     time: '10:00 AM - 12:00 PM',
-    instructor: 'Dan Rose',
-    institution: 'Fit Club',
-    imageUrl:
-      'https://t3.ftcdn.net/jpg/04/49/73/64/360_F_449736488_IAGo58o7DloC8Os5S5v9vppX3BIxzK4S.jpg',
+    instructorName: 'Dan Rose',
+    organizationName: 'Fit Club',
     activityImageUrl:
       'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.webp',
+    coordinates:{
+      latitude: 123,
+      longitude: 234
+    }  
   },
   {
+    activityId: 2,
     title: 'Yoga Session',
     date: '2024-07-25',
     time: '08:00 AM - 09:00 AM',
-    instructor: 'Jane Doe',
-    institution: 'Wellness Center',
+    instructorName: 'Jane Doe',
+    organizationName: 'Wellness Center',
     activityImageUrl:
       'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+      coordinates:{
+        latitude: 123,
+        longitude: 234
+      }  
   },
   {
+    activityId: 3,
     title: 'Swimming Class',
     date: '2024-07-23',
     time: '02:00 PM - 04:00 PM',
-    instructor: 'John Smith',
-    institution: 'Swim School',
+    instructorName: 'John Smith',
+    organizationName: 'Swim School',
     activityImageUrl:
       'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.webp',
-  },
-  {
-    title: 'Yoga Class',
-    date: '2024-07-26',
-    time: '06:00 PM - 07:00 PM',
-    instructor: 'Emily Clark',
-    institution: 'Yoga Academy',
-    activityImageUrl:
-      'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+    coordinates:{
+        latitude: 123,
+        longitude: 234
+      }  
   },
 ];
 
