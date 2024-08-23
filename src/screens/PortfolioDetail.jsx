@@ -19,7 +19,6 @@ import Video from 'react-native-video';
 
 const { width: screenWidth } = Dimensions.get('window');
 
-
 export default function PortfolioDetail() {
   const scrollViewRef = useRef(null);
   const navigation = useNavigation();
@@ -93,9 +92,7 @@ export default function PortfolioDetail() {
                         color={styles.fireIcon.color}
                         size={styles.fireIcon.size}
                       />
-                      <Text style={styles.bookingText}>
-                        {portfolioData.bookingCount}
-                      </Text>
+                      <Text style={styles.bookingText}>{portfolioData.bookingCount}</Text>
                     </>
                   ) : null}
                 </View>
@@ -184,8 +181,8 @@ export default function PortfolioDetail() {
                       style={styles.mapVideo}
                       resizeMode="cover"
                       repeat={true}
-                      paused={true} 
-                      controls={true} 
+                      paused={true}
+                      controls={true}
                     />
 
                     <Text style={styles.videoText}>{portfolioData.videoText}</Text>
@@ -325,7 +322,7 @@ const styles = StyleSheet.create({
   },
   locationContainer: {
     flex: 1,
-    marginLeft:2,
+    marginLeft: 2,
     flexDirection: 'row',
     alignItems: 'flex-end',
   },
@@ -523,7 +520,7 @@ const styles = StyleSheet.create({
   videoContainer: {
     height: 250,
     marginTop: 20,
-    marginBottom:20,
+    marginBottom: 20,
   },
   precautionContainer: {
     padding: 10,
@@ -594,25 +591,25 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   ratingContent: {
-    backgroundColor: '#F5F5F5', 
-    padding: 15, 
-    borderRadius: 10, 
+    backgroundColor: '#F5F5F5',
+    padding: 15,
+    borderRadius: 10,
   },
   ratingTitle: {
-    fontSize: 18, 
-    fontWeight: 'bold', 
-    color: '#000', 
-    marginBottom: 5, 
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#000',
+    marginBottom: 5,
   },
   ratingDescription: {
-    fontSize: 16, 
-    color: '#333', 
-    marginBottom: 10, 
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 10,
   },
   link: {
-    fontSize: 16, 
-    color: '#000', 
-    fontWeight: 'bold', 
+    fontSize: 16,
+    color: '#000',
+    fontWeight: 'bold',
   },
   buttonContainer: {
     flexDirection: 'row',

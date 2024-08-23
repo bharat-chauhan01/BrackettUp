@@ -530,10 +530,10 @@ export const upcomingActivitiesMock = [
     organizationName: 'Fit Club',
     activityImageUrl:
       'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.webp',
-    coordinates:{
+    coordinates: {
       latitude: 123,
-      longitude: 234
-    }  
+      longitude: 234,
+    },
   },
   {
     activityId: 2,
@@ -544,10 +544,10 @@ export const upcomingActivitiesMock = [
     organizationName: 'Wellness Center',
     activityImageUrl:
       'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
-      coordinates:{
-        latitude: 123,
-        longitude: 234
-      }  
+    coordinates: {
+      latitude: 123,
+      longitude: 234,
+    },
   },
   {
     activityId: 3,
@@ -558,10 +558,10 @@ export const upcomingActivitiesMock = [
     organizationName: 'Swim School',
     activityImageUrl:
       'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.webp',
-    coordinates:{
-        latitude: 123,
-        longitude: 234
-      }  
+    coordinates: {
+      latitude: 123,
+      longitude: 234,
+    },
   },
 ];
 

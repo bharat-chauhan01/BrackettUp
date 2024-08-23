@@ -49,7 +49,7 @@ const ActivityContainer = ({
           <Text style={styles.ratingDesc}>{capitalizeFirstLetter(ratingDesc)}</Text>
         </View>
         {credits && (
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row', paddingVertical: 2, marginTop: 2 }}>
             {percentageDiscount && (
               <View style={styles.discountPercentage}>
                 <Text style={styles.discountPercentageText}>{percentageDiscount}</Text>
@@ -136,8 +136,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#009E60',
     borderRadius: 5,
     paddingHorizontal: 4,
-    paddingVertical: 2,
-    marginTop: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
