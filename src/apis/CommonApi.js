@@ -12,6 +12,7 @@ import {
   upcomingActivitiesMock,
   homeSearch,
   accountMockData,
+  portfolioDataMock,
 } from './MockData';
 
 export const fetchProfile = async () => {
@@ -225,6 +226,19 @@ export const validateEmailOtp = async (oldEmail, newEmail, otp) => {
     }
     if (error instanceof BackendUnreachableError) {
       return 'Success';
+    }
+    throw error;
+  }
+};
+
+export const fetchPortfolioDetail = async id => {
+  try {
+    const response = await get(`/organization/${id}`);
+    return response.data;
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      const mockData = portfolioDataMock.find(activity => activity.organizationId === id);
+      return mockData ? mockData : {};
     }
     throw error;
   }

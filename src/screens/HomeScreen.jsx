@@ -34,7 +34,7 @@ export default function HomeScreen() {
       console.log(referenceId);
       navigation.navigate('ActivityDetail', referenceId);
     } else if (referenceType === 'portfolio') {
-      Alert.alert('Portfolio Page is building');
+      navigation.navigate('PortfolioDetail', referenceId);
     }
   };
 

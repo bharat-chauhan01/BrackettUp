@@ -874,3 +874,120 @@ export let accountMockData = {
   mobile: '1234567890',
   email: 'abc@gmail.com',
 };
+
+export const portfolioDataMock = [
+  {
+    organizationId: 1,
+    images: [
+      {
+        id: '1',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/r1oaybq0ejmylhdy3jv9.jpg',
+      },
+      {
+        id: '2',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
+      },
+      {
+        id: '3',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/r1oaybq0ejmylhdy3jv9.jpg',
+      },
+      {
+        id: '4',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/r1oaybq0ejmylhdy3jv9.jpg',
+      },
+      {
+        id: '5',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+      },
+    ],
+    organizationName: 'Chasse Dance Studios',
+    rating: {
+      content: {
+        title: 'Heels Immediate',
+        description:
+          'Sofie is a very good dancer and teacher. I am sad about the summer break I am sad about the summer break ',
+      },
+      value: '4.8',
+      count: '(20,000+)',
+    },
+    location: {
+      locationReference:
+        'Chasse Dance Studios is met 9 studios het groove studios het groove Chasse Dance Studios is met 9 studios het groove studios het groove',
+      name: 'Zuidas',
+      coordinates: { lat: '90', long: '90' },
+    },
+    bookingCount: '100+ bookings this week',
+    advantageText: 'You save a total of 38% with BrackettUp',
+    description:
+      'This is our signature 45 minute indoor Roride. Every class includes the use of cycling shoes and dumbbells.',
+
+    instagramAccount: 'chassedancestudios',
+    websiteUrl: 'chasse-dancestudios.nl',
+    about:
+      'Chasse Dance Studios is met 9 studios het groove studios het groove. Chasse Dance Studios is met 9 studios het groove studios het groove  ',
+    highlights: ['LGBTQ-friendly'],
+    mapVideo: 'https://videos.pexels.com/video-files/3209300/3209300-uhd_2560_1440_25fps.mp4',
+    videoText: 'CHASSE DANCE STUDIO NICOLE KIRKLAND RECAP KIRKLAND RECAP KIRKLAND RECAP ',
+    howToGetThere:
+      'Chasse Dance Studios is met 9 studios het groove studios het groove Chasse Dance Studios is met 9 studios het groove studios het groove ',
+    updatedDate: 'Provided by Rocycle. Updated on 3/7/2024.',
+    safety: ['Ventilation system', 'Extra sanitation'],
+  },
+  {
+    organizationId: 2,
+    images: [
+      {
+        id: '1',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/zf79zuoxsozfzovlgolf.jpg',
+      },
+      {
+        id: '2',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/ggjnlugk1n9dgcgczibs.jpg',
+      },
+      {
+        id: '3',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/r1oaybq0ejmylhdy3jv9.jpg',
+      },
+      {
+        id: '4',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/r1oaybq0ejmylhdy3jv9.jpg',
+      },
+      {
+        id: '5',
+        uri: 'https://classpass-res.cloudinary.com/image/upload/f_auto/q_auto/r1oaybq0ejmylhdy3jv9.jpg',
+      },
+    ],
+    organizationName: 'Chasse Dance Studios',
+    rating: {
+      content: {
+        title: 'Heels Immediate',
+        description:
+          'Sofie is a very good dancer and teacher. I am sad about the summer break I am sad about the summer break ',
+      },
+      value: '4.8',
+      count: '(20,000+)',
+    },
+    location: {
+      locationReference:
+        'Chasse Dance Studios is met 9 studios het groove studios het groove Chasse Dance Studios is met 9 studios het groove studios het groove',
+      name: 'Zuidas',
+      coordinates: { lat: '90', long: '90' },
+    },
+    bookingCount: '100+ bookings this week',
+    advantageText: 'You save a total of 38% with BrackettUp',
+    description:
+      'This is our signature 45 minute indoor Roride. Every class includes the use of cycling shoes and dumbbells.',
+
+    instagramAccount: 'chassedancestudios',
+    websiteUrl: 'chasse-dancestudios.nl',
+    about:
+      'Chasse Dance Studios is met 9 studios het groove studios het groove. Chasse Dance Studios is met 9 studios het groove studios het groove  ',
+    highlights: ['LGBTQ-friendly'],
+    mapVideo: 'https://videos.pexels.com/video-files/3209300/3209300-uhd_2560_1440_25fps.mp4',
+    videoText: 'CHASSE DANCE STUDIO NICOLE KIRKLAND RECAP KIRKLAND RECAP KIRKLAND RECAP ',
+    howToGetThere:
+      'Chasse Dance Studios is met 9 studios het groove studios het groove Chasse Dance Studios is met 9 studios het groove studios het groove ',
+    updatedDate: 'Provided by Rocycle. Updated on 3/7/2024.',
+    safety: ['Ventilation system', 'Extra sanitation'],
+  },
+];

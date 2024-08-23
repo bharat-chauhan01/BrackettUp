@@ -24,6 +24,7 @@ import { saveData } from './apis/MockData';
 import useUserLocation from './components/UserLocation';
 import SearchScreen from './screens/SearchScreen';
 import ActivityDetail from './screens/ActivityDetail';
+import PortfolioDetail from './screens/PortfolioDetail';
 import ReservationsScreen from './screens/ReservationsScreen';
 import AccountScreen from './screens/AccountScreen';
 
@@ -93,6 +94,7 @@ const MainApp = () => {
         <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
         <Stack.Screen name="ActivityDetail" component={ActivityDetail} />
+        <Stack.Screen name="PortfolioDetail" component={PortfolioDetail} />
         <Stack.Screen name="SupportScreen" component={SupportScreen} />
         <Stack.Screen name="AccountScreen" component={AccountScreen} />
       </Stack.Navigator>
