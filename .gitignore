@@ -75,3 +75,6 @@ yarn-error.log
 
 # to igonore package lock changes
 package-lock.json
+
+/android/app/src/main/assets
+/android/app/src/main/res
