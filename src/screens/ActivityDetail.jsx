@@ -21,6 +21,8 @@ const handleReserve = () => {
   Alert.alert('Reservation successful');
 };
 
+
+
 export default function ActivityDetail() {
   const scrollViewRef = useRef(null);
   const navigation = useNavigation();
@@ -30,6 +32,12 @@ export default function ActivityDetail() {
 
   const activityId = route.params;
 
+  const handleSeeReviews = (referenceId) => {
+    // Alert.alert('Reservation successful');
+    // console.log(referenceId);
+    navigation.navigate('ShowReviewsScreen',referenceId);
+  };
+  
   useEffect(() => {
     const loadActivityDetail = async () => {
       setLoading(true);
@@ -141,7 +149,7 @@ export default function ActivityDetail() {
                     {activityData.rating?.count}
                   </Text>
 
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() =>handleSeeReviews(activityId)}>
                     <Text style={styles.moreLink}>See all reviews</Text>
                   </TouchableOpacity>
                 </View>

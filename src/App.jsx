@@ -27,6 +27,7 @@ import ActivityDetail from './screens/ActivityDetail';
 import PortfolioDetail from './screens/PortfolioDetail';
 import ReservationsScreen from './screens/ReservationsScreen';
 import AccountScreen from './screens/AccountScreen';
+import ShowReviewsScreen from './screens/ShowReviewsScreen';
 
 LogBox.ignoreAllLogs(); // Ignore all log notifications
 
@@ -97,6 +98,7 @@ const MainApp = () => {
         <Stack.Screen name="PortfolioDetail" component={PortfolioDetail} />
         <Stack.Screen name="SupportScreen" component={SupportScreen} />
         <Stack.Screen name="AccountScreen" component={AccountScreen} />
+        <Stack.Screen name="ShowReviewsScreen" component={ShowReviewsScreen} />
       </Stack.Navigator>
       <Toast config={toastConfig} />
       {errorMsg && <Text>{errorMsg}</Text>}
