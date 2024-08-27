@@ -44,6 +44,11 @@ export default function PortfolioDetail() {
     loadPortfolioDetail();
   }, [activityId]);
 
+  const handleSeeReviews = (referenceId) => {
+    navigation.navigate('ShowReviewsScreen',referenceId);
+  };
+
+
   return (
     <View style={styles.container}>
       {renderHeader(navigation, portfolioData.organizationName)}
@@ -126,7 +131,7 @@ export default function PortfolioDetail() {
 
                     <RenderTextWithToggle text={portfolioData.rating?.content?.description} />
                   </View>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() =>handleSeeReviews(activityId)}>
                     <Text style={styles.moreLink}>See all reviews</Text>
                   </TouchableOpacity>
                 </View>

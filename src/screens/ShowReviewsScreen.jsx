@@ -34,6 +34,7 @@ const ShowReviewPage = () => {
     }));
   };
 
+
   const renderItem = ({ item }) => {
     const isExpanded = expandedReviews[item.id];
     const shouldShowSeeMore = item.description.length > 30;
