@@ -84,8 +84,8 @@ const UpcomingClassScreen = () => {
                 title={activity.title}
                 date={activity.date}
                 time={activity.time}
-                instructor={activity.instructor}
-                institution={activity.institution}
+                instructor={activity.instructorName}
+                institution={activity.organizationName}
                 imageUrl={activity.imageUrl}
                 activityImageUrl={activity.activityImageUrl}
               />

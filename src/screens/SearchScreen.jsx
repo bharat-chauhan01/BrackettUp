@@ -37,7 +37,7 @@ const SearchScreen = () => {
   const [searchPlaceholder, setSearchPlaceHodler] = useState(' Search activity...');
 
   const handleActivityPress = activityId => {
-    navigation.navigate('ActivityDetail', { activityId });
+    navigation.navigate('ActivityDetail',  activityId );
   };
 
   const [locationQuery, setLocationQuery] = useState('');

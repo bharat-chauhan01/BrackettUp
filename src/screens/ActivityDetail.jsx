@@ -15,11 +15,12 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { fetchActivityDetail } from '../apis/CommonApi';
 import RenderTextWithToggle from '../components/RenderTextWithToggle';
+import { getItem } from '../store/LocalStorage';
+import LoggedInModal from '../modals/LoggedInModal';
+import LoggedOutModal from '../modals/LoggedOutModal';
+import { confirmResevation } from '../apis/CommonApi';
 
 const { width: screenWidth } = Dimensions.get('window');
-const handleReserve = () => {
-  Alert.alert('Reservation successful');
-};
 
 
 
@@ -28,6 +29,10 @@ export default function ActivityDetail() {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [activityData, setActivityData] = useState([]);
+  const [loggedInModalVisible, setLoggedInModalVisible] = useState(false);
+  const [loggedOutModalVisible, setLoggedOutModalVisible] = useState(false);
+
+
   const route = useRoute();
 
   const activityId = route.params;
@@ -53,6 +58,37 @@ export default function ActivityDetail() {
 
     loadActivityDetail();
   }, [activityId]);
+
+  const handleReserve = async () => {
+    try {
+      const auth = await getItem('auth');
+  
+      if (auth) {
+        setLoggedInModalVisible(true);
+      } else {
+        setLoggedOutModalVisible(true);
+      }
+    } catch (error) {
+      console.error('Error fetching auth status:', error);
+    }
+  };
+
+  const handleLogin = () => {
+    setLoggedOutModalVisible(false);
+    navigation.navigate('Login');
+  };
+
+  const handleConfirmReservation = async () => {
+    setLoggedInModalVisible(false);
+    try {
+      const credits = activityData.credits; 
+      await confirmResevation(activityId, credits);
+      Alert.alert('Reservation confirmed!');
+    } catch (error) {
+      Alert.alert('Error', 'There was an issue confirming your reservation.');
+    }
+  };
+  
 
   return (
     <View style={styles.container}>
@@ -290,7 +326,18 @@ export default function ActivityDetail() {
           <Text style={styles.reserveButtonText}>Reserve</Text>
         </TouchableOpacity>
       </View>
-    </View>
+      <LoggedInModal
+        isVisible={loggedInModalVisible}
+        onClose={() => setLoggedInModalVisible(false)}
+        activity={activityData}
+        onConfirm={handleConfirmReservation}
+      /> 
+      <LoggedOutModal
+      isVisible={loggedOutModalVisible}
+      onLogin={handleLogin}
+      onClose={() => setLoggedOutModalVisible(false)}
+      />
+      </View>
   );
 }
 

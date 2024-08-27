@@ -245,6 +245,18 @@ export const fetchPortfolioDetail = async id => {
   }
 };
 
+export const confirmResevation = async (activityId, credits) => {
+  try {
+    await post('/activityClass/confirm', { credits, activityId });
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return 'Success';
+    }
+    throw error;
+  }
+};
+
+
 export const fetchReviewDetail = async id => {
   try {
     const response = await get(`/reviews/activity/${id}`);
