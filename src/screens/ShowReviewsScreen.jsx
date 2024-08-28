@@ -5,6 +5,7 @@ import { Rating } from 'react-native-ratings';
 import { renderHeader } from '../modals/HeaderModal';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { fetchReviewDetail } from '../apis/CommonApi';
+import RatingBreakdownItem from '../components/RatingBreakdownItem';
 
 const ShowReviewPage = () => {
   const [reviewData, setReviewData] = useState(null);
@@ -47,7 +48,7 @@ const ShowReviewPage = () => {
             ratingColor="black"
             imageSize={20}
             readonly
-            startingValue={item.currentReviewCount}
+            startingValue={item.currentRating}
             style={styles.starRating}
           />
           <Text style={styles.reviewTime}>{item.time}</Text>
@@ -75,25 +76,15 @@ const ShowReviewPage = () => {
     <>
       {renderHeader(navigation, reviewData?.title)}
       <ScrollView style={styles.container}>
-        {reviewData && (
+        {reviewData && reviewData.reviews.length > 0? (
           <>
             <View style={styles.summaryContainer}>
               <View style={styles.breakdownContainer}>
-                {Object.keys(reviewData.reviewMeta.ratingsBreakdown)
-                  .sort((a, b) => b - a)
-                  .map(key => (
-                    <View key={key} style={styles.breakdownRow}>
-                      <Text style={styles.breakdownLabel}>{key} stars</Text>
-                      <View style={styles.breakdownBar}>
-                        <View
-                          style={[
-                            styles.bar,
-                            { width: `${reviewData.reviewMeta.ratingsBreakdown[key] / 10}%` },
-                          ]}
-                        />
-                      </View>
-                    </View>
-                  ))}
+              <RatingBreakdownItem starLabel="5 stars" ratingCount={reviewData.reviewMeta.ratingsBreakdown.fiveStarCount} />
+      <RatingBreakdownItem starLabel="4 stars" ratingCount={reviewData.reviewMeta.ratingsBreakdown.fourStarCount} />
+      <RatingBreakdownItem starLabel="3 stars" ratingCount={reviewData.reviewMeta.ratingsBreakdown.threeStarCount} />
+      <RatingBreakdownItem starLabel="2 stars" ratingCount={reviewData.reviewMeta.ratingsBreakdown.twoStarCount} />
+      <RatingBreakdownItem starLabel="1 star" ratingCount={reviewData.reviewMeta.ratingsBreakdown.oneStarCount} />
               </View>
 
               <View style={styles.ratingContainer}>
@@ -102,13 +93,13 @@ const ShowReviewPage = () => {
                   ratingColor="black"
                   imageSize={25}
                   readonly
-                  startingValue={reviewData.reviewMeta.currentReviewCount}
+                  startingValue={reviewData.reviewMeta.reviewAverage}
                 />
                 <Text style={styles.overallRating}>
-                  {reviewData.reviewMeta.currentReviewCount}/5.0
+                  {reviewData.reviewMeta.reviewAverage}/{reviewData.reviewMeta.maxRating}
                 </Text>
                 <Text style={styles.totalRatings}>
-                  based on {reviewData.reviewMeta.totalReviewCount}+ ratings
+                  based on {reviewData.reviewMeta.reviewCountDesc}+ ratings
                 </Text>
               </View>
             </View>
@@ -121,7 +112,11 @@ const ShowReviewPage = () => {
               contentContainerStyle={styles.list}
             />
           </>
-        )}
+        ):
+        (
+  <Text style={styles.noReviewsText}>No reviews found</Text>
+)
+        }
       </ScrollView>
     </>
   );
@@ -158,29 +153,6 @@ const styles = StyleSheet.create({
   breakdownContainer: {
     flex: 1,
     justifyContent: 'space-between',
-  },
-  breakdownRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  breakdownLabel: {
-    width: 60,
-    fontSize: 14,
-    color: 'black',
-    fontWeight: 'bold',
-  },
-  breakdownBar: {
-    flex: 1,
-    height: 30,
-    backgroundColor: '#e0e0e0',
-    borderRadius: 2,
-    overflow: 'hidden',
-  },
-  bar: {
-    height: '100%',
-    backgroundColor: '#000000',
-    minWidth: 2,
   },
   list: {
     paddingBottom: 20,
@@ -232,6 +204,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 20,
     color: 'black',
+  },
+  noReviewsText: {
+    fontSize: 18,
+    color: 'gray',
+    textAlign: 'center',
+    marginTop: 20,
   },
   horizontalDotsIcon: {
     name: 'dots-horizontal',

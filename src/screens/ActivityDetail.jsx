@@ -38,8 +38,6 @@ export default function ActivityDetail() {
   const activityId = route.params;
 
   const handleSeeReviews = (referenceId) => {
-    // Alert.alert('Reservation successful');
-    // console.log(referenceId);
     navigation.navigate('ShowReviewsScreen',referenceId);
   };
   
