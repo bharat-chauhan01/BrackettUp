@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Rating } from 'react-native-ratings';
+import { Rating, AirbnbRating } from 'react-native-ratings';
+import StarRatingDisplay from 'react-native-star-rating-widget';
+import StarRating from 'react-native-star-rating-widget';
 import { renderHeader } from '../modals/HeaderModal';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { fetchReviewDetail } from '../apis/CommonApi';
@@ -28,13 +30,12 @@ const ShowReviewPage = () => {
     loadReviews();
   }, [activityId]);
 
-  const handleSeeMore = (id) => {
+  const handleSeeMore = id => {
     setExpandedReviews(prevState => ({
       ...prevState,
-      [id]: !prevState[id],  
+      [id]: !prevState[id],
     }));
   };
-
 
   const renderItem = ({ item }) => {
     const isExpanded = expandedReviews[item.id];
@@ -43,14 +44,16 @@ const ShowReviewPage = () => {
     return (
       <View style={styles.reviewContainer}>
         <View style={styles.ratingTimeContainer}>
-          <Rating
-            type="star"
-            ratingColor="black"
-            imageSize={20}
-            readonly
-            startingValue={item.currentRating}
-            style={styles.starRating}
-          />
+          <View style={styles.starContainer}>
+            <AirbnbRating
+              count={5}
+              defaultRating={item.currentRating}
+              size={18}
+              selectedColor="black"
+              unSelectedColor="#a8b2af"
+              showRating={false}
+            />
+          </View>
           <Text style={styles.reviewTime}>{item.time}</Text>
         </View>
         <Text style={styles.reviewTitle}>{item.activityName}</Text>
@@ -61,11 +64,7 @@ const ShowReviewPage = () => {
         </Text>
         {shouldShowSeeMore && (
           <TouchableOpacity onPress={() => handleSeeMore(item.id)}>
-            <MaterialCommunityIcons
-              name="dots-horizontal"
-              color="black"
-              size={20}
-            />
+            <MaterialCommunityIcons name="dots-horizontal" color="black" size={20} />
           </TouchableOpacity>
         )}
       </View>
@@ -76,24 +75,40 @@ const ShowReviewPage = () => {
     <>
       {renderHeader(navigation, reviewData?.title)}
       <ScrollView style={styles.container}>
-        {reviewData && reviewData.reviews.length > 0? (
+        {reviewData && reviewData.reviews.length > 0 ? (
           <>
             <View style={styles.summaryContainer}>
               <View style={styles.breakdownContainer}>
-              <RatingBreakdownItem starLabel="5 stars" ratingCount={reviewData.reviewMeta.ratingsBreakdown.fiveStarCount} />
-      <RatingBreakdownItem starLabel="4 stars" ratingCount={reviewData.reviewMeta.ratingsBreakdown.fourStarCount} />
-      <RatingBreakdownItem starLabel="3 stars" ratingCount={reviewData.reviewMeta.ratingsBreakdown.threeStarCount} />
-      <RatingBreakdownItem starLabel="2 stars" ratingCount={reviewData.reviewMeta.ratingsBreakdown.twoStarCount} />
-      <RatingBreakdownItem starLabel="1 star" ratingCount={reviewData.reviewMeta.ratingsBreakdown.oneStarCount} />
+                <RatingBreakdownItem
+                  starLabel="5 stars"
+                  ratingCount={reviewData.reviewMeta.ratingsBreakdown.fiveStarCount}
+                />
+                <RatingBreakdownItem
+                  starLabel="4 stars"
+                  ratingCount={reviewData.reviewMeta.ratingsBreakdown.fourStarCount}
+                />
+                <RatingBreakdownItem
+                  starLabel="3 stars"
+                  ratingCount={reviewData.reviewMeta.ratingsBreakdown.threeStarCount}
+                />
+                <RatingBreakdownItem
+                  starLabel="2 stars"
+                  ratingCount={reviewData.reviewMeta.ratingsBreakdown.twoStarCount}
+                />
+                <RatingBreakdownItem
+                  starLabel="1 star"
+                  ratingCount={reviewData.reviewMeta.ratingsBreakdown.oneStarCount}
+                />
               </View>
 
               <View style={styles.ratingContainer}>
-                <Rating
-                  type="star"
-                  ratingColor="black"
-                  imageSize={25}
-                  readonly
-                  startingValue={reviewData.reviewMeta.reviewAverage}
+                <AirbnbRating
+                  count={5}
+                  defaultRating={reviewData.reviewMeta.reviewAverage}
+                  size={22}
+                  selectedColor="black"
+                  unSelectedColor="#a8b2af"
+                  showRating={false}
                 />
                 <Text style={styles.overallRating}>
                   {reviewData.reviewMeta.reviewAverage}/{reviewData.reviewMeta.maxRating}
@@ -112,11 +127,30 @@ const ShowReviewPage = () => {
               contentContainerStyle={styles.list}
             />
           </>
-        ):
-        (
-  <Text style={styles.noReviewsText}>No reviews found</Text>
-)
-        }
+        ) : (
+          <View style={styles.summaryContainer}>
+            <View style={styles.breakdownContainer}>
+              <RatingBreakdownItem starLabel="5 stars" ratingCount={0} />
+              <RatingBreakdownItem starLabel="4 stars" ratingCount={0} />
+              <RatingBreakdownItem starLabel="3 stars" ratingCount={0} />
+              <RatingBreakdownItem starLabel="2 stars" ratingCount={0} />
+              <RatingBreakdownItem starLabel="1 star" ratingCount={0} />
+            </View>
+
+            <View style={styles.ratingContainer}>
+              <AirbnbRating
+                count={5}
+                defaultRating={0}
+                size={22}
+                selectedColor="black"
+                unSelectedColor="#a8b2af"
+                showRating={false}
+              />
+              <Text style={styles.overallRating}>{0}/5</Text>
+              <Text style={styles.totalRatings}>based on 0 ratings</Text>
+            </View>
+          </View>
+        )}
       </ScrollView>
     </>
   );
@@ -140,13 +174,13 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   overallRating: {
-    fontSize: 28,
+    fontSize: 25,
     fontWeight: 'bold',
     marginTop: 10,
     color: 'black',
   },
   totalRatings: {
-    fontSize: 14,
+    fontSize: 13,
     color: '#888',
     marginTop: 5,
   },
@@ -158,7 +192,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   reviewContainer: {
-    marginTop: 20,
+    marginTop: 15,
   },
   ratingTimeContainer: {
     flexDirection: 'row',
@@ -172,16 +206,16 @@ const styles = StyleSheet.create({
   reviewTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginTop: 5,
-    color:'black'
+    // marginTop: 5,
+    color: 'black',
   },
   reviewText: {
     fontSize: 14,
     marginVertical: 5,
-    color:'black'
+    color: 'black',
   },
   reviewTime: {
-    fontSize: 12,
+    fontSize: 13,
     color: '#888',
   },
   dotsContainer: {
@@ -205,14 +239,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: 'black',
   },
-  noReviewsText: {
-    fontSize: 18,
-    color: 'gray',
-    textAlign: 'center',
-    marginTop: 20,
-  },
   horizontalDotsIcon: {
     name: 'dots-horizontal',
     size: 20,
+  },
+  starContainer: {
+    marginLeft: -3,
   },
 });

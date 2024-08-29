@@ -13,7 +13,7 @@ import {
   homeSearch,
   accountMockData,
   portfolioDataMock,
-  activityReviewDataMock
+  activityReviewDataMock,
 } from './MockData';
 
 export const fetchProfile = async () => {
@@ -255,7 +255,6 @@ export const confirmResevation = async (activityId, credits) => {
     throw error;
   }
 };
-
 
 export const fetchReviewDetail = async id => {
   try {

@@ -992,12 +992,11 @@ export const portfolioDataMock = [
   },
 ];
 
-export const activityReviewDataMock = [ 
+export const activityReviewDataMock = [
   {
     activityId: 2,
     title: 'ClubSportive',
     reviewMeta: {
-    
       ratingsBreakdown: {
         oneStarCount: 100,
         twoStarCount: 200,
@@ -1008,79 +1007,95 @@ export const activityReviewDataMock = [
       totalReviewCount: 1500,
       reviewAverage: 4.8,
       maxRating: 5.0,
-      reviewCountDesc: '10000', 
+      reviewCountDesc: '10000',
     },
     reviews: [
       {
         id: 1,
         currentRating: 3,
-        activityName: "K/C Reformer Pilates with Joey",
-        description: "Zo’n lieve man! Was behulpzaam gaf je een zelfverzekerd gevoel en had goede uitleg en fijne oefeningen:)",
-        time: "3 hours ago",
+        activityName: 'K/C Reformer Pilates with Joey',
+        description:
+          'Zo’n lieve man! Was behulpzaam gaf je een zelfverzekerd gevoel en had goede uitleg en fijne oefeningen:)',
+        time: '3 hours ago',
       },
       {
         id: 2,
         currentRating: 5.0,
-        activityName: "K/C Reformer Pilates with Mathieu",
-        description: "What a great instructor! Love this studio and the classes!",
-        time: "Yesterday",
+        activityName: 'K/C Reformer Pilates with Mathieu',
+        description: 'What a great instructor! Love this studio and the classes!',
+        time: 'Yesterday',
       },
       {
         id: 3,
+        currentRating: 3.0,
+        activityName: 'K/C Reformer Pilates with Jewel',
+        description:
+          'Hele goede les! Jewel geeft duidelijke aanwijzingen en originele zinvolle oefeningen',
+        time: '5 days ago',
+      },
+      {
+        id: 4,
         currentRating: 5.0,
-        activityName: "K/C Reformer Pilates with Jewel",
-        description: "Hele goede les! Jewel geeft duidelijke aanwijzingen en originele zinvolle oefeningen",
-        time: "2 days ago",
-      }
-    ]
+        activityName: 'K/C Reformer Pilates with Jewel',
+        description:
+          'Hele goede les! Jewel geeft duidelijke aanwijzingen en originele zinvolle oefeningen',
+        time: '2 days ago',
+      },
+      {
+        id: 5,
+        currentRating: 5.0,
+        activityName: 'K/C Reformer Pilates with Jewel',
+        description:
+          'Hele goede les! Jewel geeft duidelijke aanwijzingen en originele zinvolle oefeningen',
+        time: '2 days ago',
+      },
+    ],
   },
   {
     activityId: 1,
     title: 'Yoga',
     reviewMeta: {
-      ratingsBreakdown:{
-      oneStarCount: 50,
-      twoStarCount: 150,
-      threeStarCount: 250,
-      fourStarCount: 350,
-      fiveStarCount: 450,
+      ratingsBreakdown: {
+        oneStarCount: 50,
+        twoStarCount: 150,
+        threeStarCount: 250,
+        fourStarCount: 350,
+        fiveStarCount: 450,
       },
       totalReviewCount: 1250,
       reviewAverage: 4.5,
       maxRating: 5.0,
-      reviewCountDesc: '8000', 
+      reviewCountDesc: '8000',
     },
     reviews: [
-      {
-        id: 4,
-        currentRating: 4.5,
-        activityName: "Yoga Basics with Anna",
-        description: "Anna is very calm and knowledgeable. Great for beginners!",
-        time: "5 hours ago",
-      },
-      {
-        id: 5,
-        currentRating: 4.0,
-        activityName: "Advanced Yoga with Mark",
-        description: "Challenging class with detailed instructions. Highly recommend!",
-        time: "2 days ago",
-      },
-      {
-        id: 5,
-        currentRating: 4.0,
-        activityName: "Advanced Yoga with Mark",
-        description: "Challenging class with detailed instructions. Highly recommend!",
-        time: "2 days ago",
-      },
-      {
-        id: 5,
-        currentRating: 4.0,
-        activityName: "Advanced Yoga with Mark",
-        description: "Challenging class with detailed instructions. Highly recommend!",
-        time: "2 days ago",
-      },
-    ]
-  },    
+      // {
+      //   id: 4,
+      //   currentRating: 4.5,
+      //   activityName: "Yoga Basics with Anna",
+      //   description: "Anna is very calm and knowledgeable. Great for beginners!",
+      //   time: "5 hours ago",
+      // },
+      // {
+      //   id: 5,
+      //   currentRating: 4.0,
+      //   activityName: "Advanced Yoga with Mark",
+      //   description: "Challenging class with detailed instructions. Highly recommend!",
+      //   time: "2 days ago",
+      // },
+      // {
+      //   id: 5,
+      //   currentRating: 4.0,
+      //   activityName: "Advanced Yoga with Mark",
+      //   description: "Challenging class with detailed instructions. Highly recommend!",
+      //   time: "2 days ago",
+      // },
+      // {
+      //   id: 5,
+      //   currentRating: 4.0,
+      //   activityName: "Advanced Yoga with Mark",
+      //   description: "Challenging class with detailed instructions. Highly recommend!",
+      //   time: "2 days ago",
+      // },
+    ],
+  },
 ];
-
-

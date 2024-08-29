@@ -6,23 +6,17 @@ const RatingBreakdownItem = ({ starLabel, ratingCount }) => {
     <View style={styles.breakdownRow}>
       <Text style={styles.breakdownLabel}>{starLabel}</Text>
       <View style={styles.breakdownBar}>
-        <View
-          style={[
-            styles.bar,
-            { width: `${ratingCount / 10}%` }, 
-          ]}
-        />
+        <View style={[styles.bar, { width: `${ratingCount / 10}%` }]} />
       </View>
-      
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-breakdownRow: {
+  breakdownRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 6,
   },
   breakdownLabel: {
     width: 60,
@@ -32,7 +26,7 @@ breakdownRow: {
   },
   breakdownBar: {
     flex: 1,
-    height: 30,
+    height: 25,
     backgroundColor: '#e0e0e0',
     borderRadius: 2,
     overflow: 'hidden',
@@ -42,7 +36,6 @@ breakdownRow: {
     backgroundColor: '#000000',
     minWidth: 2,
   },
-  
 });
 
 export default RatingBreakdownItem;
