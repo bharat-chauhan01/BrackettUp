@@ -23,35 +23,35 @@ export default function LandingScreen() {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
+        tabBarActiveTintColor: 'black', 
+        tabBarInactiveTintColor: 'gray', 
         tabBarLabelStyle: {
           fontWeight: 'bold',
         },
         tabBarStyle: {
           height: navBarHeight,
           paddingBottom: navBarPaddingBottom,
-        },
-        style: {
+          backgroundColor: 'white', 
           position: 'absolute',
-          backgroundColor: 'black',
-          borderColor: 'black',
+          borderTopColor: 'transparent', 
         },
       }}
     >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={() => ({
-          tabBarIcon: () => (
-            <MaterialCommunityIcons name="home" color={'#000000'} size={iconHeight} />
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={iconHeight} />
           ),
-        })}
+        }}
       />
       <Tab.Screen
         name="Search"
         component={SearchLandingScreen}
         options={{
-          tabBarIcon: () => (
-            <MaterialCommunityIcons name="magnify" color={'#000000'} size={iconHeight} />
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="magnify" color={color} size={iconHeight} />
           ),
         }}
       />
@@ -59,8 +59,8 @@ export default function LandingScreen() {
         name="Upcoming"
         component={UpcomingClassScreen}
         options={{
-          tabBarIcon: () => (
-            <MaterialCommunityIcons name="calendar" color={'#000000'} size={iconHeight} />
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="calendar" color={color} size={iconHeight} />
           ),
         }}
       />
@@ -69,8 +69,8 @@ export default function LandingScreen() {
         component={ProfileScreen}
         options={{
           tabBarLabel: 'Profile',
-          tabBarIcon: () => (
-            <MaterialCommunityIcons name="account" color={'#000000'} size={iconHeight} />
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={iconHeight} />
           ),
         }}
         listeners={({ navigation }) => ({
