@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Rating, AirbnbRating } from 'react-native-ratings';
-import StarRatingDisplay from 'react-native-star-rating-widget';
-import StarRating from 'react-native-star-rating-widget';
+import { AirbnbRating } from 'react-native-ratings';
 import { renderHeader } from '../modals/HeaderModal';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { fetchReviewDetail } from '../apis/CommonApi';
