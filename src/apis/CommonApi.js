@@ -13,6 +13,7 @@ import {
   homeSearch,
   accountMockData,
   portfolioDataMock,
+  activityReviewDataMock,
 } from './MockData';
 
 export const fetchProfile = async () => {
@@ -250,6 +251,19 @@ export const confirmResevation = async (activityId, credits) => {
   } catch (error) {
     if (error instanceof BackendUnreachableError) {
       return 'Success';
+    }
+    throw error;
+  }
+};
+
+export const fetchReviewDetail = async id => {
+  try {
+    const response = await get(`/reviews/activity/${id}`);
+    return response.data;
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      const mockData = activityReviewDataMock.find(activity => activity.activityId === id);
+      return mockData ? mockData : {};
     }
     throw error;
   }

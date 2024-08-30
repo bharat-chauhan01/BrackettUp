@@ -30,10 +30,13 @@ export default function ActivityDetail() {
   const [loggedInModalVisible, setLoggedInModalVisible] = useState(false);
   const [loggedOutModalVisible, setLoggedOutModalVisible] = useState(false);
 
-
   const route = useRoute();
 
   const activityId = route.params;
+
+  const handleSeeReviews = referenceId => {
+    navigation.navigate('ShowReviewsScreen', referenceId);
+  };
 
   useEffect(() => {
     const loadActivityDetail = async () => {
@@ -54,7 +57,7 @@ export default function ActivityDetail() {
   const handleReserve = async () => {
     try {
       const auth = await getItem('auth');
-  
+
       if (auth) {
         setLoggedInModalVisible(true);
       } else {
@@ -73,14 +76,13 @@ export default function ActivityDetail() {
   const handleConfirmReservation = async () => {
     setLoggedInModalVisible(false);
     try {
-      const credits = activityData.credits; 
+      const credits = activityData.credits;
       await confirmResevation(activityId, credits);
       Alert.alert('Reservation confirmed!');
     } catch (error) {
       Alert.alert('Error', 'There was an issue confirming your reservation.');
     }
   };
-  
 
   return (
     <View style={styles.container}>
@@ -177,7 +179,7 @@ export default function ActivityDetail() {
                     {activityData.rating?.count}
                   </Text>
 
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => handleSeeReviews(activityId)}>
                     <Text style={styles.moreLink}>See all reviews</Text>
                   </TouchableOpacity>
                 </View>
@@ -323,13 +325,13 @@ export default function ActivityDetail() {
         onClose={() => setLoggedInModalVisible(false)}
         activity={activityData}
         onConfirm={handleConfirmReservation}
-      /> 
-      <LoggedOutModal
-      isVisible={loggedOutModalVisible}
-      onLogin={handleLogin}
-      onClose={() => setLoggedOutModalVisible(false)}
       />
-      </View>
+      <LoggedOutModal
+        isVisible={loggedOutModalVisible}
+        onLogin={handleLogin}
+        onClose={() => setLoggedOutModalVisible(false)}
+      />
+    </View>
   );
 }
 

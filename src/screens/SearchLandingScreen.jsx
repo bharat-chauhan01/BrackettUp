@@ -99,7 +99,7 @@ const SearchLandingScreen = () => {
   };
 
   const handleActivityPress = activityId => {
-    navigation.navigate('ActivityDetail',  activityId );
+    navigation.navigate('ActivityDetail', activityId);
   };
 
   const renderCategory = category => (
