@@ -46,7 +46,11 @@ const ShowReviewPage = () => {
             <AirbnbRating
               count={5}
               defaultRating={item.currentRating}
+<<<<<<< HEAD
               size={18}
+=======
+              size={14}
+>>>>>>> 65deac37a721e6912151726fa7ffaa413451b3e7
               selectedColor="black"
               unSelectedColor="#a8b2af"
               showRating={false}
@@ -103,9 +107,14 @@ const ShowReviewPage = () => {
                 <AirbnbRating
                   count={5}
                   defaultRating={reviewData.reviewMeta.reviewAverage}
+<<<<<<< HEAD
                   size={22}
                   selectedColor="black"
                   unSelectedColor="#a8b2af"
+=======
+                  size={18}
+                  selectedColor="black"
+>>>>>>> 65deac37a721e6912151726fa7ffaa413451b3e7
                   showRating={false}
                 />
                 <Text style={styles.overallRating}>
@@ -139,7 +148,11 @@ const ShowReviewPage = () => {
               <AirbnbRating
                 count={5}
                 defaultRating={0}
+<<<<<<< HEAD
                 size={22}
+=======
+                size={20}
+>>>>>>> 65deac37a721e6912151726fa7ffaa413451b3e7
                 selectedColor="black"
                 unSelectedColor="#a8b2af"
                 showRating={false}
@@ -202,18 +215,30 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   reviewTitle: {
+<<<<<<< HEAD
     fontSize: 16,
+=======
+    fontSize: 14,
+>>>>>>> 65deac37a721e6912151726fa7ffaa413451b3e7
     fontWeight: 'bold',
     // marginTop: 5,
     color: 'black',
   },
   reviewText: {
+<<<<<<< HEAD
     fontSize: 14,
+=======
+    fontSize: 12,
+>>>>>>> 65deac37a721e6912151726fa7ffaa413451b3e7
     marginVertical: 5,
     color: 'black',
   },
   reviewTime: {
+<<<<<<< HEAD
     fontSize: 13,
+=======
+    fontSize: 12,
+>>>>>>> 65deac37a721e6912151726fa7ffaa413451b3e7
     color: '#888',
   },
   dotsContainer: {
@@ -233,7 +258,11 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   subTitle: {
+<<<<<<< HEAD
     fontSize: 20,
+=======
+    fontSize: 18,
+>>>>>>> 65deac37a721e6912151726fa7ffaa413451b3e7
     marginTop: 20,
     color: 'black',
   },
