@@ -268,3 +268,15 @@ export const fetchReviewDetail = async id => {
     throw error;
   }
 };
+
+export const submitFeedback = async (activityId, rating, reviewText) => {
+  try {
+    await post('/activityId/rating/reviewText', { activityId, rating, reviewText });
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return 'Success';
+    }
+    throw error;
+  }
+};
+

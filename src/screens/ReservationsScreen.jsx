@@ -4,6 +4,7 @@ import { renderHeader } from '../modals/HeaderModal';
 import { useFocusEffect, useIsFocused, useNavigation } from '@react-navigation/native';
 import ReservationItem from '../components/ReservationItem';
 import { fetchReservation } from '../apis/CommonApi';
+import { reservationMock } from '../apis/MockData';
 
 export default function ReservationsScreen() {
   const isFocused = useIsFocused();
@@ -48,6 +49,7 @@ export default function ReservationsScreen() {
           reservations.map((reservation, index) => (
             <ReservationItem
               key={index}
+              activityId={reservation.id}
               imageUrl={reservation.imageUrl}
               activityName={reservation.activityName}
               organisationName={reservation.organisationName}

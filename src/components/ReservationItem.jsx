@@ -1,8 +1,12 @@
+import React, { useState } from 'react';
 import { Alert, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Text } from 'react-native-paper';
+import FeedbackModal from '../modals/FeedbackModal';
+import { submitFeedback } from '../apis/CommonApi';
 
 const ReservationItem = ({
+  activityId,
   imageUrl,
   activityName,
   organisationName,
@@ -12,6 +16,22 @@ const ReservationItem = ({
   credits,
   status,
 }) => {
+  const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false);
+
+  const handleLeaveFeedback = () => {
+    setFeedbackModalVisible(true);
+  };
+
+  const handleFeedbackSubmit = async (rating, reviewText) => {
+    setFeedbackModalVisible(false);
+    try {
+      await submitFeedback(activityId, rating, reviewText);
+      Alert.alert('Thanks for your feedback!');
+    } catch (error) {
+      Alert.alert('Error', 'There was an issue submitting your feedback!');
+    }
+  };
+
   return (
     <View>
       <View style={styles.card}>
@@ -36,27 +56,29 @@ const ReservationItem = ({
 
           {status === 'Cancelled' ? null : (
             <View style={styles.reviewAndSupportContainer}>
-              <MaterialCommunityIcons
-                name={styles.reviewIcon.name}
-                size={styles.reviewIcon.size}
-              ></MaterialCommunityIcons>
-              <TouchableOpacity onPress={() => Alert.alert('Write a review')}>
-                <Text style={styles.reviewAndSupportext}>Leave Feedback</Text>
+              <MaterialCommunityIcons name={styles.reviewIcon.name} size={styles.reviewIcon.size} />
+              <TouchableOpacity onPress={handleLeaveFeedback}>
+                <Text>Leave Feedback</Text>
               </TouchableOpacity>
             </View>
           )}
           <View style={styles.reviewAndSupportContainer}>
-            <MaterialCommunityIcons
-              name={styles.supportIcon.name}
-              size={styles.supportIcon.size}
-            ></MaterialCommunityIcons>
+            <MaterialCommunityIcons name={styles.supportIcon.name} size={styles.supportIcon.size} />
             <TouchableOpacity onPress={() => Alert.alert('Support')}>
-              <Text style={styles.reviewAndSupportext}>Support</Text>
+              <Text>Support</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
       <View style={styles.horizontalLine} />
+      <FeedbackModal
+        visible={isFeedbackModalVisible}
+        onClose={() => setFeedbackModalVisible(false)}
+        onSubmit={handleFeedbackSubmit}
+        activityName={activityName}
+        date={date}
+        instructorName={instructor}
+      />
     </View>
   );
 };
