@@ -307,12 +307,23 @@ const SearchScreen = () => {
               key={index}
               style={[
                 styles.dateBox,
-                { backgroundColor: selectedDate.formattedDate === date.formattedDate ? 'black' : 'white' },
-                { borderColor: selectedDate.formattedDate === date.formattedDate ? 'white' : 'black' },
+                {
+                  backgroundColor:
+                    selectedDate.formattedDate === date.formattedDate ? 'black' : 'white',
+                },
+                {
+                  borderColor:
+                    selectedDate.formattedDate === date.formattedDate ? 'white' : 'black',
+                },
               ]}
               onPress={() => setSelectedDate(date)}
             >
-              <Text style={[styles.dateText, { color: selectedDate.formattedDate === date.formattedDate ? 'white' : 'black' }]}>
+              <Text
+                style={[
+                  styles.dateText,
+                  { color: selectedDate.formattedDate === date.formattedDate ? 'white' : 'black' },
+                ]}
+              >
                 {date.formattedDate}
               </Text>
             </TouchableOpacity>
@@ -321,35 +332,34 @@ const SearchScreen = () => {
       </ScrollView>
       <View style={styles.horizontalLine} />
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-  {loading ? (
-    <ActivityIndicator size="large" color="black" />
-  ) : data && Array.isArray(data) && data.length > 0 ? (
-    data.map((item, index) => (
-      <View key={index} style={styles.innerContainer}>
-        <TouchableOpacity onPress={() => handleActivityPress(item.time[0].activityClassId)}>
-          <SearchModal
-            activityName={item.activityName}
-            distance={item.distance}
-            organisation={item.organization}
-            rating={item.rating}
-            categories={item.categories}
-            time={item.time}
-            credits={item.credits}
-            imageSource={item.imageUrl}
-            ratingCount={item.ratingCount}
-            ratingDesc={item.ratingDesc}
-          />
-          <View style={styles.horizontalLine} />
-        </TouchableOpacity>
-      </View>
-    ))
-  ) : (
-    <View style={styles.emptyContainer}>
-      <Text style={styles.emptyText}>No data available.</Text>
-    </View>
-  )}
-</ScrollView>
-
+        {loading ? (
+          <ActivityIndicator size="large" color="black" />
+        ) : data && Array.isArray(data) && data.length > 0 ? (
+          data.map((item, index) => (
+            <View key={index} style={styles.innerContainer}>
+              <TouchableOpacity onPress={() => handleActivityPress(item.time[0].activityClassId)}>
+                <SearchModal
+                  activityName={item.activityName}
+                  distance={item.distance}
+                  organisation={item.organization}
+                  rating={item.rating}
+                  categories={item.categories}
+                  time={item.time}
+                  credits={item.credits}
+                  imageSource={item.imageUrl}
+                  ratingCount={item.ratingCount}
+                  ratingDesc={item.ratingDesc}
+                />
+                <View style={styles.horizontalLine} />
+              </TouchableOpacity>
+            </View>
+          ))
+        ) : (
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>No data available.</Text>
+          </View>
+        )}
+      </ScrollView>
     </View>
   );
 };

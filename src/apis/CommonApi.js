@@ -96,7 +96,6 @@ export const searchSuggestions = async searchText => {
   }
 };
 
-
 export const fetchActivityDetail = async id => {
   try {
     const response = await get(`/class/activity/${id}`);
@@ -208,7 +207,7 @@ export const fetchPortfolioDetail = async id => {
   }
 };
 
-export const confirmResevation = async (classId) => {
+export const confirmResevation = async classId => {
   try {
     await post('/class/reservations/schedule', { classId });
   } catch (error) {
@@ -239,4 +238,3 @@ export const submitFeedback = async (activityId, rating, reviewText) => {
     throw error;
   }
 };
-

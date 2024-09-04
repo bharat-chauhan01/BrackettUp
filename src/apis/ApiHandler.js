@@ -8,7 +8,7 @@ const createApiClient = async () => {
   return axios.create({
     baseURL: constant.baseUrl,
     headers: {
-      authToken: authData?.authToken || '',
+      'authToken': authData?.authToken || '',
       'Content-Type': 'application/json',
     },
   });

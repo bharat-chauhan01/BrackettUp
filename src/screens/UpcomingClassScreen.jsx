@@ -69,7 +69,7 @@ const UpcomingClassScreen = () => {
 
   return (
     <ScrollView
-      style={{backgroundColor: 'fff'}}
+      style={{ backgroundColor: 'fff' }}
       onScroll={event => setScrollPosition(event.nativeEvent.contentOffset.x)}
       scrollPosition={scrollPosition}
     >

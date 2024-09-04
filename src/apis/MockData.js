@@ -270,7 +270,7 @@ export const categoriesMock = [
     description: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros.',
     imageUrl:
       'https://media.istockphoto.com/id/2149222806/nl/foto/active-seniors-stretching-on-exercise-class-in-a-health-club.jpg?s=2048x2048&w=is&k=20&c=PHssWY9RQq8sLWDXZw95ObaLZtl7GjkN4vo22_ByWsw=',
-  }
+  },
 ];
 
 export const saveData = [

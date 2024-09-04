@@ -85,7 +85,9 @@ export default function PortfolioDetail() {
                 <Text style={styles.title}>{portfolioData.organizationName}</Text>
 
                 <View style={styles.locationContainer}>
-                  <Text style={styles.locationText}>{portfolioData.location?.locationReference}</Text>
+                  <Text style={styles.locationText}>
+                    {portfolioData.location?.locationReference}
+                  </Text>
                 </View>
 
                 <View style={styles.bookingContainer}>

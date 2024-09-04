@@ -151,9 +151,12 @@ const SearchLandingScreen = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {homeSearchData.craftedForYou.map((data, index) => (
                 <View key={index} style={{ marginLeft: 10 }}>
-                  <TouchableOpacity onPress={() => {
-                    console.log(data.imageUrl)
-                    handleActivityPress(data.time[0].activityClassId)}}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      console.log(data.imageUrl);
+                      handleActivityPress(data.time[0].activityClassId);
+                    }}
+                  >
                     <SearchModal
                       activityName={data.activityName}
                       distance={data.distance}
@@ -178,7 +181,9 @@ const SearchLandingScreen = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {homeSearchData.fillingOutFast.map((data, index) => (
                 <View key={index} style={{ marginLeft: 10 }}>
-                  <TouchableOpacity onPress={() => handleActivityPress(data.time[0].activityClassId)}>
+                  <TouchableOpacity
+                    onPress={() => handleActivityPress(data.time[0].activityClassId)}
+                  >
                     <SearchModal
                       activityName={data.activityName}
                       distance={data.distance}

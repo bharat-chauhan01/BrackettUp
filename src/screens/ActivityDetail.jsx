@@ -73,7 +73,7 @@ export default function ActivityDetail() {
     navigation.navigate('Login');
   };
 
-  const formatCategories = (categories) => {
+  const formatCategories = categories => {
     if (!Array.isArray(categories) || categories.length === 0) {
       return '';
     }

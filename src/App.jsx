@@ -94,8 +94,16 @@ const MainApp = () => {
         />
         <Stack.Screen name="PhoneNumberLogin" component={PhoneNumberLogin} />
         <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
-        <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ contentStyle: { backgroundColor: '#FFFFFF' } }} />
-        <Stack.Screen name="UpcomingClassScreen" component={UpcomingClassScreen} options={{ contentStyle: { backgroundColor: '#FFFFFF' } }} />
+        <Stack.Screen
+          name="SearchScreen"
+          component={SearchScreen}
+          options={{ contentStyle: { backgroundColor: '#FFFFFF' } }}
+        />
+        <Stack.Screen
+          name="UpcomingClassScreen"
+          component={UpcomingClassScreen}
+          options={{ contentStyle: { backgroundColor: '#FFFFFF' } }}
+        />
 
         <Stack.Screen name="ActivityDetail" component={ActivityDetail} />
         <Stack.Screen name="PortfolioDetail" component={PortfolioDetail} />

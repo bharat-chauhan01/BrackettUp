@@ -23,16 +23,16 @@ export default function LandingScreen() {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: 'black', 
-        tabBarInactiveTintColor: 'gray', 
+        tabBarActiveTintColor: 'black',
+        tabBarInactiveTintColor: 'gray',
         tabBarLabelStyle: {
           fontWeight: 'bold',
         },
         tabBarStyle: {
           height: navBarHeight,
           paddingBottom: navBarPaddingBottom,
-          backgroundColor: 'white', 
-          borderTopColor: 'transparent', 
+          backgroundColor: 'white',
+          borderTopColor: 'transparent',
         },
       }}
     >
