@@ -38,12 +38,9 @@ export const logout = async () => {
 
 export const fetchHomePageActivities = async () => {
   try {
-    const response = await get(`/activities`);
-    return response.data;
+    const response = await get(`/relevance/home`);
+    return response;
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return activitiesMock;
-    }
     throw error;
   }
 };
@@ -98,37 +95,19 @@ export const getNearByPlaces = async searchText => {
 
 export const searchSuggestions = async searchText => {
   try {
-    const response = await get('/activitySuggestions?searchText=' + searchText);
-    return response.data;
+    const response = await get('/relevance/search/suggestions?searchText=' + searchText);
+    return response;
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return searchMock;
-    }
     throw error;
   }
 };
 
-export const getCategories = async () => {
-  try {
-    const response = await get('/categories');
-    return response.data;
-  } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return categoriesMock;
-    }
-    throw error;
-  }
-};
 
 export const fetchActivityDetail = async id => {
   try {
-    const response = await get(`/activity/${id}`);
-    return response.data;
+    const response = await get(`/class/activity/${id}`);
+    return response;
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      const mockData = activityDataMock.find(activity => activity.activityId === id);
-      return mockData ? mockData : {};
-    }
     throw error;
   }
 };
@@ -147,12 +126,9 @@ export const fetchReservation = async () => {
 
 export const fetchSearchLandingSuggestions = async (latitute, longitude) => {
   try {
-    const response = await get(`/home/search?latitute=` + latitute + '&longitude=' + longitude);
-    return response.data;
+    const response = await get('relevance/search/home');
+    return response;
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return homeSearch;
-    }
     throw error;
   }
 };
@@ -234,13 +210,9 @@ export const validateEmailOtp = async (oldEmail, newEmail, otp) => {
 
 export const fetchPortfolioDetail = async id => {
   try {
-    const response = await get(`/organization/${id}`);
-    return response.data;
+    const response = await get(`/portfolio/organization/${id}`);
+    return response;
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      const mockData = portfolioDataMock.find(activity => activity.organizationId === id);
-      return mockData ? mockData : {};
-    }
     throw error;
   }
 };

@@ -61,7 +61,7 @@ export default function HomeScreen() {
         {activities.map((section, sectionIndex) => (
           <View key={sectionIndex} style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>{section.key}</Text>
+              <Text style={styles.sectionTitle}>{section.sectionTitle}</Text>
               <MaterialCommunityIcons
                 name={styles.itemIcon.name}
                 color={styles.itemIcon.color}
@@ -78,7 +78,7 @@ export default function HomeScreen() {
                   <ActivityContainer
                     imageUrl={activity.imageUrl}
                     title={activity.title}
-                    subtitle={activity.subtitle}
+                    subtitle={activity.locationTag}
                     distance={activity.distance}
                     activity={activity.activity}
                     rating={activity.rating}

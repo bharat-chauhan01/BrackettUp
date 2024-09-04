@@ -85,7 +85,7 @@ export default function PortfolioDetail() {
                 <Text style={styles.title}>{portfolioData.organizationName}</Text>
 
                 <View style={styles.locationContainer}>
-                  <Text style={styles.locationText}>{portfolioData.location?.name}</Text>
+                  <Text style={styles.locationText}>{portfolioData.location?.locationReference}</Text>
                 </View>
 
                 <View style={styles.bookingContainer}>
@@ -209,12 +209,11 @@ export default function PortfolioDetail() {
                     </View>
                   </View>
 
-                  <RenderTextWithToggle text={portfolioData.location?.locationReference} />
+                  <RenderTextWithToggle text={portfolioData.howToGetThere} />
                 </View>
                 <View style={styles.horizontalLine} />
                 <View style={styles.detailsContainer}>
                   <Text style={styles.subTitle}>Safety & Cleanliness</Text>
-                  <Text style={styles.description}>{portfolioData.updatedDate}</Text>
                 </View>
                 <View style={styles.detailsContainer}>
                   <View style={styles.precautionContainer}>

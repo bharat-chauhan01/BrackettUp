@@ -73,6 +73,13 @@ export default function ActivityDetail() {
     navigation.navigate('Login');
   };
 
+  const formatCategories = (categories) => {
+    if (!Array.isArray(categories) || categories.length === 0) {
+      return '';
+    }
+    return categories.join(', ');
+  };
+
   const handleConfirmReservation = async () => {
     setLoggedInModalVisible(false);
     try {
@@ -132,12 +139,11 @@ export default function ActivityDetail() {
 
                 <View style={styles.instructorContainer}>
                   <Text style={styles.instructorOrganiser}>
-                    {activityData.organisationName} · {activityData.location}
+                    {activityData.organizationName} · {activityData.locationTag}
                   </Text>
                 </View>
-                <Text style={styles.category}>{activityData.category}</Text>
                 <Text style={styles.time}>{activityData.time}</Text>
-                <Text style={styles.classTakenBy}>{activityData.classTakenBy}</Text>
+                <Text style={styles.classTakenBy}>{activityData.instructorName}</Text>
 
                 <View style={styles.buttonRow}>
                   <TouchableOpacity style={styles.fullWidthButton}>
@@ -273,7 +279,6 @@ export default function ActivityDetail() {
                 <View style={styles.horizontalLine} />
                 <View style={styles.detailsContainer}>
                   <Text style={styles.subTitle}>Safety & Cleanliness</Text>
-                  <Text style={styles.classDescription}>{activityData.updatedDate}</Text>
                 </View>
                 <View style={styles.detailsContainer}>
                   <View style={styles.precautionContainer}>
@@ -461,11 +466,10 @@ const styles = StyleSheet.create({
   category: {
     fontSize: 14,
     marginBottom: 3,
-    color: 'black',
+    color: 'grey',
   },
   time: {
     fontSize: 14,
-    marginTop: 8,
     color: 'black',
   },
   classTakenBy: {

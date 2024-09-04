@@ -15,13 +15,46 @@ const SearchModal = ({
   ratingCount,
   ratingDesc,
 }) => {
+  // Helper function to split text into multiple lines with 2 words each
+  const splitTextIntoTwoWordsPerLine = (text) => {
+    if (!text) return [];
+    const words = text.split(' '); // Split the text into words
+    const lines = [];
+    for (let i = 0; i < words.length; i += 2) {
+      lines.push(words.slice(i, i + 2).join(' ')); // Join every two words into a line
+    }
+    return lines;
+  };
+
+  const splitTextIntoThreeWordsPerLine = (text) => {
+    if (!text) return [];
+    const words = text.split(' '); // Split the text into words
+    const lines = [];
+    for (let i = 0; i < words.length; i += 3) {
+      lines.push(words.slice(i, i + 3).join(' ')); // Join every two words into a line
+    }
+    return lines;
+  };
+
+  // Split activityName and organisation into lines of two words each
+  const activityNameLines = splitTextIntoTwoWordsPerLine(activityName);
+  const organisationLines = splitTextIntoThreeWordsPerLine(organisation);
+
   return (
     <View style={styles.topContainer}>
       <View style={styles.infocontainer}>
-        <Image source={imageSource} style={styles.image} />
+        <Image source={{ uri: imageSource }} style={styles.image} />
         <View style={styles.textContainer}>
-          <Text style={styles.activityName}>{activityName}</Text>
-          <Text style={styles.property}>{organisation}</Text>
+          {activityNameLines.map((line, index) => (
+            <Text key={`activity-${index}`} style={styles.activityName}>
+              {line}
+            </Text>
+          ))}
+          {organisationLines.map((line, index) => (
+            <Text key={`organisation-${index}`} style={styles.property}>
+              {line}
+            </Text>
+          ))}
           <View style={styles.ratingContainer}>
             <Text style={styles.ratingText}>
               {rating}{' '}
@@ -32,7 +65,9 @@ const SearchModal = ({
               />
             </Text>
             <Text style={styles.ratingCount}>{' (' + ratingCount + ') '}</Text>
-            <Text style={styles.ratingDesc}>{capitalizeFirstLetter(ratingDesc)}</Text>
+            <Text style={styles.ratingDesc}>
+              {capitalizeFirstLetter(ratingDesc)}
+            </Text>
           </View>
           <View style={styles.distanceAndCreditsContainer}>
             <MaterialCommunityIcons
@@ -45,7 +80,6 @@ const SearchModal = ({
               <Text style={styles.creditsText}>{credits}</Text>
             </View>
           </View>
-          <Text style={styles.property}>{categories.join(', ')}</Text>
         </View>
       </View>
 

@@ -11,7 +11,7 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import { fetchSearchLandingSuggestions, getCategories, searchSuggestions } from '../apis/CommonApi';
+import { fetchSearchLandingSuggestions, searchSuggestions } from '../apis/CommonApi';
 import { useFocusEffect, useIsFocused, useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SearchModal from '../modals/SearchModal';
@@ -151,16 +151,18 @@ const SearchLandingScreen = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {homeSearchData.craftedForYou.map((data, index) => (
                 <View key={index} style={{ marginLeft: 10 }}>
-                  <TouchableOpacity onPress={() => handleActivityPress(data.activityId)}>
+                  <TouchableOpacity onPress={() => {
+                    console.log(data.imageUrl)
+                    handleActivityPress(data.time[0].activityClassId)}}>
                     <SearchModal
                       activityName={data.activityName}
                       distance={data.distance}
-                      organisation={data.organisation}
+                      organisation={data.organization}
                       rating={data.rating}
                       categories={data.categories}
                       time={null}
                       credits={data.credits}
-                      imageSource={data.imageSource}
+                      imageSource={data.imageUrl}
                       ratingCount={data.ratingCount}
                       ratingDesc={data.ratingDesc}
                     />
@@ -176,16 +178,16 @@ const SearchLandingScreen = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {homeSearchData.fillingOutFast.map((data, index) => (
                 <View key={index} style={{ marginLeft: 10 }}>
-                  <TouchableOpacity onPress={() => handleActivityPress(data.activityId)}>
+                  <TouchableOpacity onPress={() => handleActivityPress(data.time[0].activityClassId)}>
                     <SearchModal
                       activityName={data.activityName}
                       distance={data.distance}
-                      organisation={data.organisation}
+                      organisation={data.organization}
                       rating={data.rating}
                       categories={data.categories}
                       time={null}
                       credits={data.credits}
-                      imageSource={data.imageSource}
+                      imageSource={data.imageUrl}
                       ratingCount={data.ratingCount}
                       ratingDesc={data.ratingDesc}
                     />
