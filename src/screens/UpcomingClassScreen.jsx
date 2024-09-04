@@ -69,6 +69,7 @@ const UpcomingClassScreen = () => {
 
   return (
     <ScrollView
+      style={{backgroundColor: 'fff'}}
       onScroll={event => setScrollPosition(event.nativeEvent.contentOffset.x)}
       scrollPosition={scrollPosition}
     >
@@ -86,7 +87,6 @@ const UpcomingClassScreen = () => {
                 time={activity.time}
                 instructor={activity.instructorName}
                 institution={activity.organizationName}
-                imageUrl={activity.imageUrl}
                 activityImageUrl={activity.activityImageUrl}
               />
             ))

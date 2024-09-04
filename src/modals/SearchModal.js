@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { capitalizeFirstLetter } from '../utils/utils';
+import { useNavigation } from '@react-navigation/native';
+
 
 const SearchModal = ({
   activityName,
@@ -15,6 +17,8 @@ const SearchModal = ({
   ratingCount,
   ratingDesc,
 }) => {
+  const navigation = useNavigation();
+
   // Helper function to split text into multiple lines with 2 words each
   const splitTextIntoTwoWordsPerLine = (text) => {
     if (!text) return [];
@@ -34,6 +38,10 @@ const SearchModal = ({
       lines.push(words.slice(i, i + 3).join(' ')); // Join every two words into a line
     }
     return lines;
+  };
+
+  const handleTimePress = activityId => {
+    navigation.navigate('ActivityDetail', activityId);
   };
 
   // Split activityName and organisation into lines of two words each
@@ -83,13 +91,14 @@ const SearchModal = ({
         </View>
       </View>
 
-      {/* Only render timeContainer if time is not null */}
       {time && time.length > 0 && (
         <View style={styles.timeContainer}>
           {time.map((t, index) => (
+                  <TouchableOpacity onPress={() => handleTimePress(t.activityClassId)}>
             <View key={index} style={styles.timeBox}>
-              <Text style={styles.timeText}>{t}</Text>
+              <Text style={styles.timeText}>{t.value}</Text>
             </View>
+            </TouchableOpacity>
           ))}
         </View>
       )}

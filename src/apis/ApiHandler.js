@@ -5,13 +5,23 @@ import { getItem } from '../store/LocalStorage';
 
 const createApiClient = async () => {
   const authData = await getItem('auth');
-
   return axios.create({
     baseURL: constant.baseUrl,
     headers: {
       authToken: authData?.authToken || '',
+      'Content-Type': 'application/json',
     },
   });
+};
+
+const logCurlCommand = (method, url, headers, data) => {
+  const headersString = Object.entries(headers)
+    .map(([key, value]) => `-H "${key}: ${value}"`)
+    .join(' ');
+
+  const dataString = data ? `-d '${JSON.stringify(data)}'` : '';
+
+  console.log(`curl -X ${method.toUpperCase()} ${headersString} ${dataString} ${url}`);
 };
 
 export const get = async path => {
@@ -22,19 +32,15 @@ export const get = async path => {
     .then(response => response.data)
     .catch(error => {
       if (error.response) {
-        // The request was made and the server responded with a status code that falls out of the range of 2xx
         console.log('Non2xx: Error while calling path', path, error);
         throw new BackendUnreachableError();
       } else if (error.request) {
-        // The request was made but no response was received
         console.log('Unreachable: Error while calling path', path, error);
         throw new BackendUnreachableError();
       } else if (error.code === 'ECONNABORTED') {
-        // The request took longer than the timeout set
         console.log('ECONNABORTED: Error while calling path', path, error);
         throw new Error(constant.error.backendUnreachableErrorMessage);
       } else {
-        // Something happened in setting up the request that triggered an Error
         console.log('Unknown: Error while calling path', path, error);
         throw new Error(constant.error.networkErrorMessage);
       }
@@ -44,25 +50,23 @@ export const get = async path => {
 export const post = async (path, data) => {
   const apiClient = await createApiClient();
 
-  console.log(data);
+  // Log the full cURL command
+  logCurlCommand('post', `${constant.baseUrl}${path}`, apiClient.defaults.headers, data);
+
   return apiClient
     .post(path, data)
     .then(response => response.data)
     .catch(error => {
       if (error.response) {
-        // The request was made and the server responded with a status code that falls out of the range of 2xx
         console.log('Non2xx: Error while calling path', path, error);
         throw new BackendUnreachableError();
       } else if (error.request) {
-        // The request was made but no response was received
         console.log('Unreachable: Error while calling path', path, data, error);
         throw new BackendUnreachableError();
       } else if (error.code === 'ECONNABORTED') {
-        // The request took longer than the timeout set
         console.log('ECONNABORTED: Error while calling path', path, error);
         throw new Error(constant.error.backendUnreachableErrorMessage);
       } else {
-        // Something happened in setting up the request that triggered an Error
         console.log('Unknown: Error while calling path', path, error);
         throw new Error(constant.error.networkErrorMessage);
       }

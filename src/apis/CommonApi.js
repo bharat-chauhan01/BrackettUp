@@ -59,24 +59,18 @@ export const fetchActivitySchedule = async activityId => {
 
 export const fetchUpcomingPageActivities = async () => {
   try {
-    const response = await get(`/activities/upcoming`);
-    return response.data;
+    const response = await get(`/class/reservations/upcoming`);
+    return response;
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return upcomingActivitiesMock;
-    }
     throw error;
   }
 };
 
 export const searchedResults = async data => {
   try {
-    const response = await post('/search', data);
-    return response.data;
+    const response = await post('/relevance/search', data);
+    return response;
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return searchModalsData;
-    }
     throw error;
   }
 };
@@ -114,12 +108,9 @@ export const fetchActivityDetail = async id => {
 
 export const fetchReservation = async () => {
   try {
-    const response = await get(`/reservation`);
-    return response.data;
+    const response = await get(`/class/reservations/past`);
+    return response;
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return reservationMock;
-    }
     throw error;
   }
 };
@@ -217,13 +208,10 @@ export const fetchPortfolioDetail = async id => {
   }
 };
 
-export const confirmResevation = async (activityId, credits) => {
+export const confirmResevation = async (classId) => {
   try {
-    await post('/activityClass/confirm', { credits, activityId });
+    await post('/class/reservations/schedule', { classId });
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return 'Success';
-    }
     throw error;
   }
 };

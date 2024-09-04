@@ -123,7 +123,7 @@ const SearchScreen = () => {
         },
         currentLocation: locationData,
         sort: sortQuery,
-        date: selectedDate,
+        date: selectedDate.actualDate,
         distanceQuery: distanceQuery,
       });
       setData(response);
@@ -307,13 +307,13 @@ const SearchScreen = () => {
               key={index}
               style={[
                 styles.dateBox,
-                { backgroundColor: selectedDate === date ? 'black' : 'white' },
-                { borderColor: selectedDate === date ? 'white' : 'black' },
+                { backgroundColor: selectedDate.formattedDate === date.formattedDate ? 'black' : 'white' },
+                { borderColor: selectedDate.formattedDate === date.formattedDate ? 'white' : 'black' },
               ]}
               onPress={() => setSelectedDate(date)}
             >
-              <Text style={[styles.dateText, { color: selectedDate === date ? 'white' : 'black' }]}>
-                {date}
+              <Text style={[styles.dateText, { color: selectedDate.formattedDate === date.formattedDate ? 'white' : 'black' }]}>
+                {date.formattedDate}
               </Text>
             </TouchableOpacity>
           ))}
@@ -321,37 +321,41 @@ const SearchScreen = () => {
       </ScrollView>
       <View style={styles.horizontalLine} />
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-        {loading ? (
-          <ActivityIndicator size="large" color="black" />
-        ) : (
-          data.map((data, index) => (
-            <View key={index} style={styles.innerContainer}>
-              <TouchableOpacity onPress={() => handleActivityPress(data.activityId)}>
-                <SearchModal
-                  activityName={data.activityName}
-                  distance={data.distance}
-                  organisation={data.organisation}
-                  rating={data.rating}
-                  categories={data.categories}
-                  time={data.time}
-                  credits={data.credits}
-                  imageSource={data.imageSource}
-                  ratingCount={data.ratingCount}
-                  ratingDesc={data.ratingDesc}
-                />
-                <View style={styles.horizontalLine} />
-              </TouchableOpacity>
-            </View>
-          ))
-        )}
-      </ScrollView>
+  {loading ? (
+    <ActivityIndicator size="large" color="black" />
+  ) : data && Array.isArray(data) && data.length > 0 ? (
+    data.map((item, index) => (
+      <View key={index} style={styles.innerContainer}>
+        <TouchableOpacity onPress={() => handleActivityPress(item.time[0].activityClassId)}>
+          <SearchModal
+            activityName={item.activityName}
+            distance={item.distance}
+            organisation={item.organization}
+            rating={item.rating}
+            categories={item.categories}
+            time={item.time}
+            credits={item.credits}
+            imageSource={item.imageUrl}
+            ratingCount={item.ratingCount}
+            ratingDesc={item.ratingDesc}
+          />
+          <View style={styles.horizontalLine} />
+        </TouchableOpacity>
+      </View>
+    ))
+  ) : (
+    <View style={styles.emptyContainer}>
+      <Text style={styles.emptyText}>No data available.</Text>
+    </View>
+  )}
+</ScrollView>
+
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: 'white',
   },
   searchInputContainer: {
@@ -406,7 +410,6 @@ const styles = StyleSheet.create({
   },
   horizontalScrollView: {
     marginTop: 10,
-    marginBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
     height: 40,
@@ -507,6 +510,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#000',
+  },
+  emptyContainer: {
+    flex: 1,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: 'grey',
   },
 });
 

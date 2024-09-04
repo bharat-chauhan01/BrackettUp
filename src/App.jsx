@@ -28,6 +28,7 @@ import PortfolioDetail from './screens/PortfolioDetail';
 import ReservationsScreen from './screens/ReservationsScreen';
 import AccountScreen from './screens/AccountScreen';
 import ShowReviewsScreen from './screens/ShowReviewsScreen';
+import UpcomingClassScreen from './screens/UpcomingClassScreen';
 
 LogBox.ignoreAllLogs(); // Ignore all log notifications
 
@@ -93,7 +94,9 @@ const MainApp = () => {
         />
         <Stack.Screen name="PhoneNumberLogin" component={PhoneNumberLogin} />
         <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
-        <Stack.Screen name="SearchScreen" component={SearchScreen} />
+        <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ contentStyle: { backgroundColor: '#FFFFFF' } }} />
+        <Stack.Screen name="UpcomingClassScreen" component={UpcomingClassScreen} options={{ contentStyle: { backgroundColor: '#FFFFFF' } }} />
+
         <Stack.Screen name="ActivityDetail" component={ActivityDetail} />
         <Stack.Screen name="PortfolioDetail" component={PortfolioDetail} />
         <Stack.Screen name="SupportScreen" component={SupportScreen} />

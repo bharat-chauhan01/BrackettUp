@@ -16,8 +16,8 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { fetchActivityDetail } from '../apis/CommonApi';
 import RenderTextWithToggle from '../components/RenderTextWithToggle';
 import { getItem } from '../store/LocalStorage';
-import LoggedInModal from '../modals/LoggedInModal';
-import LoggedOutModal from '../modals/LoggedOutModal';
+import LoggedInModal from '../modals/ActivityDetailLoggedInModal';
+import LoggedOutModal from '../modals/ActivityDetailLoggedOutModal';
 import { confirmResevation } from '../apis/CommonApi';
 
 const { width: screenWidth } = Dimensions.get('window');

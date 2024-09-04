@@ -27,7 +27,7 @@ const LoggedInModal = ({ isVisible, onClose, activity, onConfirm }) => {
             <Text style={styles.activityName}>{activity?.activityName || 'N/A'}</Text>
             <Text style={styles.activityDetail}>{activity?.time || 'N/A'}</Text>
             <Text style={styles.activityDetail}>
-              {activity?.organisationName || 'N/A'} · {activity?.location || 'N/A'}
+              {activity?.organizationName || 'N/A'} · {activity?.locationTag || 'N/A'}
             </Text>
           </View>
           {activity?.images?.[0]?.uri && (

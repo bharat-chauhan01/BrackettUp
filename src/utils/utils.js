@@ -32,14 +32,23 @@ export const transformDateByReferenceDayAndDDMMM = dateString => {
 };
 
 export const generateTwoWeeksDates = () => {
-  const dates = [];
+  const datesArray = [];
   const today = new Date();
-  const options = { weekday: 'short', day: 'numeric' }; // Format options
+  const options = { weekday: 'short', day: 'numeric' }; // Format options for the display key
 
   for (let i = 0; i < 14; i++) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
-    dates.push(date.toLocaleDateString('en-US', options)); // Format date as "Day, Date"
+
+    // Key: formatted as "Day, Date" (e.g., "Wed, 4")
+    const formattedDate = date.toLocaleDateString('en-US', options);
+
+    // Value: formatted as "yyyy-mm-dd"
+    const actualDate = date.toISOString().split('T')[0]; // Keep only the "yyyy-mm-dd" part
+
+    // Push the object with both formatted and actual date into the array
+    datesArray.push({ formattedDate, actualDate });
   }
-  return dates;
+
+  return datesArray;
 };
