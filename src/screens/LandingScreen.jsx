@@ -32,7 +32,6 @@ export default function LandingScreen() {
           height: navBarHeight,
           paddingBottom: navBarPaddingBottom,
           backgroundColor: 'white', 
-          position: 'absolute',
           borderTopColor: 'transparent', 
         },
       }}
