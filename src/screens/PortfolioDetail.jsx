@@ -246,7 +246,7 @@ export default function PortfolioDetail() {
       <View style={styles.viewScheduleButtonContainer}>
         <TouchableOpacity
           style={styles.viewScheduleButton}
-          onPress={() => navigation.navigate('ScheduleScreen')}
+          onPress={() => navigation.navigate('ScheduleScreen', portfolioData.organizationId)}
         >
           <Text style={styles.viewScheduleButtonText}>View Schedule</Text>
         </TouchableOpacity>

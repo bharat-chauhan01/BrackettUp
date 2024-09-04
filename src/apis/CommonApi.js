@@ -47,12 +47,9 @@ export const fetchHomePageActivities = async () => {
 
 export const fetchActivitySchedule = async activityId => {
   try {
-    const response = await get('activity/' + activityId + '/schedule', null);
-    return response.data;
+    const response = await get('/class/organization/schedule/' + activityId);
+    return response;
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return scheduleMock;
-    }
     throw error;
   }
 };

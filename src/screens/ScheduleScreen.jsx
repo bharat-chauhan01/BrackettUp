@@ -4,11 +4,13 @@ import { ExpandableCalendar, AgendaList, CalendarProvider } from 'react-native-c
 import AgendaItem from '../modals/AgendaModal';
 import { getTheme, themeColor } from '../theme/theme';
 import { renderHeader } from '../modals/HeaderModal';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import isEmpty from 'lodash/isEmpty';
 import { fetchActivitySchedule } from '../apis/CommonApi';
 
-const ScheduleScreen = ({ activityId }) => {
+const ScheduleScreen = () => {
+  const route = useRoute();
+  const activityId = route.params;
   const navigation = useNavigation();
   const theme = useRef(getTheme());
   const todayBtnTheme = useRef({
@@ -23,6 +25,7 @@ const ScheduleScreen = ({ activityId }) => {
     const fetchData = async () => {
       setLoading(true);
       try {
+        console.log(activityId);
         const fetchedItems = await fetchActivitySchedule(activityId);
         setItems(fetchedItems);
         setMarked(getMarkedDates(fetchedItems));
