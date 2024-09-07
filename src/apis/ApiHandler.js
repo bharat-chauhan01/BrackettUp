@@ -51,7 +51,7 @@ export const post = async (path, data) => {
   const apiClient = await createApiClient();
 
   // Log the full cURL command
-  logCurlCommand('post', `${constant.baseUrl}${path}`, apiClient.defaults.headers, data);
+  //logCurlCommand('post', `${constant.baseUrl}${path}`, apiClient.defaults.headers, data);
 
   return apiClient
     .post(path, data)
@@ -59,7 +59,37 @@ export const post = async (path, data) => {
     .catch(error => {
       if (error.response) {
         console.log('Non2xx: Error while calling path', path, error);
+        throw new Error(
+          error.response.data?.message || 'An error occurred while processing the request.',
+        );
+      } else if (error.request) {
+        console.log('Unreachable: Error while calling path', path, data, error);
         throw new BackendUnreachableError();
+      } else if (error.code === 'ECONNABORTED') {
+        console.log('ECONNABORTED: Error while calling path', path, error);
+        throw new Error(constant.error.backendUnreachableErrorMessage);
+      } else {
+        console.log('Unknown: Error while calling path', path, error);
+        throw new Error(constant.error.networkErrorMessage);
+      }
+    });
+};
+
+export const put = async (path, data) => {
+  const apiClient = await createApiClient();
+
+  // Log the full cURL command
+  //logCurlCommand('put', `${constant.baseUrl}${path}`, apiClient.defaults.headers, data);
+
+  return apiClient
+    .put(path, data)
+    .then(response => response.data)
+    .catch(error => {
+      if (error.response) {
+        console.log('Non2xx: Error while calling path', path, error);
+        throw new Error(
+          error.response.data?.message || 'An error occurred while processing the request.',
+        );
       } else if (error.request) {
         console.log('Unreachable: Error while calling path', path, data, error);
         throw new BackendUnreachableError();

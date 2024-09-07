@@ -282,17 +282,34 @@ const SearchScreen = () => {
       {locationSuggestionEnabled && renderLocationSuggestions()}
 
       <View style={styles.filterContainer}>
-        <MaterialCommunityIcons name={'filter'} color={'black'} size={25} />
-        <TouchableOpacity style={styles.pickerButton} onPress={() => handleShowPicker('sort')}>
-          <Text style={styles.pickerButtonText}>{'Sort'}</Text>
-        </TouchableOpacity>
+        <View style={styles.sortContainer}>
+          <TouchableOpacity style={styles.pickerButton} onPress={() => handleShowPicker('sort')}>
+            <View style={styles.iconTextContainer}>
+              <MaterialCommunityIcons name={'filter'} color={'black'} size={12} marginRight={6} />
+              <Text style={styles.pickerButtonText}>{'Sort'}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity style={styles.pickerButton} onPress={() => handleShowPicker('distance')}>
-          <Text style={styles.pickerButtonText}>{'Distance'}</Text>
-        </TouchableOpacity>
+        <View style={styles.sortContainer}>
+          <TouchableOpacity
+            style={styles.pickerButton}
+            onPress={() => handleShowPicker('distance')}
+          >
+            <View style={styles.iconTextContainer}>
+              <MaterialCommunityIcons
+                name={'map-outline'}
+                color={'black'}
+                size={12}
+                marginRight={6}
+              />
+              <Text style={styles.pickerButtonText}>{'Distance'}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
-
       <SortPickerModal
+        map-outline
         visible={isPickerVisible}
         onClose={() => setPickerVisible(false)}
         selectedOption={currentPickerType === 'sort' ? sortQuery : distanceQuery}
@@ -405,9 +422,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginTop: 10,
   },
+  sortContainer: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    // alignItems: 'center',
+    // paddingHorizontal: 20,
+    // marginTop: 10,
+  },
   pickerButton: {
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'baseline',
     backgroundColor: '#ddd',
     borderRadius: 20,
     paddingHorizontal: 15,
@@ -531,6 +555,10 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 16,
     color: 'grey',
+  },
+  iconTextContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 

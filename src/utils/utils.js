@@ -2,6 +2,9 @@ import { constant } from '../apis/constant';
 import { format, isToday, isTomorrow, isYesterday, parseISO } from 'date-fns';
 
 export const capitalizeFirstLetter = string => {
+  if (typeof string !== 'string') {
+    return '';
+  }
   return string.replace(/\b\w/g, char => char.toUpperCase());
 };
 

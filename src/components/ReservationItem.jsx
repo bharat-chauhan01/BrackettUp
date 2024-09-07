@@ -56,16 +56,26 @@ const ReservationItem = ({
 
           {status === 'Cancelled' ? null : (
             <View style={styles.reviewAndSupportContainer}>
-              <MaterialCommunityIcons name={styles.reviewIcon.name} size={styles.reviewIcon.size} />
+              <MaterialCommunityIcons
+                name={styles.reviewIcon.name}
+                size={styles.reviewIcon.size}
+                color="black"
+              />
               <TouchableOpacity onPress={handleLeaveFeedback}>
-                <Text>Leave Feedback</Text>
+                <Text style={{ textDecorationLine: 'underline', marginLeft: 5 }}>
+                  Leave Feedback
+                </Text>
               </TouchableOpacity>
             </View>
           )}
           <View style={styles.reviewAndSupportContainer}>
-            <MaterialCommunityIcons name={styles.supportIcon.name} size={styles.supportIcon.size} />
+            <MaterialCommunityIcons
+              name={styles.supportIcon.name}
+              size={styles.supportIcon.size}
+              color="black"
+            />
             <TouchableOpacity onPress={() => Alert.alert('Support')}>
-              <Text>Support</Text>
+              <Text style={{ textDecorationLine: 'underline', marginLeft: 5 }}>Support</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -163,13 +173,13 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   reviewIcon: {
-    name: 'pencil',
-    color: '#681',
+    name: 'book-edit',
+    color: 'black',
     size: 14,
   },
   supportIcon: {
     name: 'help-circle',
-    color: '#681',
+    color: 'black',
     size: 14,
   },
   horizontalLine: {

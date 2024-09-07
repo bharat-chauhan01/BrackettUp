@@ -73,7 +73,7 @@ const ShowReviewPage = () => {
     <>
       {renderHeader(navigation, reviewData?.title)}
       <ScrollView style={styles.container}>
-        {reviewData && reviewData.reviews.length > 0 ? (
+        {reviewData && reviewData.reviews && reviewData.reviews.length > 0 ? (
           <>
             <View style={styles.summaryContainer}>
               <View style={styles.breakdownContainer}>

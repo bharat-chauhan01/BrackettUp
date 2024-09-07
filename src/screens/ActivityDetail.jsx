@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Linking,
   Dimensions,
   Alert,
   ActivityIndicator,
@@ -21,6 +22,7 @@ import LoggedOutModal from '../modals/ActivityDetailLoggedOutModal';
 import { confirmResevation } from '../apis/CommonApi';
 
 const { width: screenWidth } = Dimensions.get('window');
+const screenHeight = Dimensions.get('window').height;
 
 export default function ActivityDetail() {
   const scrollViewRef = useRef(null);
@@ -87,7 +89,7 @@ export default function ActivityDetail() {
       await confirmResevation(activityId, credits);
       Alert.alert('Reservation confirmed!');
     } catch (error) {
-      Alert.alert('Error', 'There was an issue confirming your reservation.');
+      Alert.alert('', error.message);
     }
   };
 
@@ -125,7 +127,11 @@ export default function ActivityDetail() {
 
             <View>
               <View style={styles.detailsContainer}>
-                <Text style={styles.title}>{activityData.activityName}</Text>
+                <View style={styles.titleRatingContainer}>
+                  <Text style={styles.title}>{activityData.activityName}</Text>
+                  <Text style={styles.ratingDesc}>{activityData.rating?.description}</Text>
+                </View>
+
                 <Text style={styles.rating}>
                   {activityData.rating?.value}{' '}
                   <MaterialCommunityIcons
@@ -133,17 +139,35 @@ export default function ActivityDetail() {
                     color={styles.starIcon.color}
                     size={styles.starIcon.size}
                   />
-                  {activityData.rating?.count}{' '}
-                  <Text style={styles.ratingDesc}>{activityData.rating?.description}</Text>
+                  ({activityData.rating?.count}){' '}
                 </Text>
 
                 <View style={styles.instructorContainer}>
+                  <MaterialCommunityIcons
+                    name="school"
+                    color={styles.starIcon.color}
+                    size={styles.starIcon.size}
+                  />
                   <Text style={styles.instructorOrganiser}>
                     {activityData.organizationName} · {activityData.locationTag}
                   </Text>
                 </View>
-                <Text style={styles.time}>{activityData.time}</Text>
-                <Text style={styles.classTakenBy}>{activityData.instructorName}</Text>
+                <View style={styles.instructorContainer}>
+                  <MaterialCommunityIcons
+                    name="clock"
+                    color={styles.starIcon.color}
+                    size={styles.starIcon.size}
+                  />
+                  <Text style={styles.time}>{activityData.time}</Text>
+                </View>
+                <View style={styles.instructorContainer}>
+                  <MaterialCommunityIcons
+                    name="account"
+                    color={styles.starIcon.color}
+                    size={styles.starIcon.size}
+                  />
+                  <Text style={styles.classTakenBy}>{activityData.instructorName}</Text>
+                </View>
 
                 <View style={styles.buttonRow}>
                   <TouchableOpacity style={styles.fullWidthButton}>
@@ -182,7 +206,7 @@ export default function ActivityDetail() {
                       color={styles.starIcon.color}
                       size={styles.starIcon.size}
                     />{' '}
-                    {activityData.rating?.count}
+                    ({activityData.rating?.count})
                   </Text>
 
                   <TouchableOpacity onPress={() => handleSeeReviews(activityId)}>
@@ -196,8 +220,8 @@ export default function ActivityDetail() {
                   <Text style={styles.moreLink}>Learn more</Text>
                 </View>
                 <View style={styles.horizontalLine} />
-                <View style={styles.detailsContainer}>
-                  <Text style={styles.subTitle}>About</Text>
+                <View style={[styles.detailsContainer, { marginBottom: -30 }]}>
+                  <Text style={[styles.subTitle, { paddingBottom: 10 }]}>About</Text>
                   <View style={styles.infoContainer}>
                     <View style={styles.infoRow}>
                       <Text style={styles.infoText}>{activityData.instagramAccount}</Text>
@@ -208,16 +232,24 @@ export default function ActivityDetail() {
                       />
                     </View>
                     <View style={styles.infoRow}>
-                      <Text style={styles.infoText}>{activityData.websiteUrl}</Text>
-                      <MaterialCommunityIcons
-                        name={styles.webIcon.name}
-                        color={styles.webIcon.color}
-                        size={styles.webIcon.size}
-                      />
+                      {activityData.websiteUrl ? (
+                        <>
+                          <TouchableOpacity
+                            onPress={() => Linking.openURL(activityData.websiteUrl)}
+                          >
+                            <Text style={styles.linkText}>Checkout Website</Text>
+                          </TouchableOpacity>
+
+                          <MaterialCommunityIcons
+                            name={styles.webIcon.name}
+                            color={styles.webIcon.color}
+                            size={styles.webIcon.size}
+                          />
+                        </>
+                      ) : null}
                     </View>
                   </View>
                   <RenderTextWithToggle text={activityData.about} />
-                  {/* {RenderTextWithToggle(activityData.about)} */}
                 </View>
                 <View style={styles.horizontalLine} />
                 <View style={styles.detailsContainer}>
@@ -254,22 +286,25 @@ export default function ActivityDetail() {
                   </View>
                 </View>
                 <View style={styles.detailsContainer}>
-                  <View style={styles.locationContainer}>
-                    {/* <Image source={{ uri: activityData.mapImage }} style={styles.mapImage} /> */}
+                  <View style={[styles.locationContainer, { paddingRight: 10 }]}>
                     <View style={styles.locationTextContainer}>
+                      <Text style={styles.subTitle}>Address</Text>
                       <Text style={styles.locationText}>{activityData.address}</Text>
                       <Text style={styles.locationText}>{activityData.city}</Text>
                     </View>
-                    <TouchableOpacity style={styles.getDirectionsButton}>
-                      <Text style={styles.buttonText}>
+
+                    <View style={styles.buttonContainer}>
+                      <View style={styles.directionButton}>
                         <MaterialCommunityIcons
-                          name={styles.directionsIcon.name}
-                          color={styles.directionsIcon.color}
-                          size={styles.directionsIcon.size}
-                        />{' '}
-                        Get Directions
-                      </Text>
-                    </TouchableOpacity>
+                          name={styles.directionIcon.name}
+                          color={styles.directionIcon.color}
+                          size={styles.directionIcon.size}
+                        />
+                        <TouchableOpacity onPress={() => Alert.alert('Directions button clicked!')}>
+                          <Text style={styles.directionButtonText}>Directions</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
                   </View>
 
                   <Text style={styles.subTitle}>How to get there</Text>
@@ -283,21 +318,28 @@ export default function ActivityDetail() {
                 <View style={styles.detailsContainer}>
                   <View style={styles.precautionContainer}>
                     <Text style={styles.precautionTitle}>Safety & Health Measures</Text>
-                    <View style={styles.safetyContainer}>
+
+                    <View style={[styles.safetyContainer, { flexWrap: 'wrap' }]}>
                       {activityData.safety &&
                         activityData.safety.map((item, index) => (
-                          <Text key={index} style={styles.safetyItem}>
+                          <View
+                            key={index}
+                            style={{
+                              width: '50%',
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                              gap: 6,
+                            }}
+                          >
                             <MaterialCommunityIcons
                               name={styles.checkIcon.name}
                               color={styles.checkIcon.color}
                               size={styles.checkIcon.size}
-                            />{' '}
-                            {item}
-                          </Text>
+                            />
+                            <Text style={styles.safetyItem}>{item}</Text>
+                          </View>
                         ))}
                     </View>
-
-                    <Text style={styles.moreLink}>See details</Text>
                   </View>
                 </View>
                 <View style={styles.detailsContainer}>
@@ -310,7 +352,9 @@ export default function ActivityDetail() {
                       color={styles.reportIcon.color}
                       size={styles.reportIcon.size}
                     />
-                    <Text style={styles.moreLink}>Report inaccurate information</Text>
+                    <Text style={[styles.moreLink, { paddingBottom: 20 }]}>
+                      Report inaccurate information
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -389,11 +433,11 @@ const styles = StyleSheet.create({
   detailsContainer: {
     flex: 1,
     paddingHorizontal: 20,
-    // paddingBottom:250,
   },
   title: {
     fontSize: 22,
     marginBottom: 2,
+    paddingRight: 10,
     fontWeight: 'bold',
     color: 'black',
     letterSpacing: 1.25,
@@ -412,7 +456,7 @@ const styles = StyleSheet.create({
   instructorContainer: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'center',
   },
   starIcon: {
     name: 'star',
@@ -456,10 +500,11 @@ const styles = StyleSheet.create({
   },
   ratingDesc: {
     fontSize: 16,
-    color: 'black',
-    fontWeight: '600',
+    color: '#3e8ae2',
+    fontWeight: '400',
   },
   instructorOrganiser: {
+    marginLeft: 5,
     fontSize: 14,
     color: 'black',
   },
@@ -470,12 +515,13 @@ const styles = StyleSheet.create({
   },
   time: {
     fontSize: 14,
+    marginLeft: 5,
     color: 'black',
   },
   classTakenBy: {
     fontSize: 14,
-    marginBottom: 5,
     color: 'black',
+    marginLeft: 5,
   },
   attending: {
     fontSize: 14,
@@ -483,7 +529,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   horizontalLine: {
-    marginTop: 10,
+    marginTop: 20,
     height: 1,
     width: '100%',
     backgroundColor: '#D3D3D3',
@@ -575,15 +621,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: 'black',
   },
-  infoContainer: {
-    flex: 1,
-    marginTop: 10,
-  },
+
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: 10,
+    marginBottom: 10,
   },
   infoText: {
     fontSize: 14,
@@ -594,13 +637,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 20,
-    // marginBottom: 10,
+    marginBottom: 10,
     color: 'black',
   },
   precautionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 20,
     marginBottom: 10,
     color: 'black',
   },
@@ -622,7 +664,12 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: 'black',
     textDecorationLine: 'underline',
-    marginBottom: 10,
+  },
+  linkText: {
+    color: '#3e8ae2',
+    textDecorationLine: 'underline',
+    fontSize: 14,
+    fontWeight: '500',
   },
   highlightsContainer: {
     padding: 16,
@@ -632,59 +679,93 @@ const styles = StyleSheet.create({
     borderColor: '#E0E0E0',
   },
   locationContainer: {
-    height: 170,
+    // height: screenHeight * 0.30,
     marginTop: 20,
+    marginBottom: 20,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#E0E0E0',
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginTop: 10,
+    marginLeft: 15,
+  },
+  directionButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#eee',
+    borderRadius: 10,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    marginRight: 10,
+    marginBottom: 20,
+    gap: 4,
+  },
+  directionIcon: {
+    name: 'directions',
+    color: '#000000',
+    size: 14,
+  },
+  directionButtonText: {
+    fontSize: 15,
+    color: 'black',
+  },
   precautionContainer: {
     padding: 10,
-    marginTop: 20,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#E0E0E0',
     paddingBottom: 30,
   },
   reportContainer: {
-    paddingTop: 20,
+    // paddingTop: 25,
     flex: 1,
     flexDirection: 'row',
-    gap: 10,
+    alignItems: 'baseline',
+    gap: 5,
   },
   locationTextContainer: {
-    padding: 20,
+    paddingLeft: 20,
   },
   highlightsRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 8,
     gap: 10,
+    flexWrap: 'wrap',
   },
   checkIcon: {
     name: 'check',
     color: 'green',
-    size: 24,
+    size: 12,
   },
   reportIcon: {
     name: 'flag-outline',
     color: '#000000',
-    size: 24,
+    size: 12,
   },
   highlightsText: {
     fontSize: 12,
+    marginTop: 6,
     fontWeight: '400',
     color: 'black',
   },
   safetyContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 20,
     gap: 6,
   },
   safetyItem: {
     fontSize: 12,
     color: 'black',
     flex: 1,
+  },
+  titleRatingContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 4,
   },
 });

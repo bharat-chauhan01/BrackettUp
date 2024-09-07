@@ -15,6 +15,7 @@ const SearchModal = ({
   imageSource,
   ratingCount,
   ratingDesc,
+  discountCredits,
 }) => {
   const navigation = useNavigation();
 
@@ -72,7 +73,9 @@ const SearchModal = ({
               />
             </Text>
             <Text style={styles.ratingCount}>{' (' + ratingCount + ') '}</Text>
-            <Text style={styles.ratingDesc}>{capitalizeFirstLetter(ratingDesc)}</Text>
+            <View style={styles.labelContainer}>
+              <Text style={styles.ratingDesc}>{capitalizeFirstLetter(ratingDesc)}</Text>
+            </View>
           </View>
           <View style={styles.distanceAndCreditsContainer}>
             <MaterialCommunityIcons
@@ -81,9 +84,18 @@ const SearchModal = ({
               size={styles.distance.fontSize}
             />
             <Text style={styles.distance}>{distance}</Text>
-            <View style={styles.creditsBox}>
-              <Text style={styles.creditsText}>{credits}</Text>
-            </View>
+            {discountCredits && credits ? (
+              <View style={[styles.creditsContainer, styles.discountedContainer]}>
+                <Text style={[styles.creditsText, { color: 'white' }]}>{discountCredits}</Text>
+                <Text style={[styles.creditsText, { textDecorationLine: 'line-through' }]}>
+                  ({credits})
+                </Text>
+              </View>
+            ) : credits ? (
+              <View style={[styles.creditsContainer, styles.discountedContainer]}>
+                <Text style={styles.creditsText}>{credits}</Text>
+              </View>
+            ) : null}
           </View>
         </View>
       </View>
@@ -138,7 +150,8 @@ const styles = StyleSheet.create({
   distance: {
     fontSize: 14,
     color: 'black',
-    marginLeft: 5,
+    marginLeft: 1,
+    marginRight: 7,
   },
   creditsBox: {
     backgroundColor: '#f0f0f0',
@@ -151,7 +164,7 @@ const styles = StyleSheet.create({
   },
   creditsText: {
     fontSize: 14,
-    color: 'black',
+    color: 'white',
   },
   property: {
     fontSize: 14,
@@ -190,6 +203,10 @@ const styles = StyleSheet.create({
     color: '#FFBF00',
     size: 12,
   },
+  labelContainer: {
+    backgroundColor: 'rgba(255, 255, 255)',
+    borderRadius: 15,
+  },
   ratingText: {
     fontSize: 14,
     color: 'black',
@@ -202,9 +219,22 @@ const styles = StyleSheet.create({
   },
   ratingDesc: {
     fontSize: 12,
-    color: 'purple',
-    fontWeight: '600',
+    color: '#8a288f',
+    fontWeight: '500',
     marginLeft: 2,
+  },
+  creditsContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 3,
+    paddingBottom: 1,
+    borderRadius: 5,
+    borderColor: 'black',
+    borderWidth: 0.19,
+    backgroundColor: '#515656',
+  },
+  discountedContainer: {
+    borderColor: '#007FFF',
+    backgroundColor: '#007FFF',
   },
 });
 

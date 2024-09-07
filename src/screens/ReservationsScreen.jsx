@@ -40,7 +40,6 @@ export default function ReservationsScreen() {
   return (
     <View style={styles.container}>
       {renderHeader(navigation, 'Your Reservations')}
-      <View style={{ marginTop: 10 }}></View>
       <Text style={{ fontWeight: '500', color: 'black', marginLeft: 15, fontSize: 16 }}>Past</Text>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         {loading ? (
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     marginTop: 10,
     paddingHorizontal: 10,
-    flexGrow: 1,
+    // flexGrow: 1,
     justifyContent: 'center',
   },
 });

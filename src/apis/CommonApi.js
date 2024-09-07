@@ -1,5 +1,5 @@
 import { BackendUnreachableError } from '../utils/utils';
-import { get, post } from './ApiHandler';
+import { get, post, put } from './ApiHandler';
 import {
   categoriesMock,
   placesMock,
@@ -232,6 +232,15 @@ export const submitFeedback = async (activityId, rating, reviewText) => {
     if (error instanceof BackendUnreachableError) {
       return 'Success';
     }
+    throw error;
+  }
+};
+
+export const cancelReservation = async (classReservationId, cancellationReason) => {
+  try {
+    await put('/class/reservations/cancel', { classReservationId, cancellationReason });
+  } catch (error) {
+    console.log(error);
     throw error;
   }
 };

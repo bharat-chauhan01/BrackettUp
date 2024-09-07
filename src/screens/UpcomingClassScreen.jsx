@@ -69,7 +69,7 @@ const UpcomingClassScreen = () => {
 
   return (
     <ScrollView
-      style={{ backgroundColor: 'fff' }}
+      style={{ backgroundColor: '#fff' }}
       onScroll={event => setScrollPosition(event.nativeEvent.contentOffset.x)}
       scrollPosition={scrollPosition}
     >
@@ -88,6 +88,8 @@ const UpcomingClassScreen = () => {
                 instructor={activity.instructorName}
                 institution={activity.organizationName}
                 activityImageUrl={activity.activityImageUrl}
+                activityClassId={7}
+                coordinates={activity.coordinates}
               />
             ))
           ) : (
@@ -112,6 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: '5%',
     paddingTop: '5%',
+    paddingBottom: '20%',
     gap: 10,
   },
   heading: {

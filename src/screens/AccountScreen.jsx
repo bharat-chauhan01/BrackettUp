@@ -343,7 +343,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     paddingVertical: 12,
     paddingHorizontal: 32,
-    borderRadius: 10,
+    borderRadius: 50,
     alignItems: 'center',
     marginBottom: 20,
   },
@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   saveContainer: {
-    paddingHorizontal: 78,
+    // paddingHorizontal: 78,
   },
   updateContainer: {
     flexDirection: 'row',

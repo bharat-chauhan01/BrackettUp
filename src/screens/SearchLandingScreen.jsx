@@ -168,6 +168,7 @@ const SearchLandingScreen = () => {
                       imageSource={data.imageUrl}
                       ratingCount={data.ratingCount}
                       ratingDesc={data.ratingDesc}
+                      discountCredits={data.discountedCredits}
                     />
                   </TouchableOpacity>
                 </View>
@@ -195,6 +196,7 @@ const SearchLandingScreen = () => {
                       imageSource={data.imageUrl}
                       ratingCount={data.ratingCount}
                       ratingDesc={data.ratingDesc}
+                      discountCredits={data.discountedCredits}
                     />
                   </TouchableOpacity>
                 </View>

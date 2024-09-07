@@ -31,7 +31,6 @@ export default function HomeScreen() {
   };
   const handleActivityPress = (referenceId, referenceType) => {
     if (referenceType === 'activity') {
-      console.log(referenceId);
       navigation.navigate('ActivityDetail', referenceId);
     } else if (referenceType === 'portfolio') {
       navigation.navigate('PortfolioDetail', referenceId);
@@ -58,6 +57,9 @@ export default function HomeScreen() {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
+        <View style={styles.headerContainer}>
+          <Text style={styles.sectionTitle}>Hi, Nice to See You!</Text>
+        </View>
         {activities.map((section, sectionIndex) => (
           <View key={sectionIndex} style={styles.section}>
             <View style={styles.sectionHeader}>
@@ -85,7 +87,7 @@ export default function HomeScreen() {
                     ratingCount={activity.ratingCount}
                     ratingDesc={activity.ratingDesc}
                     date={activity.date}
-                    time={activity.time}
+                    duration={activity.duration}
                     credits={activity.credits}
                     discountCredits={activity.discountCredits}
                     percentageDiscount={activity.percentageDiscount}
@@ -106,6 +108,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
   },
+  headerContainer: {
+    width: '100%',
+    marginLeft: 10,
+    alignItems: 'flex-start',
+    marginVertical: 10,
+  },
   container: {
     marginTop: 20,
     flex: 1,
@@ -113,6 +121,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingBottom: 0,
+    gap: 12,
   },
   section: {
     marginBottom: 0,
@@ -122,6 +131,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginLeft: 10,
+    marginRight: 5,
   },
   sectionTitle: {
     fontSize: 18,
@@ -130,8 +140,8 @@ const styles = StyleSheet.create({
   },
   itemIcon: {
     name: 'dots-horizontal',
-    color: '#681',
-    size: 20,
+    color: 'black',
+    size: 23,
   },
   activityTouchable: {
     marginHorizontal: 0,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, ImageBackground, StyleSheet, Dimensions } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { capitalizeFirstLetter } from '../utils/utils';
 
@@ -15,28 +15,50 @@ const ActivityContainer = ({
   ratingCount,
   ratingDesc,
   date,
-  time,
+  duration,
   credits,
   discountCredits,
   percentageDiscount,
 }) => {
   return (
     <View style={styles.container}>
-      <Image source={{ uri: imageUrl }} style={styles.image} />
+      <ImageBackground
+        source={{ uri: imageUrl }}
+        style={styles.image}
+        imageStyle={styles.imageStyle}
+      >
+        <View style={styles.labelContainer}>
+          <Text style={styles.labelText}>{capitalizeFirstLetter(ratingDesc)}</Text>
+        </View>
+        {duration && (
+          <View style={styles.labelTimeContainer}>
+            <Text style={styles.labelText}>{duration} min</Text>
+          </View>
+        )}
+      </ImageBackground>
+
       <View style={styles.textContainer}>
         <Text style={styles.title}>{capitalizeFirstLetter(title)}</Text>
         <View style={styles.act}>
-          <Text style={styles.subtitle}>{capitalizeFirstLetter(subtitle)}</Text>
-          <Text style={styles.distance}>{distance}</Text>
+          <Text style={styles.subtitle}>{capitalizeFirstLetter(subtitle)} · </Text>
+          <Text style={styles.subtitle}>{distance}</Text>
         </View>
+      </View>
+      <View>
         {date && (
           <View style={styles.dateTimeContainer}>
             <Text style={styles.details}>{date}</Text>
-            <View style={styles.circle} />
-            {time && <Text style={styles.details}>{time}</Text>}
+            {percentageDiscount && (
+              <View style={styles.discountPercentage}>
+                <Text style={styles.discountPercentageText}>{percentageDiscount}</Text>
+              </View>
+            )}
           </View>
         )}
-        <View style={styles.ratingContainer}>
+      </View>
+
+      <View style={styles.ratingContainer}>
+        <View style={styles.ratingDetails}>
           <Text style={styles.ratingText}>
             {rating}{' '}
             <MaterialCommunityIcons
@@ -45,30 +67,20 @@ const ActivityContainer = ({
               size={styles.itemIcon.size}
             />
           </Text>
-          <Text style={styles.ratingCount}>{ratingCount}</Text>
-          <Text style={styles.ratingDesc}>{capitalizeFirstLetter(ratingDesc)}</Text>
         </View>
-        {credits && (
-          <View style={{ flexDirection: 'row', paddingVertical: 2, marginTop: 2 }}>
-            {percentageDiscount && (
-              <View style={styles.discountPercentage}>
-                <Text style={styles.discountPercentageText}>{percentageDiscount}</Text>
-              </View>
-            )}
-            <View style={styles.creditBox}>
-              <View style={[styles.creditsContainer, discountCredits && styles.greyBackground]}>
-                <Text style={[styles.creditsText, discountCredits && styles.strikethrough]}>
-                  {credits}
-                </Text>
-              </View>
-              {discountCredits && (
-                <View style={[styles.creditsContainer, styles.discountedContainer]}>
-                  <Text style={[styles.creditsText, { color: 'white' }]}>{discountCredits}</Text>
-                </View>
-              )}
-            </View>
+
+        {discountCredits && credits ? (
+          <View style={[styles.creditsContainer, styles.discountedContainer]}>
+            <Text style={[styles.creditsText, { color: 'white' }]}>{discountCredits}</Text>
+            <Text style={[styles.creditsText, { textDecorationLine: 'line-through' }]}>
+              ({credits})
+            </Text>
           </View>
-        )}
+        ) : credits ? (
+          <View style={[styles.creditsContainer, styles.discountedContainer]}>
+            <Text style={styles.creditsText}>{credits}</Text>
+          </View>
+        ) : null}
       </View>
     </View>
   );
@@ -82,11 +94,38 @@ const styles = StyleSheet.create({
     padding: 5,
     marginVertical: 5,
     width: windowWidth * 0.45,
+    position: 'relative',
+  },
+  labelContainer: {
+    position: 'absolute',
+    bottom: 8,
+    right: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.75)',
+    borderRadius: 15,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    zIndex: 1,
+  },
+  labelTimeContainer: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    backgroundColor: '#FFDF00',
+    borderRadius: 15,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    zIndex: 1,
+  },
+  labelText: {
+    fontSize: windowWidth * 0.03,
+    color: '#8a288f',
+    fontWeight: '500',
   },
   image: {
     width: '100%',
     height: windowWidth * 0.29,
     borderRadius: 10,
+    justifyContent: 'space-between',
   },
   textContainer: {
     marginTop: 5,
@@ -96,7 +135,6 @@ const styles = StyleSheet.create({
     fontSize: windowWidth * 0.04,
     fontWeight: 'bold',
     color: 'black',
-    letterSpacing: 1.25,
     marginBottom: 2,
   },
   subtitle: {
@@ -110,13 +148,24 @@ const styles = StyleSheet.create({
   },
   ratingContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 2,
+    marginTop: 2,
+  },
+
+  ratingDetails: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   ratingText: {
     fontSize: windowWidth * 0.035,
     color: 'black',
     fontWeight: 'bold',
+  },
+  ratingCount: {
+    color: 'gray',
+    marginLeft: 4,
   },
   ratingDesc: {
     marginLeft: 2,
@@ -126,7 +175,7 @@ const styles = StyleSheet.create({
   },
   dateTimeContainer: {
     flexDirection: 'row',
-    alignItems: 'center', // Align items vertically centered
+    justifyContent: 'space-between',
   },
   details: {
     fontSize: windowWidth * 0.035,
@@ -135,18 +184,38 @@ const styles = StyleSheet.create({
   discountPercentage: {
     backgroundColor: '#009E60',
     borderRadius: 5,
+    paddingVertical: 0,
     paddingHorizontal: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  creditsText: {
-    textDecorationStyle: 'line-through',
-    fontSize: windowWidth * 0.035,
-    color: 'black',
-  },
   discountPercentageText: {
-    fontSize: windowWidth * 0.035,
+    fontSize: windowWidth * 0.036,
     color: 'white',
+  },
+  creditsContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 3,
+    paddingBottom: 1,
+    borderRadius: 5,
+    borderColor: 'black',
+    borderWidth: 0.19,
+    backgroundColor: '#515656',
+  },
+  greyBackground: {
+    backgroundColor: '#515656',
+    marginHorizontal: 3,
+  },
+  creditsText: {
+    fontSize: windowWidth * 0.03,
+    color: 'white',
+  },
+  strikethrough: {
+    textDecorationLine: 'line-through',
+  },
+  discountedContainer: {
+    borderColor: '#007FFF',
+    backgroundColor: '#007FFF',
   },
   itemIcon: {
     name: 'star',
@@ -154,11 +223,11 @@ const styles = StyleSheet.create({
     size: fontSize,
   },
   circle: {
-    width: 4, // Adjusted size for better visibility
+    width: 4,
     height: 4,
-    borderRadius: 2, // Radius to make it a perfect circle
+    borderRadius: 2,
     backgroundColor: 'black',
-    marginHorizontal: 6, // Adjusted margin for better spacing
+    marginHorizontal: 6,
   },
   creditBox: {
     flex: 1,
@@ -166,29 +235,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'row',
   },
-  creditsContainer: {
-    paddingHorizontal: 3, // Add some padding inside the box
-    paddingVertical: 1,
-    borderRadius: 5, // Radius to make it a perfect circle
-    borderColor: 'black',
-    borderWidth: 0.19,
-    backgroundColor: '#515656', // Add grey background color
-    position: 'relative', // Needed for the diagonal line
-  },
-  greyBackground: {
-    backgroundColor: '#515656', // Add grey background color
-    marginHorizontal: 3, // Add space between the boxes
-  },
-  creditsText: {
-    fontSize: 14,
-    color: 'white', // Set the text color to black for contrast
-  },
-  strikethrough: {
-    textDecorationLine: 'line-through', // Apply strikethrough style
-  },
-  discountedContainer: {
-    borderColor: '#007FFF',
-    backgroundColor: '#007FFF',
+  imageStyle: {
+    borderRadius: 10,
   },
 });
 

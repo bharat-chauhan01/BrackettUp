@@ -25,6 +25,8 @@ export default function LandingScreen() {
         headerShown: false,
         tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: 'black',
+        tabBarInactiveTintColor: 'gray',
         tabBarLabelStyle: {
           fontWeight: 'bold',
         },

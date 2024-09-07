@@ -45,6 +45,7 @@ const SavedItem = ({ data }) => {
             <Text style={styles.scheduleText}>Schedule</Text>
           </TouchableOpacity>
         </View>
+
         <View style={styles.imageContainer}>
           <Image source={{ uri: item.imageUrl }} style={styles.image}></Image>
           <TouchableOpacity
@@ -86,6 +87,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
+    flexDirection: 'col',
     marginRight: 8,
   },
   imageContainer: {
@@ -134,12 +136,18 @@ const styles = StyleSheet.create({
     right: 8,
   },
   scheduleButton: {
-    marginTop: 35,
+    marginTop: 30,
+    backgroundColor: 'black',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    alignSelf: 'flex-start',
   },
   scheduleText: {
-    color: '#0080FE',
+    color: 'white',
     fontSize: 14,
     fontWeight: '500',
+    alignSelf: 'flex-start',
   },
   separator: {
     marginVertical: 10,

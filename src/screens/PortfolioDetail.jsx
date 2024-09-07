@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Linking,
   Dimensions,
   Alert,
   ActivityIndicator,
@@ -16,8 +17,10 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { fetchPortfolioDetail } from '../apis/CommonApi';
 import RenderTextWithToggle from '../components/RenderTextWithToggle';
 import Video from 'react-native-video';
+import { capitalizeFirstLetter } from '../utils/utils';
 
 const { width: screenWidth } = Dimensions.get('window');
+const screenHeight = Dimensions.get('window').height;
 
 export default function PortfolioDetail() {
   const scrollViewRef = useRef(null);
@@ -104,13 +107,15 @@ export default function PortfolioDetail() {
                 </View>
                 {portfolioData.advantageText ? (
                   <>
-                    <TouchableOpacity style={styles.saveButton}>
-                      <Text style={styles.saveButtonText}>{portfolioData.advantageText}</Text>
-                    </TouchableOpacity>
+                    <View style={styles.advantageContainer}>
+                      <Text style={styles.advantageText}>{portfolioData.advantageText}</Text>
+                    </View>
                   </>
                 ) : null}
 
-                <Text style={styles.description}>{portfolioData.description}</Text>
+                <View style={styles.description}>
+                  <RenderTextWithToggle text={portfolioData.description} />
+                </View>
               </View>
               <View style={styles.horizontalLine} />
 
@@ -149,13 +154,29 @@ export default function PortfolioDetail() {
                         size={styles.instagramIcon.size}
                       />
                     </View>
-                    <View style={styles.infoRow}>
-                      <Text style={styles.infoText}>{portfolioData.websiteUrl}</Text>
-                      <MaterialCommunityIcons
-                        name={styles.webIcon.name}
-                        color={styles.webIcon.color}
-                        size={styles.webIcon.size}
-                      />
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      {portfolioData.websiteUrl ? (
+                        <>
+                          <TouchableOpacity
+                            style={styles.checkoutButton}
+                            onPress={() => Linking.openURL(portfolioData.websiteUrl)}
+                          >
+                            <Text style={styles.linkText}>Checkout Website</Text>
+                          </TouchableOpacity>
+
+                          <MaterialCommunityIcons
+                            name={styles.webIcon.name}
+                            color={styles.webIcon.color}
+                            size={styles.webIcon.size}
+                          />
+                        </>
+                      ) : null}
                     </View>
                   </View>
                   <RenderTextWithToggle text={portfolioData.about} />
@@ -179,6 +200,7 @@ export default function PortfolioDetail() {
                     </View>
                   </View>
                 </View>
+                <View style={styles.horizontalLine} />
                 <View style={styles.detailsContainer}>
                   <Text style={styles.subTitle}>Videos</Text>
                   <View style={styles.videoContainer}>
@@ -191,13 +213,17 @@ export default function PortfolioDetail() {
                       controls={true}
                     />
 
-                    <Text style={styles.videoText}>{portfolioData.videoText}</Text>
+                    {portfolioData.videoText ? (
+                      <Text style={styles.videoText}>{portfolioData.videoText}</Text>
+                    ) : null}
                   </View>
                 </View>
                 <View style={styles.horizontalLine} />
-                <View style={styles.detailsContainer}>
+                {/* <View style={styles.detailsContainer}> */}
+                <View style={[styles.detailsContainer, { marginBottom: 8 }]}>
                   <Text style={styles.howToGet}>How to get there</Text>
 
+                  <RenderTextWithToggle text={capitalizeFirstLetter(portfolioData.howToGetThere)} />
                   <View style={styles.buttonContainer}>
                     <View style={styles.directionButton}>
                       <MaterialCommunityIcons
@@ -210,8 +236,6 @@ export default function PortfolioDetail() {
                       </TouchableOpacity>
                     </View>
                   </View>
-
-                  <RenderTextWithToggle text={portfolioData.howToGetThere} />
                 </View>
                 <View style={styles.horizontalLine} />
                 <View style={styles.detailsContainer}>
@@ -220,21 +244,27 @@ export default function PortfolioDetail() {
                 <View style={styles.detailsContainer}>
                   <View style={styles.precautionContainer}>
                     <Text style={styles.precautionTitle}>Safety & Health Measures</Text>
-                    <View style={styles.safetyContainer}>
+                    <View style={[styles.safetyContainer, { flexWrap: 'wrap' }]}>
                       {portfolioData.safety &&
                         portfolioData.safety.map((item, index) => (
-                          <Text key={index} style={styles.safetyItem}>
+                          <View
+                            key={index}
+                            style={{
+                              width: '50%',
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                              gap: 6,
+                            }}
+                          >
                             <MaterialCommunityIcons
                               name={styles.checkIcon.name}
                               color={styles.checkIcon.color}
                               size={styles.checkIcon.size}
-                            />{' '}
-                            {item}
-                          </Text>
+                            />
+                            <Text style={styles.safetyItem}>{capitalizeFirstLetter(item)}</Text>
+                          </View>
                         ))}
                     </View>
-
-                    <Text style={styles.moreLink}>See details</Text>
                   </View>
                 </View>
               </View>
@@ -305,7 +335,6 @@ const styles = StyleSheet.create({
   detailsContainer: {
     flex: 1,
     paddingHorizontal: 20,
-    // paddingBottom:250,
   },
   title: {
     fontSize: 22,
@@ -317,7 +346,6 @@ const styles = StyleSheet.create({
   rating: {
     fontSize: 14,
     marginBottom: 10,
-    // marginTop:10,
     color: 'black',
   },
   ratingFull: {
@@ -476,15 +504,13 @@ const styles = StyleSheet.create({
   subTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginTop: 20,
-    // marginBottom: 10,
+    marginTop: 15,
     color: 'black',
   },
   howToGet: {
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 20,
-    marginBottom: 10,
     color: 'black',
   },
   text: {
@@ -512,20 +538,25 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: 'black',
     textDecorationLine: 'underline',
-    marginTop: 10,
-    marginBottom: 10,
+  },
+  linkText: {
+    color: '#3e8ae2',
+    textDecorationLine: 'underline',
+    fontSize: 14,
+    fontWeight: '500',
   },
   highlightsContainer: {
     padding: 16,
-    marginTop: 15,
+    marginTop: 20,
+    marginBottom: 10,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#E0E0E0',
   },
   videoContainer: {
-    height: 250,
-    marginTop: 20,
-    marginBottom: 20,
+    height: screenHeight * 0.3,
+    marginTop: 10,
+    // marginBottom: 20,
   },
   precautionContainer: {
     padding: 10,
@@ -533,7 +564,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#E0E0E0',
-    paddingBottom: 30,
+    paddingBottom: 10,
   },
   reportContainer: {
     paddingTop: 20,
@@ -549,11 +580,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 8,
     gap: 10,
+    flexWrap: 'wrap',
   },
   checkIcon: {
     name: 'check',
     color: 'green',
-    size: 24,
+    size: 12,
   },
   reportIcon: {
     name: 'flag-outline',
@@ -568,7 +600,7 @@ const styles = StyleSheet.create({
   safetyContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 10,
     gap: 6,
   },
   safetyItem: {
@@ -580,17 +612,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  saveButton: {
+  advantageContainer: {
     backgroundColor: '#E6F4E7',
     paddingVertical: 10,
-    paddingHorizontal: 20,
-    marginTop: 12,
-    marginBottom: 12,
+    marginTop: 10,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  saveButtonText: {
+  advantageText: {
     color: '#1E1E1E',
     fontSize: 16,
     fontWeight: '500',
@@ -643,7 +673,7 @@ const styles = StyleSheet.create({
   precautionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 10,
     color: 'black',
   },

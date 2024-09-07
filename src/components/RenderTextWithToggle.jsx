@@ -11,7 +11,7 @@ const RenderTextWithToggle = ({ text }) => {
   if (text && text.length > 80) {
     return (
       <View>
-        <Text style={styles.text}>{showFullText ? text : `${text.substring(0, 60)}...`}</Text>
+        <Text style={styles.text}>{showFullText ? text : `${text.substring(0, 90)}...`}</Text>
         <Text style={styles.moreLink} onPress={toggleText}>
           {showFullText ? 'Read less' : 'Read more'}
         </Text>
