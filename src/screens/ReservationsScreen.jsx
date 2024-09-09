@@ -3,8 +3,7 @@ import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-nat
 import { renderHeader } from '../modals/HeaderModal';
 import { useFocusEffect, useIsFocused, useNavigation } from '@react-navigation/native';
 import ReservationItem from '../components/ReservationItem';
-import { fetchReservation } from '../apis/CommonApi';
-import { reservationMock } from '../apis/MockData';
+import { fetchReservation } from '../apis/ReservationApi';
 
 export default function ReservationsScreen() {
   const isFocused = useIsFocused();

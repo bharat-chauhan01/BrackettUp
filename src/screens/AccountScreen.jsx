@@ -19,7 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 import { renderHeader } from '../modals/HeaderModal';
 import { getItem } from '../store/LocalStorage';
 import { fetchAccountData } from '../apis/CommonApi';
-import { saveAccountData, requestPhoneOtp, requestEmailOtp } from '../apis/CommonApi';
+import { saveAccountData, requestPhoneOtp, requestEmailOtp } from '../apis/AccountApi';
 import VerificationModal from '../modals/VerificationModal';
 
 const AccountScreen = () => {

@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Alert, Linking } from 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { transformDateByReferenceDayAndDDMMM } from '../utils/utils';
 import CancellationModal from '../modals/ClassCancellationModal';
-import { cancelReservation } from '../apis/CommonApi';
+import { cancelReservation } from '../apis/ReservationApi';
 
 // Main Component
 const UpcomingActivitiesCard = ({

@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import UpcomingActivitiesCard from '../components/UpcomingActivitiesCard';
-import { fetchUpcomingPageActivities } from '../apis/CommonApi';
 import { useIsFocused, useFocusEffect } from '@react-navigation/native';
 import { getItem } from '../store/LocalStorage';
+import { fetchUpcomingPageActivities } from '../apis/ReservationApi';
 
 const windowWidth = Dimensions.get('window').width;
 

@@ -19,7 +19,7 @@ import RenderTextWithToggle from '../components/RenderTextWithToggle';
 import { getItem } from '../store/LocalStorage';
 import LoggedInModal from '../modals/ActivityDetailLoggedInModal';
 import LoggedOutModal from '../modals/ActivityDetailLoggedOutModal';
-import { confirmResevation } from '../apis/CommonApi';
+import { confirmResevation } from '../apis/ReservationApi';
 
 const { width: screenWidth } = Dimensions.get('window');
 const screenHeight = Dimensions.get('window').height;

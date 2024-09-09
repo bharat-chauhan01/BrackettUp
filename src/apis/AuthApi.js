@@ -23,3 +23,11 @@ export const validateOtp = async (contactNumber, otp) => {
     throw error;
   }
 };
+
+export const logout = async () => {
+  try {
+    return await post('/auth/logout', null);
+  } catch (error) {
+    return {};
+  }
+};

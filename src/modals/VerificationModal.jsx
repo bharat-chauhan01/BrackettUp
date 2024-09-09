@@ -6,7 +6,7 @@ import {
   validatePhoneOtp,
   validateEmailOtp,
   saveAccountData,
-} from '../apis/CommonApi';
+} from '../apis/AccountApi';
 
 const resendOtp = async (type, value, onClose) => {
   try {

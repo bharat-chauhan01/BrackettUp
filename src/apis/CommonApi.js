@@ -1,18 +1,7 @@
 import { BackendUnreachableError } from '../utils/utils';
 import { get, post, put } from './ApiHandler';
 import {
-  categoriesMock,
   placesMock,
-  reservationMock,
-  scheduleMock,
-  searchMock,
-  searchModalsData,
-  activityDataMock,
-  activitiesMock,
-  upcomingActivitiesMock,
-  homeSearch,
-  accountMockData,
-  portfolioDataMock,
   activityReviewDataMock,
   creditPackagesMock,
   accountBalanceMock,
@@ -27,14 +16,6 @@ export const fetchProfile = async () => {
   }
 };
 
-export const logout = async () => {
-  try {
-    return await post('/auth/logout', null);
-  } catch (error) {
-    return {};
-  }
-};
-
 export const fetchHomePageActivities = async () => {
   try {
     const response = await get(`/relevance/home`);
@@ -46,16 +27,16 @@ export const fetchHomePageActivities = async () => {
 
 export const fetchActivitySchedule = async activityId => {
   try {
-    const response = await get('/class/organization/schedule/' + activityId);
+    const response = await get('/class/activity/schedule/' + activityId);
     return response;
   } catch (error) {
     throw error;
   }
 };
 
-export const fetchUpcomingPageActivities = async () => {
+export const fetchOrganizationSchedule = async activityId => {
   try {
-    const response = await get(`/class/reservations/upcoming`);
+    const response = await get('/class/organization/schedule/' + activityId);
     return response;
   } catch (error) {
     throw error;
@@ -101,15 +82,6 @@ export const fetchActivityDetail = async id => {
   }
 };
 
-export const fetchReservation = async () => {
-  try {
-    const response = await get(`/class/reservations/past`);
-    return response;
-  } catch (error) {
-    throw error;
-  }
-};
-
 export const fetchSearchLandingSuggestions = async (latitute, longitude) => {
   try {
     const response = await get('relevance/search/home');
@@ -119,93 +91,10 @@ export const fetchSearchLandingSuggestions = async (latitute, longitude) => {
   }
 };
 
-export const fetchAccountData = async () => {
-  try {
-    const response = await get(`/account`);
-    return response.data;
-  } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return accountData;
-    }
-    throw error;
-  }
-};
-let accountData = { ...accountMockData };
-export const saveAccountData = async data => {
-  try {
-    const response = await post(`/account`, data);
-    return response;
-  } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      accountData = { ...accountData, ...data };
-      return accountData;
-    }
-    throw error;
-  }
-};
-
-export const requestPhoneOtp = async phone => {
-  try {
-    return await post('/mobile/otp/request', { phone });
-  } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return {};
-    }
-    throw error;
-  }
-};
-
-export const requestEmailOtp = async email => {
-  try {
-    return await post('/email/otp/request', { email });
-  } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return {};
-    }
-    throw error;
-  }
-};
-
-export const validatePhoneOtp = async (oldPhone, newPhone, otp) => {
-  try {
-    await post('/mobile/otp/validate', { oldPhone, newPhone, otp });
-  } catch (error) {
-    if (otp != '0000') {
-      throw new Error('Please Enter 0000 for validation');
-    }
-    if (error instanceof BackendUnreachableError) {
-      return 'Success';
-    }
-    throw error;
-  }
-};
-
-export const validateEmailOtp = async (oldEmail, newEmail, otp) => {
-  try {
-    await post('/email/otp/validate', { oldEmail, newEmail, otp });
-  } catch (error) {
-    if (otp != '0000') {
-      throw new Error('Please Enter 0000 for validation');
-    }
-    if (error instanceof BackendUnreachableError) {
-      return 'Success';
-    }
-    throw error;
-  }
-};
-
 export const fetchPortfolioDetail = async id => {
   try {
     const response = await get(`/portfolio/organization/${id}`);
     return response;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const confirmResevation = async classId => {
-  try {
-    await post('/class/reservations/schedule', { classId });
   } catch (error) {
     throw error;
   }
@@ -255,15 +144,6 @@ export const fetchAccountBalance = async () => {
     if (error instanceof BackendUnreachableError) {
       return accountBalanceMock.balance;
     }
-    throw error;
-  }
-};
-
-export const cancelReservation = async (classReservationId, cancellationReason) => {
-  try {
-    await put('/class/reservations/cancel', { classReservationId, cancellationReason });
-  } catch (error) {
-    console.log(error);
     throw error;
   }
 };
