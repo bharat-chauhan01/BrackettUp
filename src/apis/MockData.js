@@ -1015,3 +1015,90 @@ export const activityReviewDataMock = [
     ],
   },
 ];
+
+export const creditPackagesMock = [
+  {
+    packageId: 1,
+    credits: 2,
+    pricePerCredit: 2.5,
+    totalPrice: 5.0,
+    discount: '17% off',
+    originalPrice: 6.0,
+  },
+  {
+    packageId: 2,
+    credits: 10,
+    pricePerCredit: 1.9,
+    totalPrice: 19.0,
+    discount: '24% off',
+    originalPrice: 25.0,
+  },
+  {
+    packageId: 3,
+    credits: 25,
+    pricePerCredit: 1.8,
+    totalPrice: 45.0,
+    discount: '36% off',
+    originalPrice: 70.0,
+  },
+  {
+    packageId: 4,
+    credits: 50,
+    pricePerCredit: 1.7,
+    totalPrice: 85.0,
+    discount: '43% off',
+    originalPrice: 150.0,
+  },
+  {
+    packageId: 5,
+    credits: 75,
+    pricePerCredit: 1.6,
+    totalPrice: 120.0,
+    discount: '50% off',
+    originalPrice: 240.0,
+  },
+  {
+    packageId: 6,
+    credits: 100,
+    pricePerCredit: 1.5,
+    totalPrice: 150.0,
+    discount: '57% off',
+    originalPrice: 350.0,
+  },
+  {
+    packageId: 7,
+    credits: 150,
+    pricePerCredit: 1.4,
+    totalPrice: 210.0,
+    discount: '60% off',
+    originalPrice: 525.0,
+  },
+  {
+    packageId: 8,
+    credits: 200,
+    pricePerCredit: 1.35,
+    totalPrice: 270.0,
+    discount: '64% off',
+    originalPrice: 750.0,
+  },
+  {
+    packageId: 9,
+    credits: 300,
+    pricePerCredit: 1.25,
+    totalPrice: 375.0,
+    discount: '70% off',
+    originalPrice: 1250.0,
+  },
+  {
+    packageId: 10,
+    credits: 500,
+    pricePerCredit: 1.15,
+    totalPrice: 575.0,
+    discount: '75% off',
+    originalPrice: 2300.0,
+  },
+];
+
+export const accountBalanceMock = {
+  balance: 10,
+};

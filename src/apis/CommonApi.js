@@ -1,5 +1,5 @@
 import { BackendUnreachableError } from '../utils/utils';
-import { get, post, put } from './ApiHandler';
+import { get, post } from './ApiHandler';
 import {
   categoriesMock,
   placesMock,
@@ -14,6 +14,8 @@ import {
   accountMockData,
   portfolioDataMock,
   activityReviewDataMock,
+  creditPackagesMock,
+  accountBalanceMock,
 } from './MockData';
 
 export const fetchProfile = async () => {
@@ -236,11 +238,26 @@ export const submitFeedback = async (activityId, rating, reviewText) => {
   }
 };
 
-export const cancelReservation = async (classReservationId, cancellationReason) => {
+export const fetchCreditPackages = async () => {
   try {
-    await put('/class/reservations/cancel', { classReservationId, cancellationReason });
+    const response = await get('/credits/packages');
+    return response.data;
   } catch (error) {
-    console.log(error);
+    if (error instanceof BackendUnreachableError) {
+      return creditPackagesMock;
+    }
+    throw error;
+  }
+};
+
+export const fetchAccountBalance = async () => {
+  try {
+    const response = await get('/account/balance');
+    return response.data;
+  } catch (error) {
+    if (error instanceof BackendUnreachableError) {
+      return accountBalanceMock.balance;
+    }
     throw error;
   }
 };

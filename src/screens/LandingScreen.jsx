@@ -8,6 +8,7 @@ import UpcomingClassScreen from './UpcomingClassScreen';
 import SearchScreen from './SearchScreen';
 import SearchLandingScreen from './SearchLandingScreen';
 import { useDispatch } from 'react-redux';
+import AddCreditsScreen from './AddCreditsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -53,6 +54,15 @@ export default function LandingScreen() {
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="magnify" color={color} size={iconHeight} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Credits"
+        component={AddCreditsScreen}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="plus-circle" color={color} size={iconHeight} />
           ),
         }}
       />
