@@ -70,10 +70,7 @@ const AddCreditsScreen = () => {
         <Text style={styles.heading}>Top Up Your Account</Text>
 
         {/* Use LinearGradient for the account container */}
-        <LinearGradient
-          colors={['#333333', '#888888']}
-          style={styles.accountContainer}
-        >
+        <LinearGradient colors={['#333333', '#888888']} style={styles.accountContainer}>
           <Text style={styles.balanceText}>Account Balance</Text>
           <Text style={styles.balanceBoxText}>
             {user ? `${accountBalance} credits` : '0 credits'}
@@ -82,13 +79,13 @@ const AddCreditsScreen = () => {
 
         {!user ? (
           <View style={styles.loginPromptContainer}>
-            <Text style={styles.description}>Log in to see your exclusive offers!</Text>
             <TouchableOpacity
               style={styles.loginButton}
               onPress={() => navigation.navigate('Login')}
             >
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
+            <Text style={styles.inlineDescription}> to see your exclusive offers!</Text>
           </View>
         ) : (
           <Text style={styles.description}>
@@ -110,9 +107,11 @@ const CreditOptions = ({ creditOptions }) => {
           <View>
             <Text style={styles.creditText}>{`${option.credits} credits`}</Text>
             <Text style={styles.priceText}>{`₹${option.pricePerCredit}/credit`}</Text>
-            <View style={{flexDirection: 'row', alignItems: 'center', marginLeft:1}}>
-            <Text style={styles.discountText}>{`₹${option.totalPrice} (${option.discount})`}</Text>
-            <Text style={styles.originalPriceText}>{`₹${option.originalPrice}`}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 1 }}>
+              <Text
+                style={styles.discountText}
+              >{`₹${option.totalPrice} (${option.discount})`}</Text>
+              <Text style={styles.originalPriceText}>{`₹${option.originalPrice}`}</Text>
             </View>
           </View>
           <TouchableOpacity
@@ -164,32 +163,26 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   loginPromptContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 1,
-    borderRadius: 10,
-    marginBottom: 10,
+    flexDirection: 'row', // Keep items in a row
+    alignItems: 'center', // Align items vertically center
+    marginVertical: 10,
   },
-  description: {
+  inlineDescription: {
     fontSize: 16,
     color: 'black',
-    fontWeight: '500',
-    marginBottom: 10,
-    marginLeft: 2,
-    marginTop: 10,
+    marginLeft: 2, // Add some space between the button and the text
   },
   loginButton: {
     backgroundColor: 'black',
     borderRadius: 10,
-    paddingVertical: 4,
-    paddingHorizontal: 10,
+    paddingVertical: 2,
+    paddingHorizontal: 6,
     alignItems: 'center',
   },
   loginButtonText: {
     color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: '400',
   },
   creditPackageContainer: {
     flexDirection: 'row',
@@ -208,7 +201,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   priceText: {
-    marginLeft:2,
+    marginLeft: 2,
     fontSize: 10,
     color: '#777',
   },

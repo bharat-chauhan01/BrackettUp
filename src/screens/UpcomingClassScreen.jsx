@@ -98,8 +98,11 @@ const UpcomingClassScreen = () => {
         ) : (
           <View style={styles.notLoggedInContainer}>
             <Text style={styles.noActivities}>Please log in to see your upcoming activities.</Text>
-            <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('Home')}>
-              <Text style={styles.homeButtonText}>Go to Home</Text>
+            <TouchableOpacity
+              style={styles.homeButton}
+              onPress={() => navigation.navigate('Login')}
+            >
+              <Text style={styles.homeButtonText}>Login</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -137,8 +140,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: '#007BFF',
-    borderRadius: 5,
+    backgroundColor: '#000',
+    borderRadius: 20,
   },
   homeButtonText: {
     color: '#fff',

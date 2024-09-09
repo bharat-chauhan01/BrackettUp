@@ -29,12 +29,9 @@ export const fetchProfile = async () => {
 
 export const logout = async () => {
   try {
-    return await post('/logout', null);
+    return await post('/auth/logout', null);
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return {};
-    }
-    throw error;
+    return {};
   }
 };
 

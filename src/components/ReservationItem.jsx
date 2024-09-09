@@ -40,9 +40,11 @@ const ReservationItem = ({
           <Text style={styles.activityName}>{activityName}</Text>
           <Text style={styles.organisationName}>{organisationName}</Text>
           <Text style={styles.instructorName}>{instructor}</Text>
-          <Text style={styles.details}>{date}</Text>
-          <Text style={styles.details}>{time}</Text>
-
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={[styles.details]}>{date}</Text>
+            <View style={styles.circle} />
+            <Text style={styles.details}>{time}</Text>
+          </View>
           <View style={styles.statusAndCreditsContainer}>
             <View style={styles.textBox}>
               <Text style={styles.status}>{status}</Text>
@@ -121,6 +123,7 @@ const styles = StyleSheet.create({
   },
   details: {
     fontSize: 14,
+    color: 'gray',
   },
   review: {
     fontSize: 14,

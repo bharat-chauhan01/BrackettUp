@@ -71,7 +71,9 @@ const ActivityContainer = ({
 
         {discountCredits && credits ? (
           <View style={[styles.creditsContainer, styles.discountedContainer]}>
-            <Text style={[styles.creditsText, { color: 'white' }]}>{discountCredits}</Text>
+            <Text style={[styles.creditsText, { marginRight: 2, color: 'white' }]}>
+              {discountCredits}
+            </Text>
             <Text style={[styles.creditsText, { textDecorationLine: 'line-through' }]}>
               ({credits})
             </Text>

@@ -86,7 +86,9 @@ const SearchModal = ({
             <Text style={styles.distance}>{distance}</Text>
             {discountCredits && credits ? (
               <View style={[styles.creditsContainer, styles.discountedContainer]}>
-                <Text style={[styles.creditsText, { color: 'white' }]}>{discountCredits}</Text>
+                <Text style={[styles.creditsText, { marginRight: 2, color: 'white' }]}>
+                  {discountCredits}
+                </Text>
                 <Text style={[styles.creditsText, { textDecorationLine: 'line-through' }]}>
                   ({credits})
                 </Text>
@@ -163,7 +165,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   creditsText: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'white',
   },
   property: {
@@ -226,7 +228,7 @@ const styles = StyleSheet.create({
   creditsContainer: {
     flexDirection: 'row',
     paddingHorizontal: 3,
-    paddingBottom: 1,
+    paddingVertical: 0.5,
     borderRadius: 5,
     borderColor: 'black',
     borderWidth: 0.19,
