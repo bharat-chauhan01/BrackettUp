@@ -6,11 +6,12 @@ import { getTheme, themeColor } from '../theme/theme';
 import { renderHeader } from '../modals/HeaderModal';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import isEmpty from 'lodash/isEmpty';
-import { fetchActivitySchedule } from '../apis/CommonApi';
+import { fetchActivitySchedule, fetchOrganizationSchedule } from '../apis/CommonApi';
 
 const ScheduleScreen = () => {
   const route = useRoute();
-  const activityId = route.params;
+  const referenceType= route.params[0];
+  const referenceId = route.params[1];
   const navigation = useNavigation();
   const theme = useRef(getTheme());
   const todayBtnTheme = useRef({
@@ -25,8 +26,14 @@ const ScheduleScreen = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        console.log(activityId);
-        const fetchedItems = await fetchActivitySchedule(activityId);
+        var fetchedItems;
+        if(referenceType=='activity'){
+          console.log(referenceId)
+          fetchedItems = await fetchActivitySchedule(referenceId);
+        }
+        else{
+          fetchedItems = await fetchOrganizationSchedule(referenceId);
+        }
         setItems(fetchedItems);
         setMarked(getMarkedDates(fetchedItems));
       } catch (error) {
@@ -36,7 +43,7 @@ const ScheduleScreen = () => {
       }
     };
     fetchData();
-  }, [activityId]);
+  }, [referenceId]);
 
   function getMarkedDates(items) {
     const marked = {};

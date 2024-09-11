@@ -40,6 +40,10 @@ export default function ActivityDetail() {
     navigation.navigate('ShowReviewsScreen', ['activity', referenceId]);
   };
 
+  const handleSchedule = referenceId => {
+    navigation.navigate('ScheduleScreen', ['activity', referenceId]);
+  };
+
   useEffect(() => {
     const loadActivityDetail = async () => {
       setLoading(true);
@@ -180,14 +184,14 @@ export default function ActivityDetail() {
                       Invite
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.fullWidthButton}>
+                  <TouchableOpacity style={styles.fullWidthButton} onPress={() => handleSchedule(activityData.activityId)}>
                     <Text style={styles.buttonText}>
                       <MaterialCommunityIcons
                         name={styles.calendarIcon.name}
                         color={styles.calendarIcon.color}
                         size={styles.calendarIcon.size}
                       />{' '}
-                      Add
+                      View More
                     </Text>
                   </TouchableOpacity>
                 </View>
@@ -209,7 +213,7 @@ export default function ActivityDetail() {
                     ({activityData.rating?.count})
                   </Text>
 
-                  <TouchableOpacity onPress={() => handleSeeReviews(activityId)}>
+                  <TouchableOpacity onPress={() => handleSeeReviews(activityData.activityId)}>
                     <Text style={styles.moreLink}>See all reviews</Text>
                   </TouchableOpacity>
                 </View>
@@ -490,12 +494,12 @@ const styles = StyleSheet.create({
   },
   accountIcon: {
     name: 'account-plus-outline',
-    color: '#000000',
+    color: '#fff',
     size: 14,
   },
   calendarIcon: {
     name: 'calendar',
-    color: '#000000',
+    color: '#fff',
     size: 12,
   },
   ratingDesc: {
@@ -554,7 +558,7 @@ const styles = StyleSheet.create({
   fullWidthButton: {
     flex: 1,
     width: '80%',
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     paddingVertical: 10,
     borderWidth: 1,
     borderColor: '#D3D3D3',
@@ -562,7 +566,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    color: 'black',
+    color: 'white',
     textAlign: 'center',
     fontSize: 14,
   },
@@ -602,7 +606,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   reserveButton: {
-    backgroundColor: '#1B7CDD',
+    backgroundColor: 'black',
     padding: 15,
     paddingHorizontal: 50,
     borderRadius: 25,

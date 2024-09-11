@@ -20,9 +20,9 @@ export const fetchActivitySchedule = async activityId => {
   }
 };
 
-export const fetchOrganizationSchedule = async activityId => {
+export const fetchOrganizationSchedule = async organizationId => {
   try {
-    const response = await get('/class/organization/schedule/' + activityId);
+    const response = await get('/class/organization/schedule/' + organizationId);
     return response;
   } catch (error) {
     throw error;

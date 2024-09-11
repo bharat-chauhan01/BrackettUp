@@ -40,26 +40,24 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     alignItems: 'center',
-    height: '20%',
   },
   modalText: {
-    fontSize: 18,
-    marginBottom: 30,
-    marginTop: 20,
+    fontSize: 16,
+    marginVertical: 10,
     textAlign: 'center',
     color: 'black',
   },
   loginButton: {
+    paddingHorizontal: 20,
     backgroundColor: '#000000',
-    paddingVertical: 20,
-    borderRadius: 5,
-    width: '60%',
+    paddingVertical: 5,
     borderRadius: 30,
+    width: '80%'
   },
   loginButtonText: {
     color: '#FFFFFF',
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: '500',
     textAlign: 'center',
   },
 });

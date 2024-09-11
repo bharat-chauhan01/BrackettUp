@@ -1,13 +1,15 @@
+import { useNavigation } from '@react-navigation/native';
 import isEmpty from 'lodash/isEmpty';
 import React, { useCallback } from 'react';
 import { StyleSheet, Alert, View, Text, TouchableOpacity } from 'react-native';
 
 const AgendaItem = props => {
   const { item } = props;
+  const navigation = useNavigation();
 
   const itemPressed = useCallback(() => {
     if (!item.booked) {
-      Alert.alert(item.title);
+      navigation.navigate('ActivityDetail',item.activityClassId);
     }
   }, [item]);
 

@@ -39,7 +39,7 @@ const SavedItem = ({ data }) => {
           <TouchableOpacity
             style={styles.scheduleButton}
             onPress={() => {
-              navigation.navigate('ScheduleScreen');
+              navigation.navigate('ScheduleScreen',['organization',item.id]);
             }}
           >
             <Text style={styles.scheduleText}>Schedule</Text>
