@@ -1,5 +1,16 @@
 import { post, get } from './ApiHandler';
+import { accountMockData } from './MockData';
 
+export const fetchProfile = async () => {
+  try {
+    const response = await get('/user/profile');
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+let accountData = { ...accountMockData };
 export const fetchAccountData = async () => {
   try {
     const response = await get(`/account`);
@@ -11,7 +22,6 @@ export const fetchAccountData = async () => {
     throw error;
   }
 };
-let accountData = { ...accountMockData };
 export const saveAccountData = async data => {
   try {
     const response = await post(`/account`, data);

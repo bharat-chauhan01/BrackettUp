@@ -14,12 +14,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useDispatch, useSelector } from 'react-redux';
 import { setProfile } from '../store/slices/ProfileSlice';
 import { setLogout } from '../store/slices/loginSlice';
-import { fetchProfile } from '../apis/CommonApi';
+import { fetchProfile } from '../apis/AccountApi';
 import { useFocusEffect } from '@react-navigation/native';
 import LogoutModal from '../modals/LogoutModal';
 import { getItem } from '../store/LocalStorage';
-import SupportScreen from '../screens/SupportScreen';
-import { imageURL } from '../constants/imageURLs';
 import { logout } from '../apis/AuthApi';
 
 const PROFILE_ITEMS_META = [

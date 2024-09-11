@@ -4,7 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { AirbnbRating } from 'react-native-ratings';
 import { renderHeader } from '../modals/HeaderModal';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { fetchReviewDetail } from '../apis/CommonApi';
+import { fetchReviewDetail } from '../apis/ReviewApi';
 import RatingBreakdownItem from '../components/RatingBreakdownItem';
 
 const ShowReviewPage = () => {
@@ -13,12 +13,13 @@ const ShowReviewPage = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const activityId = route.params;
+  const referenceType = route.params[0];
+  const id = route.params[1];
 
   useEffect(() => {
     const loadReviews = async () => {
       try {
-        const data = await fetchReviewDetail(activityId);
+        const data = await fetchReviewDetail(referenceType, id);
         setReviewData(data);
       } catch (error) {
         console.error('Failed to fetch activity details:', error);
@@ -26,7 +27,7 @@ const ShowReviewPage = () => {
     };
 
     loadReviews();
-  }, [activityId]);
+  }, [id]);
 
   const handleSeeMore = id => {
     setExpandedReviews(prevState => ({
@@ -111,7 +112,7 @@ const ShowReviewPage = () => {
                   {reviewData.reviewMeta.reviewAverage}/{reviewData.reviewMeta.maxRating}
                 </Text>
                 <Text style={styles.totalRatings}>
-                  based on {reviewData.reviewMeta.reviewCountDesc}+ ratings
+                  based on {reviewData.reviewMeta.totalReviewCount}+ ratings
                 </Text>
               </View>
             </View>

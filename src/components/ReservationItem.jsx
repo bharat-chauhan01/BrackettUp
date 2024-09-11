@@ -3,7 +3,7 @@ import { Alert, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Text } from 'react-native-paper';
 import FeedbackModal from '../modals/FeedbackModal';
-import { submitFeedback } from '../apis/CommonApi';
+import { submitFeedback } from '../apis/ReviewApi';
 
 const ReservationItem = ({
   activityId,

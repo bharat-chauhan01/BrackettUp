@@ -37,7 +37,7 @@ export default function ActivityDetail() {
   const activityId = route.params;
 
   const handleSeeReviews = referenceId => {
-    navigation.navigate('ShowReviewsScreen', referenceId);
+    navigation.navigate('ShowReviewsScreen', ['activity', referenceId]);
   };
 
   useEffect(() => {

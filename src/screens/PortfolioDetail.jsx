@@ -48,7 +48,7 @@ export default function PortfolioDetail() {
   }, [activityId]);
 
   const handleSeeReviews = referenceId => {
-    navigation.navigate('ShowReviewsScreen', referenceId);
+    navigation.navigate('ShowReviewsScreen', ['organization', referenceId]);
   };
 
   return (

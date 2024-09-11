@@ -1,20 +1,6 @@
 import { BackendUnreachableError } from '../utils/utils';
 import { get, post, put } from './ApiHandler';
-import {
-  placesMock,
-  activityReviewDataMock,
-  creditPackagesMock,
-  accountBalanceMock,
-} from './MockData';
-
-export const fetchProfile = async () => {
-  try {
-    const response = await get('/user/profile');
-    return response;
-  } catch (error) {
-    throw error;
-  }
-};
+import { placesMock, creditPackagesMock, accountBalanceMock } from './MockData';
 
 export const fetchHomePageActivities = async () => {
   try {
@@ -96,30 +82,6 @@ export const fetchPortfolioDetail = async id => {
     const response = await get(`/portfolio/organization/${id}`);
     return response;
   } catch (error) {
-    throw error;
-  }
-};
-
-export const fetchReviewDetail = async id => {
-  try {
-    const response = await get(`/reviews/activity/${id}`);
-    return response.data;
-  } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      const mockData = activityReviewDataMock.find(activity => activity.activityId === id);
-      return mockData ? mockData : {};
-    }
-    throw error;
-  }
-};
-
-export const submitFeedback = async (activityId, rating, reviewText) => {
-  try {
-    await post('/activityId/rating/reviewText', { activityId, rating, reviewText });
-  } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return 'Success';
-    }
     throw error;
   }
 };
