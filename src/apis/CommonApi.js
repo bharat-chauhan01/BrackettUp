@@ -88,12 +88,9 @@ export const fetchPortfolioDetail = async id => {
 
 export const fetchCreditPackages = async () => {
   try {
-    const response = await get('/credits/packages');
-    return response.data;
+    const response = await get('/credits/package');
+    return response;
   } catch (error) {
-    if (error instanceof BackendUnreachableError) {
-      return creditPackagesMock;
-    }
     throw error;
   }
 };

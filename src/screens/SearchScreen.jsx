@@ -348,7 +348,7 @@ const SearchScreen = () => {
         </View>
       </ScrollView>
       <View style={styles.horizontalLine} />
-      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+      <ScrollView vertical style={styles.scrollViewContainer}>
         {loading ? (
           <ActivityIndicator size="large" color="black" />
         ) : data && Array.isArray(data) && data.length > 0 ? (
@@ -471,7 +471,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingHorizontal: 10,
     flexGrow: 1,
-    justifyContent: 'center',
   },
   innerContainer: {},
   horizontalLine: {

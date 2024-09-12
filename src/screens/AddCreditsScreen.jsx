@@ -105,12 +105,12 @@ const CreditOptions = ({ creditOptions }) => {
       {creditOptions.map(option => (
         <View key={option.packageId} style={styles.creditPackageContainer}>
           <View>
-            <Text style={styles.creditText}>{`${option.credits} credits`}</Text>
+            <Text style={styles.creditText}>{`${option.credits} credit`}</Text>
             <Text style={styles.priceText}>{`₹${option.pricePerCredit}/credit`}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 1 }}>
               <Text
                 style={styles.discountText}
-              >{`₹${option.totalPrice} (${option.discount})`}</Text>
+              >{`₹${option.discountedPrice} (${option.percentageDiscount})`}</Text>
               <Text style={styles.originalPriceText}>{`₹${option.originalPrice}`}</Text>
             </View>
           </View>
