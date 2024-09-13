@@ -4,6 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { Text } from 'react-native-paper';
 import FeedbackModal from '../modals/FeedbackModal';
 import { submitFeedback } from '../apis/ReviewApi';
+import { useNavigation } from '@react-navigation/native';
 
 const ReservationItem = ({
   activityId,
@@ -16,6 +17,7 @@ const ReservationItem = ({
   credits,
   status,
 }) => {
+  const navigation=useNavigation();
   const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false);
 
   const handleLeaveFeedback = () => {
@@ -76,7 +78,7 @@ const ReservationItem = ({
               size={styles.supportIcon.size}
               color="black"
             />
-            <TouchableOpacity onPress={() => Alert.alert('Support')}>
+            <TouchableOpacity onPress={() => navigation.navigate('SupportScreen')}>
               <Text style={{ textDecorationLine: 'underline', marginLeft: 5 }}>Support</Text>
             </TouchableOpacity>
           </View>

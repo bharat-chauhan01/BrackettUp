@@ -24,9 +24,13 @@ const dates = generateTwoWeeksDates();
 const SearchScreen = () => {
   const route = useRoute();
   var initialSearchText = '';
+  var categoryIds=[];
   if (route.params.searchText) {
     initialSearchText = route.params.searchText;
-  } else if (route.params) {
+  }if(route.params.categoryIds){
+    categoryIds=route.params.categoryIds;
+  } 
+  else if (route.params) {
     initialSearchText = route.params;
   }
 
@@ -116,6 +120,7 @@ const SearchScreen = () => {
           name: searchName,
           ref_id: searchRefId,
           ref_type: searchRefType,
+          categories: categoryIds
         },
         destinationLocation: {
           name: locationName,

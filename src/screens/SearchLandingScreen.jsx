@@ -95,7 +95,7 @@ const SearchLandingScreen = () => {
   };
 
   const handleCategoryPress = category => {
-    navigation.navigate('SearchScreen', { searchText: category.name });
+    navigation.navigate('SearchScreen', { searchText: category.name, categoryIds: [category.id] });
   };
 
   const handleActivityPress = activityId => {

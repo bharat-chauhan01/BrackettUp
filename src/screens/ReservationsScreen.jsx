@@ -28,7 +28,6 @@ export default function ReservationsScreen() {
         setReservation([]);
         loadReservation();
       } else {
-        console.warn(reservation);
         setReservation([]);
       }
     }, [isFocused]),

@@ -32,6 +32,11 @@ const ActivityContainer = ({
         </View>
         {duration && (
           <View style={styles.labelTimeContainer}>
+            <MaterialCommunityIcons
+              name='timer-outline'
+              color='black'
+              size={styles.labelText.fontSize}
+            />
             <Text style={styles.labelText}>{duration} min</Text>
           </View>
         )}
@@ -108,16 +113,19 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   labelTimeContainer: {
+    flexDirection: 'row',
+    alignItems:'center',
     position: 'absolute',
     top: 0.1,
     right: 0.1,
-    backgroundColor: '#FFEA00',
+    backgroundColor: '#FFF5EE',
     borderTopRightRadius: 10,
     paddingHorizontal: 6,
     paddingVertical: 2,
     zIndex: 1,
   },
   labelText: {
+    marginLeft: 2,
     fontSize: windowWidth * 0.03,
     color: '#8a288f',
     fontWeight: '500',

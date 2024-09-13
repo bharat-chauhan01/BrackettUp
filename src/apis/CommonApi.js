@@ -31,6 +31,7 @@ export const fetchOrganizationSchedule = async organizationId => {
 
 export const searchedResults = async data => {
   try {
+    console.log(data);
     const response = await post('/relevance/search', data);
     return response;
   } catch (error) {
