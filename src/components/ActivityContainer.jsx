@@ -9,7 +9,7 @@ const fontSize = 15;
 const ActivityContainer = ({
   imageUrl,
   title,
-  subtitle,
+  locationTag,
   distance,
   rating,
   ratingCount,
@@ -42,7 +42,7 @@ const ActivityContainer = ({
       <View style={styles.textContainer}>
         <Text style={styles.title}>{capitalizeFirstLetter(title)}</Text>
         <View style={styles.act}>
-          <Text style={styles.subtitle}>{capitalizeFirstLetter(subtitle)} · </Text>
+          <Text style={styles.subtitle}>{capitalizeFirstLetter(locationTag)} · </Text>
           <Text style={styles.subtitle}>{distance}</Text>
         </View>
       </View>

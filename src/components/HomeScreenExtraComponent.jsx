@@ -1,15 +1,17 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { capitalizeFirstLetter } from '../utils/utils';
 import { useNavigation } from '@react-navigation/native';
+
+const windowWidth = Dimensions.get('window').width;
 
 const HomeScreenExtraComponent = ({
   activityName,
   distance,
   organisation,
   rating,
-  categories,
+  locationTag,
   time,
   credits,
   imageSource,
@@ -17,6 +19,7 @@ const HomeScreenExtraComponent = ({
   ratingDesc,
   discountCredits,
   discountPercentage,
+  duration,
 }) => {
   const navigation = useNavigation();
 
@@ -86,14 +89,26 @@ const HomeScreenExtraComponent = ({
               <Text style={styles.ratingDesc}>{capitalizeFirstLetter(ratingDesc)}</Text>
             </View>
           </View>
+          <View>
+          <View style={styles.dateTimeContainer}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <MaterialCommunityIcons name="clock-outline" size={styles.details.fontSize} color='black' />
+              <Text style={[styles.details, { marginLeft: 1 }]}>{duration} min</Text>
+            </View>
+          </View>
+        
+      </View>
           <View style={styles.distanceAndCreditsContainer}>
             <MaterialCommunityIcons
               name={'google-maps'}
               color={'black'}
               size={styles.distance.fontSize}
             />
-            <Text style={styles.distance}>{distance}</Text>
-            {discountCredits && credits ? (
+          <Text style={styles.distance}>{distance} · </Text>
+          <Text style={styles.distance}>{capitalizeFirstLetter(locationTag)}</Text>
+          </View>
+          <View style={{marginTop: 5}}>
+          {discountCredits ? (
               <View style={[styles.creditsContainer, styles.discountedContainer]}>
                 <Text style={[styles.creditsText, { marginRight: 2, color: 'white' }]}>
                   {discountCredits}
@@ -108,6 +123,7 @@ const HomeScreenExtraComponent = ({
               </View>
             ) : null}
           </View>
+          
         </View>
       </View>
 
@@ -179,17 +195,16 @@ const styles = StyleSheet.create({
   distanceAndCreditsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10,
   },
   distance: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'black',
-    marginRight: 10,
   },
   creditsContainer: {
     flexDirection: 'row',
+    alignSelf: 'flex-start',
     paddingHorizontal: 6,
-    paddingVertical: 2,
+    paddingVertical: 1,
     borderRadius: 5,
     borderColor: 'black',
     borderWidth: 0.5,
@@ -201,13 +216,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#007FFF',
   },
   creditsText: {
-    fontSize: 12,
+    fontSize: 11,
     color: 'white',
   },
   property: {
-    fontSize: 14,
-    color: 'black',
-    marginTop: 5,
+    fontSize: 12,
+    color: 'gray',
   },
   timeContainer: {
     flexDirection: 'row',
@@ -232,7 +246,6 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10,
   },
   ratingText: {
     fontSize: 14,
@@ -254,6 +267,15 @@ const styles = StyleSheet.create({
     name: 'star',
     color: '#FFBF00',
     size: 12,
+  },
+  dateTimeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  details: {
+    color: 'black',
+    fontSize: 11,
+    marginRight: 4,
   },
 });
 
