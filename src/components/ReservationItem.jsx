@@ -17,7 +17,7 @@ const ReservationItem = ({
   credits,
   status,
 }) => {
-  const navigation=useNavigation();
+  const navigation = useNavigation();
   const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false);
 
   const handleLeaveFeedback = () => {

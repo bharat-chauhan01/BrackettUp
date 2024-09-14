@@ -9,7 +9,7 @@ const AgendaItem = props => {
 
   const itemPressed = useCallback(() => {
     if (!item.booked) {
-      navigation.navigate('ActivityDetail',item.activityClassId);
+      navigation.navigate('ActivityDetail', item.activityClassId);
     }
   }, [item]);
 

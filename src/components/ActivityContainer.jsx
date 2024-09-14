@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, ImageBackground, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, Dimensions } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { capitalizeFirstLetter } from '../utils/utils';
 
@@ -22,25 +22,22 @@ const ActivityContainer = ({
 }) => {
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={{ uri: imageUrl }}
-        style={styles.image}
-        imageStyle={styles.imageStyle}
-      >
-        <View style={styles.labelContainer}>
-          <Text style={styles.labelText}>{capitalizeFirstLetter(ratingDesc)}</Text>
-        </View>
-        {duration && (
-          <View style={styles.labelTimeContainer}>
-            <MaterialCommunityIcons
-              name='timer-outline'
-              color='black'
-              size={styles.labelText.fontSize}
-            />
-            <Text style={styles.labelText}>{duration} min</Text>
+      <View style={styles.imageContainer}>
+        <ImageBackground
+          source={{ uri: imageUrl }}
+          style={styles.image}
+          imageStyle={styles.imageStyle}
+        >
+          <View style={styles.labelContainer}>
+            <Text style={styles.labelText}>{capitalizeFirstLetter(ratingDesc)}</Text>
           </View>
-        )}
-      </ImageBackground>
+          {percentageDiscount && (
+            <View style={styles.discountBox}>
+              <Text style={styles.discountText}>{percentageDiscount} OFF</Text>
+            </View>
+          )}
+        </ImageBackground>
+      </View>
 
       <View style={styles.textContainer}>
         <Text style={styles.title}>{capitalizeFirstLetter(title)}</Text>
@@ -53,11 +50,10 @@ const ActivityContainer = ({
         {date && (
           <View style={styles.dateTimeContainer}>
             <Text style={styles.details}>{date}</Text>
-            {percentageDiscount && (
-              <View style={styles.discountPercentage}>
-                <Text style={styles.discountPercentageText}>{percentageDiscount}</Text>
-              </View>
-            )}
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <MaterialCommunityIcons name="clock-outline" size={styles.details.fontSize} />
+              <Text style={[styles.details, { marginLeft: 1 }]}>{duration} min</Text>
+            </View>
           </View>
         )}
       </View>
@@ -103,6 +99,18 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.45,
     position: 'relative',
   },
+  imageContainer: {
+    position: 'relative',
+  },
+  image: {
+    width: '100%',
+    height: windowWidth * 0.29,
+    borderRadius: 10,
+    justifyContent: 'space-between',
+  },
+  imageStyle: {
+    borderRadius: 10,
+  },
   labelContainer: {
     position: 'absolute',
     bottom: 0.1,
@@ -114,7 +122,7 @@ const styles = StyleSheet.create({
   },
   labelTimeContainer: {
     flexDirection: 'row',
-    alignItems:'center',
+    alignItems: 'center',
     position: 'absolute',
     top: 0.1,
     right: 0.1,
@@ -130,11 +138,20 @@ const styles = StyleSheet.create({
     color: '#8a288f',
     fontWeight: '500',
   },
-  image: {
-    width: '100%',
-    height: windowWidth * 0.29,
-    borderRadius: 10,
-    justifyContent: 'space-between',
+  discountBox: {
+    position: 'absolute',
+    top: 0.1,
+    right: 0.1,
+    backgroundColor: '#4CAF50', // Green background
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 5,
+    zIndex: 1,
+  },
+  discountText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: windowWidth * 0.036,
   },
   textContainer: {
     marginTop: 5,
@@ -155,13 +172,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  dateTimeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  details: {
+    fontSize: windowWidth * 0.035,
+    marginRight: 4,
+  },
   ratingContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 2,
   },
-
   ratingDetails: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -181,26 +205,6 @@ const styles = StyleSheet.create({
     fontSize: windowWidth * 0.033,
     color: 'purple',
     fontWeight: '600',
-  },
-  dateTimeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  details: {
-    fontSize: windowWidth * 0.035,
-    marginRight: 4,
-  },
-  discountPercentage: {
-    backgroundColor: '#009E60',
-    borderRadius: 5,
-    paddingVertical: 0,
-    paddingHorizontal: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  discountPercentageText: {
-    fontSize: windowWidth * 0.036,
-    color: 'white',
   },
   creditsContainer: {
     flexDirection: 'row',
@@ -243,9 +247,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'flex-start',
     flexDirection: 'row',
-  },
-  imageStyle: {
-    borderRadius: 10,
   },
 });
 

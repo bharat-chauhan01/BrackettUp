@@ -10,9 +10,15 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import ActivityContainer from '../components/ActivityContainer';
+import SearchModal from '../modals/SearchModal'; // Import your SearchModal
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { fetchHomePageActivities } from '../apis/CommonApi';
+import {
+  fetchExtraHomeScreenActivities,
+  fetchHomePageActivities,
+  fetchSearchResults,
+} from '../apis/CommonApi'; // Modify this API to accept offset and limit
 import { useIsFocused, useFocusEffect, useNavigation } from '@react-navigation/native';
+import HomeScreenExtraComponent from '../components/HomeScreenExtraComponent';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -20,7 +26,12 @@ export default function HomeScreen() {
   const isFocused = useIsFocused();
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false); // For loading more data
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [offset, setOffset] = useState(0); // Pagination offset
+  const [limit] = useState(1); // Pagination limit
+  const [hasMore, setHasMore] = useState(true); // Check if there are more activities
+  const [searchModalData, setSearchModalData] = useState([]);
   const navigation = useNavigation();
 
   const loadActivities = async () => {
@@ -33,6 +44,27 @@ export default function HomeScreen() {
       Alert.alert('Error', 'Failed to load activities. Please try again.');
     } finally {
       setLoading(false);
+      setLoadingMore(false); // Stop loading more data
+    }
+  };
+
+  // Fetch search results and display them in the SearchModal
+  const loadSearchResults = async () => {
+    try {
+      setLoadingMore(true); // Show loading spinner while fetching
+
+      const searchResults = await fetchExtraHomeScreenActivities(offset, limit); // Fetch search results with pagination
+
+      if (searchResults.length > 0) {
+        setSearchModalData(prevData => [...prevData, ...searchResults]); // Append new data
+        setOffset(prevOffset => prevOffset + limit); // Increase the offset for the next batch
+      } else {
+        setHasMore(false); // No more results to load
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Failed to load search results. Please try again.');
+    } finally {
+      setLoadingMore(false); // Hide loading spinner
     }
   };
 
@@ -48,15 +80,35 @@ export default function HomeScreen() {
     useCallback(() => {
       if (isFocused) {
         setActivities([]);
+        setSearchModalData([]);
         setScrollPosition(0);
+        setOffset(0); // Reset offset when the screen is focused
+        setHasMore(true); // Reset hasMore when screen reloads
         loadActivities();
-      } else {
-        setActivities([]);
       }
     }, [isFocused]),
   );
 
-  if (loading) {
+  const handleScrollEnd = nativeEvent => {
+    if (
+      !nativeEvent ||
+      !nativeEvent.layoutMeasurement ||
+      !nativeEvent.contentOffset ||
+      !nativeEvent.contentSize
+    ) {
+      return; // Exit if nativeEvent or its properties are not defined
+    }
+
+    const { layoutMeasurement, contentOffset, contentSize } = nativeEvent;
+    const isCloseToBottom = layoutMeasurement.height + contentOffset.y >= contentSize.height - 50;
+
+    if (isCloseToBottom && !loadingMore && hasMore) {
+      console.log('Reached the bottom! Loading more...');
+      loadSearchResults(); // Load more data when bottom is reached
+    }
+  };
+
+  if (loading && activities.length === 0) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
@@ -67,20 +119,24 @@ export default function HomeScreen() {
   return (
     <View style={styles.screenContainer}>
       <ScrollView
-        onScroll={event => setScrollPosition(event.nativeEvent.contentOffset.y)}
+        onScroll={({ nativeEvent }) => handleScrollEnd(nativeEvent)}
+        scrollEventThrottle={16} // Update throttle value to a lower number for better performance
+        onMomentumScrollEnd={({ nativeEvent }) => handleScrollEnd(nativeEvent)} // Detects scroll ending
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
         <View style={styles.headerContainer}>
           <Text style={styles.sectionTitle}>Hi, Nice to See You!</Text>
           <MaterialCommunityIcons
-            name="bell-outline" // Notification icon name
+            name="bell-outline"
             color="black"
             size={26}
             style={styles.notificationIcon}
-            onPress={() => Alert.alert('Notifications')} // Optional: Add action on press
+            onPress={() => Alert.alert('Notifications')}
           />
         </View>
+
+        {/* Render all sections and activities */}
         {activities.map((section, sectionIndex) => (
           <View key={sectionIndex} style={styles.section}>
             <View style={styles.sectionHeader}>
@@ -118,6 +174,37 @@ export default function HomeScreen() {
             </ScrollView>
           </View>
         ))}
+
+        <View style={[styles.sectionHeader, { marginBottom: 10 }]}>
+          <Text style={styles.sectionTitle}>And More Things To Do Down Below!</Text>
+        </View>
+        {/* Show SearchModal once data is fetched */}
+        {searchModalData && (
+          <View style={styles.searchModalContainer}>
+            {searchModalData.map((data, index) => (
+              <HomeScreenExtraComponent
+                key={index}
+                activityName={data.activityName}
+                distance={data.distance}
+                organisation={data.organisation}
+                rating={data.rating}
+                categories={data.categories}
+                time={data.time}
+                credits={data.credits}
+                imageSource={data.imageSource}
+                ratingCount={data.ratingCount}
+                ratingDesc={data.ratingDesc}
+                discountCredits={data.discountCredits}
+                discountPercentage={'25'}
+              />
+            ))}
+          </View>
+        )}
+        {loadingMore && (
+          <View style={styles.loadingMoreContainer}>
+            <ActivityIndicator size="small" color="#0000ff" />
+          </View>
+        )}
       </ScrollView>
     </View>
   );
@@ -131,8 +218,8 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     width: '100%',
-    flexDirection: 'row', // Make header container a row
-    justifyContent: 'space-between', // Space between text and icon
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 10,
     marginVertical: 10,
@@ -174,7 +261,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  loadingMoreContainer: {
+    marginVertical: 20,
+    alignItems: 'center',
+  },
+  searchModalContainer: {},
   notificationIcon: {
-    marginRight: 10, // Adjust margin to position the icon
+    marginRight: 10,
   },
 });

@@ -145,7 +145,7 @@ const ProfileScreen = ({ navigation }) => {
           navigation.navigate('SupportScreen');
         } else if (item.title === 'Account') {
           navigation.navigate('AccountScreen');
-        } 
+        }
       }}
     >
       <View style={styles.itemRow}>

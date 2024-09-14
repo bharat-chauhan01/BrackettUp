@@ -184,7 +184,10 @@ export default function ActivityDetail() {
                       Invite
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.fullWidthButton} onPress={() => handleSchedule(activityData.activityId)}>
+                  <TouchableOpacity
+                    style={styles.fullWidthButton}
+                    onPress={() => handleSchedule(activityData.activityId)}
+                  >
                     <Text style={styles.buttonText}>
                       <MaterialCommunityIcons
                         name={styles.calendarIcon.name}

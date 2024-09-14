@@ -10,7 +10,7 @@ import { fetchActivitySchedule, fetchOrganizationSchedule } from '../apis/Common
 
 const ScheduleScreen = () => {
   const route = useRoute();
-  const referenceType= route.params[0];
+  const referenceType = route.params[0];
   const referenceId = route.params[1];
   const navigation = useNavigation();
   const theme = useRef(getTheme());
@@ -27,11 +27,10 @@ const ScheduleScreen = () => {
       setLoading(true);
       try {
         var fetchedItems;
-        if(referenceType=='activity'){
-          console.log(referenceId)
+        if (referenceType == 'activity') {
+          console.log(referenceId);
           fetchedItems = await fetchActivitySchedule(referenceId);
-        }
-        else{
+        } else {
           fetchedItems = await fetchOrganizationSchedule(referenceId);
         }
         setItems(fetchedItems);
