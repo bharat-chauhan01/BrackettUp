@@ -12,12 +12,8 @@ import {
 import ActivityContainer from '../components/ActivityContainer';
 import SearchModal from '../modals/SearchModal'; // Import your SearchModal
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {
-  fetchExtraHomeScreenActivities,
-  fetchHomePageActivities,
-} from '../apis/CommonApi'; // Modify this API to accept offset and limit
+import { fetchExtraHomeScreenActivities, fetchHomePageActivities } from '../apis/CommonApi'; // Modify this API to accept offset and limit
 import { useIsFocused, useFocusEffect, useNavigation } from '@react-navigation/native';
-import HomeScreenExtraComponent from '../components/HomeScreenExtraComponent';
 import HomeScreenExtraComponent from '../components/HomeScreenExtraComponent';
 
 const windowWidth = Dimensions.get('window').width;
@@ -26,7 +22,6 @@ export default function HomeScreen() {
   const isFocused = useIsFocused();
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false); // For loading more data
   const [loadingMore, setLoadingMore] = useState(false); // For loading more data
   const [scrollPosition, setScrollPosition] = useState(0);
   const [offset, setOffset] = useState(0); // Pagination offset
@@ -85,33 +80,11 @@ export default function HomeScreen() {
         setScrollPosition(0);
         setOffset(0); // Reset offset when the screen is focused
         setHasMore(true); // Reset hasMore when screen reloads
-        setOffset(0); // Reset offset when the screen is focused
-        setHasMore(true); // Reset hasMore when screen reloads
         loadActivities();
       }
     }, [isFocused]),
   );
 
-  const handleScrollEnd = nativeEvent => {
-    if (
-      !nativeEvent ||
-      !nativeEvent.layoutMeasurement ||
-      !nativeEvent.contentOffset ||
-      !nativeEvent.contentSize
-    ) {
-      return; // Exit if nativeEvent or its properties are not defined
-    }
-
-    const { layoutMeasurement, contentOffset, contentSize } = nativeEvent;
-    const isCloseToBottom = layoutMeasurement.height + contentOffset.y >= contentSize.height - 50;
-
-    if (isCloseToBottom && !loadingMore && hasMore) {
-      console.log('Reached the bottom! Loading more...');
-      loadSearchResults(); // Load more data when bottom is reached
-    }
-  };
-
-  if (loading && activities.length === 0) {
   const handleScrollEnd = nativeEvent => {
     if (
       !nativeEvent ||
@@ -145,9 +118,6 @@ export default function HomeScreen() {
         onScroll={({ nativeEvent }) => handleScrollEnd(nativeEvent)}
         scrollEventThrottle={16} // Update throttle value to a lower number for better performance
         onMomentumScrollEnd={({ nativeEvent }) => handleScrollEnd(nativeEvent)} // Detects scroll ending
-        onScroll={({ nativeEvent }) => handleScrollEnd(nativeEvent)}
-        scrollEventThrottle={16} // Update throttle value to a lower number for better performance
-        onMomentumScrollEnd={({ nativeEvent }) => handleScrollEnd(nativeEvent)} // Detects scroll ending
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
@@ -155,16 +125,12 @@ export default function HomeScreen() {
           <Text style={styles.sectionTitle}>Hi, Nice to See You!</Text>
           <MaterialCommunityIcons
             name="bell-outline"
-            name="bell-outline"
             color="black"
             size={26}
             style={styles.notificationIcon}
             onPress={() => Alert.alert('Notifications')}
-            onPress={() => Alert.alert('Notifications')}
           />
         </View>
-
-        {/* Render all sections and activities */}
 
         {/* Render all sections and activities */}
         {activities.map((section, sectionIndex) => (
@@ -208,42 +174,37 @@ export default function HomeScreen() {
         <View style={[styles.sectionHeader, { marginBottom: 10 }]}>
           <Text style={styles.sectionTitle}>And More Things To Do Down Below!</Text>
         </View>
+
         {/* Show SearchModal once data is fetched */}
         {extraActivities && (
-          
           <View style={styles.searchModalContainer}>
             {extraActivities.map((data, index) => (
               <TouchableOpacity
-              key={index}
-              style={styles.activityTouchable}
-              onPress={() => handleActivityPress(data.activityId, 'activity')}
-            >
-              <HomeScreenExtraComponent
-                id={data.activityId}
-                activityName={data.activityName}
-                distance={data.distance}
-                organisation={data.organisation}
-                rating={data.rating}
-                locationTag={data.locationTag}
-                time={data.time}
-                credits={data.credits}
-                imageSource={data.imageSource}
-                ratingCount={data.ratingCount}
-                ratingDesc={data.ratingDesc}
-                discountCredits={data.discountCredits}
-                discountPercentage={data.discountPercentage}
-                duration={data.duration}
-              />
-                        </TouchableOpacity>
-
-            )
-            
-            )
-            
-            }
-            
+                key={index}
+                style={styles.activityTouchable}
+                onPress={() => handleActivityPress(data.activityId, 'activity')}
+              >
+                <HomeScreenExtraComponent
+                  id={data.activityId}
+                  activityName={data.activityName}
+                  distance={data.distance}
+                  organisation={data.organisation}
+                  rating={data.rating}
+                  locationTag={data.locationTag}
+                  time={data.time}
+                  credits={data.credits}
+                  imageSource={data.imageSource}
+                  ratingCount={data.ratingCount}
+                  ratingDesc={data.ratingDesc}
+                  discountCredits={data.discountCredits}
+                  discountPercentage={data.discountPercentage}
+                  duration={data.duration}
+                />
+              </TouchableOpacity>
+            ))}
           </View>
         )}
+
         {loadingMore && (
           <View style={styles.loadingMoreContainer}>
             <ActivityIndicator size="small" color="#0000ff" />
@@ -262,8 +223,6 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -312,13 +271,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   searchModalContainer: {},
-  loadingMoreContainer: {
-    marginVertical: 20,
-    alignItems: 'center',
-  },
-  searchModalContainer: {},
   notificationIcon: {
-    marginRight: 10,
     marginRight: 10,
   },
 });

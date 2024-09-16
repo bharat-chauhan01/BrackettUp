@@ -90,25 +90,28 @@ const HomeScreenExtraComponent = ({
             </View>
           </View>
           <View>
-          <View style={styles.dateTimeContainer}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <MaterialCommunityIcons name="clock-outline" size={styles.details.fontSize} color='black' />
-              <Text style={[styles.details, { marginLeft: 1 }]}>{duration} min</Text>
+            <View style={styles.dateTimeContainer}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <MaterialCommunityIcons
+                  name="clock-outline"
+                  size={styles.details.fontSize}
+                  color="black"
+                />
+                <Text style={[styles.details, { marginLeft: 1 }]}>{duration} min</Text>
+              </View>
             </View>
           </View>
-        
-      </View>
           <View style={styles.distanceAndCreditsContainer}>
             <MaterialCommunityIcons
               name={'google-maps'}
               color={'black'}
               size={styles.distance.fontSize}
             />
-          <Text style={styles.distance}>{distance} · </Text>
-          <Text style={styles.distance}>{capitalizeFirstLetter(locationTag)}</Text>
+            <Text style={styles.distance}>{distance} · </Text>
+            <Text style={styles.distance}>{capitalizeFirstLetter(locationTag)}</Text>
           </View>
-          <View style={{marginTop: 5}}>
-          {discountCredits ? (
+          <View style={{ marginTop: 5 }}>
+            {discountCredits ? (
               <View style={[styles.creditsContainer, styles.discountedContainer]}>
                 <Text style={[styles.creditsText, { marginRight: 2, color: 'white' }]}>
                   {discountCredits}
@@ -123,7 +126,6 @@ const HomeScreenExtraComponent = ({
               </View>
             ) : null}
           </View>
-          
         </View>
       </View>
 

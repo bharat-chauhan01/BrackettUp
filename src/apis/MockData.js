@@ -1016,7 +1016,6 @@ export const activityReviewDataMock = [
   },
 ];
 
-
 export const accountBalanceMock = {
   balance: 10,
 };
